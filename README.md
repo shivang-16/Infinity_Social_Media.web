@@ -1,4 +1,4 @@
-# React + Vite
+# Social_Media_App_Frontend -> (IN PROGRESS...)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
