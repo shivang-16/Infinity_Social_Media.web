@@ -1,25 +1,25 @@
-import React from 'react'
-import LeftSidebar from '../LeftSideBar/LeftSidebar'
-import MiddleSection from '../MiddleSection/MiddleSection'
-import RightSidebar from '../RightSideBar/RightSidebar'
-import './mainbody.scss'
+import React from "react";
+import LeftSidebar from "../LeftSideBar/LeftSidebar";
+import MiddleSection from "../MiddleSection/MiddleSection";
+import RightSidebar from "../RightSideBar/RightSidebar";
+import "./mainbody.scss";
 
 const Mainbody = () => {
   return (
-   <main>
+    <main>
       <div className="main-box left_sidebar">
-      <LeftSidebar/>
+        <LeftSidebar />
       </div>
-      <div className='main-box middle-section'>
-      <div className="box post_section">
-        <MiddleSection/>
+      <div className="main-box middle-section">
+        <div className="box post_section">
+          <MiddleSection />
+        </div>
+        <div className="box right_sidebar">
+          <RightSidebar />
+        </div>
       </div>
-      <div className="box right_sidebar">
-        <RightSidebar/>
-      </div>
-      </div>
-   </main>
-  )
-}
+    </main>
+  );
+};
 
-export default Mainbody
+export default Mainbody;

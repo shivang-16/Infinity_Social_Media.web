@@ -1,20 +1,15 @@
-import React from 'react'
-import LeftSidebar from '../HomePage/LeftSideBar/LeftSidebar'
+import React from "react";
+import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 
 const Connect = () => {
   return (
-<main>
+    <main>
       <div className="main-box left_sidebar">
-      <LeftSidebar/>
+        <LeftSidebar />
       </div>
-      <div className="main-box middle-section">
-        {/* <MiddleSection/> */}
-      </div>
-    
-   </main>
+      <div className="main-box middle-section">{/* <MiddleSection/> */}</div>
+    </main>
+  );
+};
 
-
-  )
-}
-
-export default Connect
+export default Connect;

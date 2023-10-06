@@ -1,69 +1,66 @@
-.right-main{
-    // border: 2px solid red;
-    width: 80%;
-    padding: 0px 20px;
+.right-main {
+  // border: 2px solid red;
+  width: 80%;
+  padding: 0px 20px;
 }
-.rightSidebar-header{
-    // border: 2px solid red;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    margin: 30px 0px 10px 0px;
-    position: relative;
-
+.rightSidebar-header {
+  // border: 2px solid red;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  margin: 30px 0px 10px 0px;
+  position: relative;
 }
-.userImg{
-    // border: 2px solid red;
+.userImg {
+  // border: 2px solid red;
 
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  margin: 0px 20px 0px 0px;
+  img {
+    height: 100%;
+    width: 100%;
     border-radius: 100%;
-    margin: 0px 20px 0px 0px;
-    img{
-        height: 100%;
-        width: 100%;
-        border-radius: 100%;
-    }
+  }
 }
-.userDetail{
-    // width: 100%;
+.userDetail {
+  // width: 100%;
 }
-.name{
-    p{
-        color: gray;
-    }
+.name {
+  p {
+    color: gray;
+  }
 }
-.btn{
-    position: absolute;
-    right: 0;
-   p{
+.btn {
+  position: absolute;
+  right: 0;
+  p {
     color: rgb(9, 111, 255);
-   }
-
+  }
 }
-.content-heading{
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 0px 0px 10px;
-    >p{
-        color: gray;
-        font-weight: bold;
-    }
-  
+.content-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 0px 0px 10px;
+  > p {
+    color: gray;
+    font-weight: bold;
+  }
 }
-.content-body{
-    // border: 2px solid red;
-    margin: 30px 0px;
+.content-body {
+  // border: 2px solid red;
+  margin: 30px 0px;
 }
-.suggestions{
-    // border: 2px solid red;
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 20px 0px;
-    cursor: pointer;
-    .userImg{
-        height: 40px;
-        width: 40px;
-    }
+.suggestions {
+  // border: 2px solid red;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  cursor: pointer;
+  .userImg {
+    height: 40px;
+    width: 40px;
+  }
 }

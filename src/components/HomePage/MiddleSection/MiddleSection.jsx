@@ -1,11 +1,8 @@
-import React from 'react'
-import './middlesection.scss'
+import React from "react";
+import "./middlesection.scss";
 
 const MiddleSection = () => {
-  return (
-  <>
-  </>
-  )
-}
+  return <></>;
+};
 
-export default MiddleSection
+export default MiddleSection;
