@@ -1,0 +1,30 @@
+main{
+    // border: 2px solid red;
+    height: 100vh;
+    display: flex;
+}
+.main-box{
+// border: 2px solid green;
+// width: 100%;
+}
+
+.left_sidebar{
+  width: 300px;
+  border-right: 1px solid rgb(63, 63, 63);
+}
+.box{
+  // border: 2px solid red;
+}
+.middle-section{ 
+  border: 2px solid green;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.post_section{
+   width:700px;
+}
+.right_sidebar{
+    width: 400px;
+}

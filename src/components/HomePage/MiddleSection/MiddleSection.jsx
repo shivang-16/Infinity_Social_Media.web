@@ -1,5 +1,5 @@
 import React from 'react'
-import 'middlesection.scss'
+import './middlesection.scss'
 
 const MiddleSection = () => {
   return (
