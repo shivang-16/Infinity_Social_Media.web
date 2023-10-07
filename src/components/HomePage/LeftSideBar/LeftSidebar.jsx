@@ -13,7 +13,7 @@ const LeftSidebar = () => {
         <h2>SocialApp</h2>
       </div>
       <div className="leftSidebar-content">
-        <Link to="/">
+        <Link to="/home">
           <div className="left-boxes">
             <img src={home} />
             <p>Home</p>
