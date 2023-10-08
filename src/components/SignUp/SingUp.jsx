@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../components/Login/login.scss';
 import photo from '../../assets/loginPhoto.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { sinupUser } from '../../actions/User';
 
 const SignUp = () => {
   const [name, setName] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSignUp = (e) => {
+
     e.preventDefault();
-    console.log(name + userName + email + password);
-    // Add any other code to handle the sign-up logic here
+    dispatch(sinupUser(name, userName, email, password))
+    navigate('/verify')
   };
 
   return (
