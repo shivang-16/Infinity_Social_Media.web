@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../components/Login/login.scss';
-import photo from '../../assets/loginPhoto.png';
+import photo from '../../assets/photo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { sinupUser } from '../../actions/User';
@@ -20,6 +20,7 @@ const SignUp = () => {
     dispatch(sinupUser(name, userName, email, password))
     navigate('/verify')
   };
+
 
   return (
     <main id="login_page">

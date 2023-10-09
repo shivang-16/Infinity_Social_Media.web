@@ -1,8 +1,25 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import '../../components/Login/login.scss'
-import photo from '../../assets/loginPhoto.png'
+import photo from '../../assets/photo.png'
+import { useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import { loginUser } from '../../actions/User'
+import { useDispatch } from 'react-redux'
 const Login = () => {
+   
+    const [loginIdentifier, setLoginIdentifier] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    
+    const handleLogin = (e)=>{
+        e.preventDefault();
+        dispatch(loginUser(loginIdentifier, password));
+    
+    }
+    
+    
+
   return (
    <main id='login_page'>
     <div className="brandImage login_box">
@@ -13,9 +30,9 @@ const Login = () => {
    
     <h1>Social App</h1>
     <p>Login up to see photos and videos</p>
-    <form>
-        <input type="text" placeholder='Enter Email or Username' />
-        <input type="password" placeholder='Enter Password' />
+    <form onSubmit={handleLogin}>
+        <input type="text" placeholder='Enter Email or Username' value={loginIdentifier} onChange={e=>setLoginIdentifier(e.target.value)}/>
+        <input type="password" placeholder='Enter Password' value={password} onChange={e=>setPassword(e.target.value)}/>
         <input type="submit" value='Login'/>
     </form>
     <span>or</span>

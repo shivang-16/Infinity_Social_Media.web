@@ -1,18 +1,20 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useNavigate, Navigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../actions/User'
+
 
 const Verification = () => {
 
+  const { isAuthenticated } = useSelector((state) => state.user);
 const dispatch = useDispatch()
 const navigate = useNavigate()
   const [otp, setOtp] = useState('')
   const hanldeVerify = (e)=>{
     e.preventDefault()
     dispatch(verifyOtp(otp))
-    navigate('/home')
   }
+  if (isAuthenticated) return <Navigate to={"/"} />;
   return (
     <>
     <div className='login_form'>

@@ -3,8 +3,9 @@ import React from "react";
 import photo from "../../assets/profilepic.jpg";
 import { Link } from "react-router-dom";
 import "../ProfilePage/profile.scss";
-
+import { useSelector } from "react-redux";
 const Profile = () => {
+  const { user, loading: userLoading } = useSelector((state) => state.user);
   return (
     <>
       <div className="user_section profile_details">
@@ -13,27 +14,33 @@ const Profile = () => {
             <img src={photo} alt="" />
           </div>
         </div>
-        <div className="profile_box profile_content">
+        {user ? (
+ <div className="profile_box profile_content">
           <div className="content_box user_name">
-            <span>shivang_18</span>
+         
+            <span>{user.userName}</span>
             <button>Edit Profile</button>
           </div>
           <div className="content_box followers_section">
             <span>0 Posts</span>
             <Link to="/followers">
-              <span>100 Followers</span>
+              <span>{user.followers.length} Followers</span>
             </Link>
             <Link to="/following">
-              <span>200 Following</span>
+              <span>{user.following.length}  Following</span>
             </Link>
           </div>
           <div className="content_box user_descripton">
-            <h4>Shivang Yadav</h4>
+            <h4>{user.name}</h4>
             <p>Full stack web Developer</p>
             <p>23 Feb 2005</p>
             <p>github.com/shivang-16</p>
           </div>
         </div>
+        ):(
+          <h2>NOt found</h2>
+        )}
+       
       </div>
     </>
   );
