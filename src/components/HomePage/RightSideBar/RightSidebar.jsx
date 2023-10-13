@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import profile from "../../../assets/profilepic.jpg";
 import userImg from "../../../assets/user2.jpg";
 import user2Img from "../../../assets/user.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { followUser } from "../../../actions/User";
 
 const RightSidebar = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch()
+    
+   const handleFollow = (_id)=>{
+    dispatch(followUser(_id))
+   }
 
   return (
     <>
@@ -44,7 +50,7 @@ const RightSidebar = () => {
           <div className="content-body">
          {users ? ( 
            users.map((element, index)=>{
-             const {name, userName} = element
+             const {name, userName, _id} = element
             return (
               <div className="suggestions" key={index}>
               <div className="userImg">
@@ -60,7 +66,7 @@ const RightSidebar = () => {
               </div>
               <div className="btn">
                 <Link to="#">
-                  <button>Follow</button>
+                  <button onClick={()=>handleFollow(_id)}>Follow</button>
                 </Link>
               </div>
             </div>

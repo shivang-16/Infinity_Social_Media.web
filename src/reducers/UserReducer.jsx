@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 const initialState={
-  isAuthenticated: false
+  // isAuthenticated: false
 }
 
 export const userReducer = 
@@ -95,3 +95,16 @@ export const allUserReducer = createReducer(initialState, {
    
 })
      
+export const followUserReducer = createReducer(initialState, {
+  FollowRequest: (state)=>{
+    state.loading = true;
+   },
+   FollowSuccess: (state, action)=>{
+    state.loading = false;
+    state.message = action.payload
+   },
+   FollowFailure: (state, action)=>{
+    state.loading = false;
+    state.error = action.payload
+   }
+})

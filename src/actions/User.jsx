@@ -156,13 +156,27 @@ export const getAllUser = ()=> async (dispatch)=>{
     }
 }
 
-// export const followUser = async(_id) =>{
-//   try {
-//     let {data} = await axios.post(`${server}/follow/${_id}`,{
-//          withCredentials: true,
-//     })
-
-//   } catch (error) {
-    
-//   }
-// }
+export const followUser= (_id) => async(dispatch)=>{
+  try {
+    console.log(_id)
+    dispatch({
+      type: "FollowRequest"
+    })
+    let {data} = await axios.get(`${server}/follow/${_id}`,{
+         withCredentials: true,
+    })
+    console.log(data)
+    dispatch({
+      type: "FollowRequest",
+      payload: data.message
+    })
+    toast.success(data.message)
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: "FollowRequest",
+      payload: error.response.data.message
+    })
+    toast.error(error.response.data.message)
+  }
+}
