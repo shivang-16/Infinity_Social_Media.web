@@ -33,8 +33,11 @@
 .btn {
   position: absolute;
   right: 0;
-  p {
+  button {
+    background: none;
+    border: none;
     color: rgb(9, 111, 255);
+    cursor: pointer;
   }
 }
 .content-heading {

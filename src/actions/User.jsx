@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from 'react-hot-toast'
-const server = 'https://social-media-app-backend-11f047k0t-shivang-16.vercel.app/api/v1'
+import { server } from "../main";
 
 
 export const sinupUser = (name, userName, email, password)=> async(dispatch)=>{
@@ -65,7 +65,7 @@ export const loginUser = (loginIdentifier,password)=> async(dispatch)=>{
             type:"LoginRequest",
         })
         const {data} = await axios.post(`${server}/user/login`,{
-            loginIdentifier,password
+            loginIdentifier, password
         },{
             headers:{
                 "Content-Type": "application/json"
@@ -132,3 +132,37 @@ export const logoutUser = () => async (dispatch) => {
       });
     }
   };
+
+
+export const getAllUser = ()=> async (dispatch)=>{
+    try {
+      dispatch({
+        type: "allUserRequest"
+      })
+
+      let {data} = await axios.get(`${server}/user/all`,{
+        withCredentials: true
+      })
+      console.log(data)
+      dispatch({
+        type: "allUserSuccess",
+        payload: data.users
+      })
+    } catch (error) {
+        dispatch({
+            type: "allUserFailure",
+            payload: error.response.data.message
+          })
+    }
+}
+
+// export const followUser = async(_id) =>{
+//   try {
+//     let {data} = await axios.post(`${server}/follow/${_id}`,{
+//          withCredentials: true,
+//     })
+
+//   } catch (error) {
+    
+//   }
+// }

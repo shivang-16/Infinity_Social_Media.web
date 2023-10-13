@@ -7,6 +7,8 @@ import Login from "./components/Login/login";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
 import { loadUser } from "./actions/User";
+import { getAllPost } from "./actions/Post";
+import { getAllUser } from "./actions/User";
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
@@ -18,6 +20,8 @@ function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUser());
+        dispatch(getAllPost())
+        dispatch(getAllUser())
        }, [dispatch]);
     
   return (

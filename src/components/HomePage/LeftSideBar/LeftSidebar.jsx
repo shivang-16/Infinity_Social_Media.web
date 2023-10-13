@@ -21,7 +21,7 @@ const LeftSidebar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthenticated } = useSelector((state) => state.user);
-
+ 
    const handleLogout = ()=>{
     dispatch(logoutUser());
    }
@@ -32,6 +32,7 @@ const LeftSidebar = () => {
       setSelectedOption(option);
     }
   };
+
 
 
 

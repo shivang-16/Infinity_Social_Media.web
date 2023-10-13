@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 
 const RightSidebar = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
+  const { users } = useSelector((state) => state.users);
+
   return (
     <>
       <div className="right-main">
@@ -15,7 +17,7 @@ const RightSidebar = () => {
           <div className="userImg">
             <img src={userImg} alt="" />
           </div>
-          {user? (
+          {user ? (
             <div className="userDetail">
             <div className="username">
               <p>{user.userName}</p>
@@ -28,54 +30,46 @@ const RightSidebar = () => {
           
           <div className="btn">
             <Link to="/profile">
-              <p>View</p>
+              <button>View</button>
             </Link>
           </div>
         </div>
         <div className="rightSidebar-content">
           <div className="content-heading">
             <p>Suggested for you</p>
-            <Link to="#">
+            <Link to="/connect">
               <p>See all</p>
             </Link>
           </div>
           <div className="content-body">
-            <div className="suggestions">
+         {users ? ( 
+           users.map((element, index)=>{
+             const {name, userName} = element
+            return (
+              <div className="suggestions" key={index}>
               <div className="userImg">
-                <img src={profile} alt="" />
+                <img src={user2Img} alt="" style={{'filter': 'invert(100%)'}}/>
               </div>
               <div className="userDetail">
                 <div className="username">
-                  <p>shivang16</p>
+                  <p>{name}</p>
                 </div>
                 <div className="name">
-                  <p>Shivang Yadav</p>
+                  <p>{userName}</p>
                 </div>
               </div>
               <div className="btn">
                 <Link to="#">
-                  <p>Follow</p>
+                  <button>Follow</button>
                 </Link>
               </div>
             </div>
-            <div className="suggestions">
-              <div className="userImg">
-                <img src={user2Img} alt="" />
-              </div>
-              <div className="userDetail">
-                <div className="username">
-                  <p>lucky16</p>
-                </div>
-                <div className="name">
-                  <p>Lucky Yadav</p>
-                </div>
-              </div>
-              <div className="btn">
-                <Link to="#">
-                  <p>Follow</p>
-                </Link>
-              </div>
-            </div>
+            )
+           })
+         ) : (
+          "No users found"
+          )}
+           
           </div>
         </div>
       </div>

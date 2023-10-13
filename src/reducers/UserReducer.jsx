@@ -77,3 +77,21 @@ createReducer(initialState, {
         state.isAuthenticated =true;
       },
 })
+
+
+export const allUserReducer = createReducer(initialState, {
+
+   allUserRequest: (state)=>{
+    state.loading = true;
+   },
+   allUserSuccess: (state, action)=>{
+    state.loading = false;
+    state.users = action.payload
+   },
+   allUserFailure: (state, action)=>{
+    state.loading = false;
+    state.error = action.payload
+   }
+   
+})
+     
