@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from 'react-hot-toast'
-const server = 'https://social-media-app-backend-fd5u08epc-shivang-16.vercel.app/api/v1'
+const server = 'https://social-media-app-backend-11f047k0t-shivang-16.vercel.app/api/v1'
 
 
 export const sinupUser = (name, userName, email, password)=> async(dispatch)=>{
@@ -25,9 +25,9 @@ export const sinupUser = (name, userName, email, password)=> async(dispatch)=>{
    } catch (error) {
     dispatch({
         type:"OtpFaliure",
-        payload: data.message,
+        payload: error.response.data.message,
     })
-    toast.error(data.message)
+    toast.error(error.response.data.message)
    }
 }
 
@@ -53,9 +53,9 @@ export const verifyOtp = (otp)=> async(dispatch)=>{
         console.log(error)
         dispatch({
             type:"RegisterFaliure",
-            payload: data.message,
+            payload: error.response.data.message,
         })
-        toast.error(data.message)
+        toast.error( error.response.data.message)
        }
 }
 
@@ -83,7 +83,7 @@ export const loginUser = (loginIdentifier,password)=> async(dispatch)=>{
             type:"LoginFaliure",
             payload: error.response.data.message,
         })
-        toast.error(data.message)
+        toast.error( error.response.data.message)
        }
 }
 
@@ -94,7 +94,9 @@ export const loadUser = () => async (dispatch) => {
         type: "LoadUserRequest",
       });
   
-      const { data } = await axios.get(`${server}/user/myProfile`);
+      const { data } = await axios.get(`${server}/user/myProfile`,{
+        withCredentials: true
+      });
   
       dispatch({
         type: "LoadUserSuccess",
@@ -103,6 +105,29 @@ export const loadUser = () => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: "LoadUserFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const logoutUser = () => async (dispatch) => {
+    try {
+      dispatch({
+        type: "LogoutRequest",
+      });
+  
+      const { data } = await axios.get(`${server}/user/logout`,{
+          withCredentials: true      
+      });
+  
+      dispatch({
+        type: "LogoutSuccess",
+        payload: data.message,
+      });
+    } catch (error) {
+        console.log(error)
+      dispatch({
+        type: "LogoutFailure",
         payload: error.response.data.message,
       });
     }

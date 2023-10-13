@@ -24,7 +24,7 @@ function App() {
     <Router>
       <Routes>
       <Route exact path="/" element={isAuthenticated? <Mainbody />: <Login />} />
-            <Route exact path="/connect" element={<Connect />} />
+        <Route exact path="/connect" element={<Connect />} />
         <Route exact path="/profile" element={<PostSection />} />
         <Route exact path="/bookmark" element={<BookmarkSection />} />
         <Route exact path="/signup" element={<SingUp />} />

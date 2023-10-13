@@ -5,13 +5,14 @@ main {
 
 .left_sidebar {
   width: 300px;
-  border-right: 1px solid rgb(63, 63, 63);
+  // border-right: 1px solid rgb(63, 63, 63);
 }
 
 .middle-section {
   width: 100%;
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .post_section {
@@ -19,5 +20,5 @@ main {
 }
 .right_sidebar {
   width: 400px;
-  border-left: 1px solid rgb(63, 63, 63);
+  margin-left: 20px;
 }

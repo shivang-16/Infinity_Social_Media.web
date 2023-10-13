@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../actions/User'
 
@@ -8,7 +8,6 @@ const Verification = () => {
 
   const { isAuthenticated } = useSelector((state) => state.user);
 const dispatch = useDispatch()
-const navigate = useNavigate()
   const [otp, setOtp] = useState('')
   const hanldeVerify = (e)=>{
     e.preventDefault()

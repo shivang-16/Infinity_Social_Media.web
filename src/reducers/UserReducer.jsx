@@ -10,7 +10,7 @@ createReducer(initialState, {
       },
       OtpSuccess: (state, action)=>{
         state.loading = false;
-        state.user = action.payload
+        state.message = action.payload
       },
       OtpFailure: (state, action)=>{
         state.loading = false,
@@ -46,11 +46,7 @@ createReducer(initialState, {
         state.error = action.payload;
         state.isAuthenticated =false;
       },
-
-
       
-
-
       LoadUserRequest: (state)=>{
         state.loading = true;
       },
@@ -64,5 +60,20 @@ createReducer(initialState, {
         state.error = action.payload;
         state.isAuthenticated = false;
 
+      },
+
+      LogoutRequest: (state)=>{
+        state.loading = true;
+        state.isAuthenticated=true;
+      },
+      LogoutSuccess: (state, action)=>{
+        state.loading = false;
+        state.message = action.payload;
+        state.isAuthenticated =false;
+      },
+      LogoutFailure: (state, action)=>{
+        state.loading = false;
+        state.error = action.payload;
+        state.isAuthenticated =true;
       },
 })

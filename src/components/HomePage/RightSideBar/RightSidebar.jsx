@@ -4,25 +4,30 @@ import { Link } from "react-router-dom";
 import profile from "../../../assets/profilepic.jpg";
 import userImg from "../../../assets/user2.jpg";
 import user2Img from "../../../assets/user.png";
+import { useSelector } from "react-redux";
 
 const RightSidebar = () => {
+  const { user, loading: userLoading } = useSelector((state) => state.user);
   return (
     <>
       <div className="right-main">
         <div className="rightSidebar-header">
           <div className="userImg">
-            <img src={profile} alt="" />
+            <img src={userImg} alt="" />
           </div>
-          <div className="userDetail">
+          {user? (
+            <div className="userDetail">
             <div className="username">
-              <p>shivang_18</p>
+              <p>{user.userName}</p>
             </div>
             <div className="name">
-              <p>Shivang Yadav</p>
+              <p>{user.name}</p>
             </div>
           </div>
+          ):(<p>Login first</p>)}
+          
           <div className="btn">
-            <Link to="#">
+            <Link to="/profile">
               <p>View</p>
             </Link>
           </div>
@@ -37,14 +42,14 @@ const RightSidebar = () => {
           <div className="content-body">
             <div className="suggestions">
               <div className="userImg">
-                <img src={userImg} alt="" />
+                <img src={profile} alt="" />
               </div>
               <div className="userDetail">
                 <div className="username">
-                  <p>16_mansi</p>
+                  <p>shivang16</p>
                 </div>
                 <div className="name">
-                  <p>Mansi Swaraj</p>
+                  <p>Shivang Yadav</p>
                 </div>
               </div>
               <div className="btn">

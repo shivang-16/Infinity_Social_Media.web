@@ -1,6 +1,6 @@
 import React from "react";
 
-import photo from "../../assets/profilepic.jpg";
+import photo from "../../assets/user2.jpg";
 import { Link } from "react-router-dom";
 import "../ProfilePage/profile.scss";
 import { useSelector } from "react-redux";
