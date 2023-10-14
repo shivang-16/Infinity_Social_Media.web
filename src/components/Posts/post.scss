@@ -1,6 +1,6 @@
 .post{
     border: 1px solid rgb(46, 46, 46);
-    margin-top: 50px;
+    margin-top: 30px;
     padding:  20px;
     border-radius: 10px;
 }
@@ -37,12 +37,21 @@
     // border: 2px solid red;
     display: flex;
     align-items: center;
+    div{
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        span{
+            cursor: pointer;
+            
+        }
+    }
 }
 
 .action{
     background: none ;
     border: none;
-    margin-right: 15px;
+    margin-right: 5px;
     img{
         height: 25px;
         transition: transform 0.2s ease-in-out;

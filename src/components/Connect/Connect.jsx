@@ -9,13 +9,14 @@ import { followUser } from "../../actions/User";
 
 const Connect = () => {
   const { users } = useSelector((state) => state.users);
+  const {user, isAuthenticated} = useSelector((state) => state.user)
    const dispatch = useDispatch()
     
    const handleFollow = (_id)=>{
     dispatch(followUser(_id))
    }
 
-
+   const isUserFollowed = (userId) => user.following.includes(userId);
   return (
     <main>
       <div className="main-box left_sidebar">
@@ -43,7 +44,9 @@ const Connect = () => {
               </div>
               <div className="btn">
                 <Link to="#">
-                  <button onClick={()=>handleFollow(_id)}>Follow</button>
+                  <button onClick={()=>handleFollow(_id)}>
+                  {isAuthenticated && isUserFollowed(_id) ? <span className="unfollow">Unfollow</span> : <span className="follow">Follow</span>}
+                  </button>
                 </Link>
               </div>
             </div>

@@ -8,7 +8,6 @@ const store = configureStore({
         user: userReducer,
         users: allUserReducer,
         post: postReducer,
-        followUser: followUserReducer
     }
 });
 

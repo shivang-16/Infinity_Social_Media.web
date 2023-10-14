@@ -7,10 +7,17 @@
     h2{
         margin-bottom: 15px;
     }
-    button{
+    .follow{
         color: white;
         background-color: rgb(0, 115, 255);
         padding: 8px 15px;
         border-radius: 10px;
-    }
+   }
+   .unfollow{
+         background-color: white;
+        color: rgb(0, 115, 255);
+        padding: 8px 15px;
+        border-radius: 10px;
+   
+   }
 }

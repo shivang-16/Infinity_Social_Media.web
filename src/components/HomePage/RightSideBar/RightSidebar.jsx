@@ -8,20 +8,20 @@ import { useSelector, useDispatch} from "react-redux";
 import { followUser } from "../../../actions/User";
 
 const RightSidebar = () => {
-  const { user, loading: userLoading } = useSelector((state) => state.user);
+  const { user, loading: userLoading , isAuthenticated} = useSelector((state) => state.user);
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch()
     
    const handleFollow = (_id)=>{
     dispatch(followUser(_id))
    }
-
+   const isUserFollowed = (userId) => user.following.includes(userId);
   return (
     <>
       <div className="right-main">
         <div className="rightSidebar-header">
           <div className="userImg">
-            <img src={userImg} alt="" />
+            <img src={profile} alt="" />
           </div>
           {user ? (
             <div className="userDetail">
@@ -66,7 +66,9 @@ const RightSidebar = () => {
               </div>
               <div className="btn">
                 <Link to="#">
-                  <button onClick={()=>handleFollow(_id)}>Follow</button>
+                  <button onClick={()=>handleFollow(_id)}>
+                  {isAuthenticated && isUserFollowed(_id) ? <span className="unfollow">Unfollow</span> : <span className="follow">Follow</span>}
+                    </button>
                 </Link>
               </div>
             </div>

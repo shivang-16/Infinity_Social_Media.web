@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const LeftSidebar = () => {
-  const [selectedOption, setSelectedOption] = useState("home"); // Initialize with "home" selected
+  const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthenticated } = useSelector((state) => state.user);

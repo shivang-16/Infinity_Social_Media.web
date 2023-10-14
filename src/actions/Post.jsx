@@ -27,7 +27,7 @@ export const createPost = (caption) => async(dispatch)=>{
     })
    }
 }
-export const getAllPost = (caption) => async(dispatch)=>{
+export const getAllPost = () => async(dispatch)=>{
   try {
     dispatch({
         type: "GetPostRequest",
@@ -50,4 +50,31 @@ export const getAllPost = (caption) => async(dispatch)=>{
         payload: error.response.data.message
     })
    }
+}
+
+export const likePost = (_id) => async(dispatch)=>{
+    console.log(_id)
+    try {
+        dispatch({
+            type: "LikeRequest",
+        })
+    
+        const {data} = await axios.get(`${server}/post/likes/${_id}`,{
+            withCredentials: true
+         })
+         
+      
+         dispatch({
+            type: "LikeSuccess",
+            payload: data.message
+        })
+      console.log(data)
+      toast.success(data.message)
+       } catch (error) {
+        console.log(error)
+        dispatch({
+            type: "LikeFailure",
+            payload: error.response.data.message
+        })
+       }
 }
