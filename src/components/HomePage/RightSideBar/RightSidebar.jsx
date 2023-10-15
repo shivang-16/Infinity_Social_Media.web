@@ -6,6 +6,7 @@ import userImg from "../../../assets/user2.jpg";
 import user2Img from "../../../assets/user.png";
 import { useSelector, useDispatch} from "react-redux";
 import { followUser } from "../../../actions/User";
+import User from "../../User/User";
 
 const RightSidebar = () => {
   const { user, loading: userLoading , isAuthenticated} = useSelector((state) => state.user);
@@ -52,18 +53,13 @@ const RightSidebar = () => {
            users.map((element, index)=>{
              const {name, userName, _id} = element
             return (
+             
               <div className="suggestions" key={index}>
-              <div className="userImg">
-                <img src={user2Img} alt="" style={{'filter': 'invert(100%)'}}/>
-              </div>
-              <div className="userDetail">
-                <div className="username">
-                  <p>{name}</p>
-                </div>
-                <div className="name">
-                  <p>{userName}</p>
-                </div>
-              </div>
+               <User 
+               userId={_id} 
+               userName={userName} 
+               name={name}
+               />
               <div className="btn">
                 <Link to="#">
                   <button onClick={()=>handleFollow(_id)}>
@@ -72,6 +68,7 @@ const RightSidebar = () => {
                 </Link>
               </div>
             </div>
+          
             )
            })
          ) : (

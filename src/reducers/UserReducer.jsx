@@ -94,6 +94,23 @@ export const allUserReducer = createReducer(initialState, {
    }
    
 })
+
+//to get the profile of other users
+// export const UserProfileReducer = createReducer(initialState, {
+
+//   UserProfileRequest: (state)=>{
+//     state.loading = true;
+//    },
+//    UserProfileSuccess: (state, action)=>{
+//     state.loading = false;
+//     state.user = action.payload
+//    },
+//    UserProfileFailure: (state, action)=>{
+//     state.loading = false;
+//     state.error = action.payload
+//    }
+   
+// })
      
 export const followUserReducer = createReducer(initialState, {
   FollowRequest: (state)=>{

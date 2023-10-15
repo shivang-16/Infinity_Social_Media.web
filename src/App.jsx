@@ -6,7 +6,7 @@ import BookmarkSection from "./components/ProfilePage/BookmarkSection";
 import Login from "./components/Login/login";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
-import Users from "./components/Users/Users";
+import Users from "./components/UserProfile/UserProfile";
 import { loadUser } from "./actions/User";
 import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";

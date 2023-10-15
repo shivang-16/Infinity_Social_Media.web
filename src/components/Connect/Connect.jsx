@@ -5,6 +5,7 @@ import user2Img from '../../assets/user.png';
 import { useSelector, useDispatch } from "react-redux";
 import './connect.scss'
 import { followUser } from "../../actions/User";
+import User from "../User/User";
 
 
 const Connect = () => {
@@ -30,18 +31,13 @@ const Connect = () => {
            users.map((element, index)=>{
              const {name, userName, _id} = element
             return (
+              
               <div className="suggestions" key={index}>
-              <div className="userImg">
-                <img src={user2Img} alt="" style={{'filter': 'invert(100%)'}}/>
-              </div>
-              <div className="userDetail">
-                <div className="username">
-                  <p>{name}</p>
-                </div>
-                <div className="name">
-                  <p>{userName}</p>
-                </div>
-              </div>
+              <User 
+               userId={_id} 
+               userName={userName} 
+               name={name}
+               />
               <div className="btn">
                 <Link to="#">
                   <button onClick={()=>handleFollow(_id)}>
@@ -50,6 +46,7 @@ const Connect = () => {
                 </Link>
               </div>
             </div>
+           
             )
            })
          ) : (
