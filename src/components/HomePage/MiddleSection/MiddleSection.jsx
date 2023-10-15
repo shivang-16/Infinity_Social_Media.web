@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./middlesection.scss";
 import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
 import { useDispatch } from "react-redux";
 
 const MiddleSection = () => {
+  
   const [activeTab, setActiveTab] = useState("Explore");
   const dispatch = useDispatch()
 
@@ -12,14 +13,13 @@ const MiddleSection = () => {
   
   const handleAllPosts =()=>{
       dispatch(getAllPost())
-      console.log("explore")
   }
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
 
-
+ 
 
   return (
     <>
@@ -45,7 +45,7 @@ const MiddleSection = () => {
         </div>
       </div>
       <div className="middle-content">
-        <PostBody />
+        <PostBody/>
       </div>
     </>
   );

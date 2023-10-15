@@ -1,11 +1,19 @@
 import React from 'react'
 import user2Img from '../../assets/user.png'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getUserProfile } from '../../actions/User'
+
 const User = ({userName, name, userId}) => {
+
+    const dispatch = useDispatch()
+    const handleGetUserProfile = ()=>{
+        dispatch(getUserProfile(userName))
+    }
   return (
-    <Link to={`/user/${userId}`}>
+    <Link to={`/user/${userName}`} >
    
-    <div className="user">
+    <div className="user" onClick={handleGetUserProfile}>
                  
     <div className="userImg">
       <img src={user2Img} alt="" style={{'filter': 'invert(100%)'}}/>

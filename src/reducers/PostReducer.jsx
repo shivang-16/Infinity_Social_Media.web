@@ -7,11 +7,11 @@ export const createPostReducer = createReducer(initialState, {
         state.loading =true;
     },
     CreatePostSuccess:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.message = action.payload;
     },
     CreatePostFailure:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.error = action.payload;
     },
 })
@@ -23,11 +23,11 @@ export const postReducer = createReducer(initialState, {
         state.loading =true;
     },
     GetPostSuccess:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.post = action.payload;
     },
     GetPostFailure:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.error = action.payload;
     },
 
@@ -41,11 +41,11 @@ export const likeReducer = createReducer(initialState, {
         state.loading =true;
     },
     LikeSuccess:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.message = action.payload;
     },
     LikeFailure:(state, action)=>{
-        state.loading =true;
+        state.loading =false;
         state.error = action.payload;
     },
   

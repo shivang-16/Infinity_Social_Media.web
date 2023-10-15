@@ -156,6 +156,29 @@ export const getAllUser = ()=> async (dispatch)=>{
     }
 }
 
+export const getUserProfile = (userName)=> async (dispatch)=>{
+    try {
+      dispatch({
+        type: "UserProfileRequest"
+      })
+
+      let {data} = await axios.get(`${server}/user/all?userName=${userName}`,{
+        withCredentials: true
+      })
+      console.log(data)
+      dispatch({
+        type: "UserProfileSuccess",
+        payload: data.users
+      })
+    } catch (error) {
+      console.log(error)
+        dispatch({
+            type: "UserProfileFailure",
+            payload: error.response.data.message
+          })
+    }
+}
+
 export const followUser= (_id) => async(dispatch)=>{
   try {
     console.log(_id)

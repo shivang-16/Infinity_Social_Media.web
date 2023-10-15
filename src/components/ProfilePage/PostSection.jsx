@@ -6,6 +6,7 @@ import "../ProfilePage/profile.scss";
 import { Link } from "react-router-dom";
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
+import PostBody from "../Posts/PostBody";
 const PostSection = () => {
   return (
     <>
@@ -31,7 +32,9 @@ const PostSection = () => {
                   </div>
                 </Link>
               </div>
-              <div className="post_detail_content">Posts</div>
+              <div className="post_detail_content">
+                <PostBody/>
+              </div>
             </div>
           </div>
 
