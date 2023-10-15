@@ -16,7 +16,7 @@ import { logoutUser } from "../../../actions/User";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const LeftSidebar = () => {
+const LeftSidebar = ({openPopup}) => {
   const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -73,7 +73,7 @@ const LeftSidebar = () => {
             <p>Connect</p>
           </div>
         </Link>
-        <div className={`left-boxes ${selectedOption === "create" ? "active" : ""}`}>
+        <div className='left-boxes' onClick={openPopup}>
           <img src={create} alt="Create" />
           <p>Create</p>
         </div>

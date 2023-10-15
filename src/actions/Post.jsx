@@ -6,7 +6,7 @@ import { server } from "../main";
 export const createPost = (caption) => async(dispatch)=>{
   try {
     dispatch({
-        type: "CreateRequest",
+        type: "CreatePostRequest",
     })
     const {data} = await axios.post(`${server}/post/create`,{
         caption
@@ -17,12 +17,14 @@ export const createPost = (caption) => async(dispatch)=>{
          withCredentials: true
      })
      dispatch({
-        type: "CreateSuccess",
-        payload: data.post
+        type: "CreatePostSuccess",
+        payload: data.message
     })
+    toast.success(data.message)
    } catch (error) {
+    console.log(error)
     dispatch({
-        type: "CreateFailure",
+        type: "CreatePostFailure",
         payload: error.response.data.message
     })
    }

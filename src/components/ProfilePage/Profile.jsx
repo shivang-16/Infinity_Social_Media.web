@@ -6,6 +6,7 @@ import "../ProfilePage/profile.scss";
 import { useSelector } from "react-redux";
 const Profile = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
+  
   return (
     <>
       <div className="user_section profile_details">

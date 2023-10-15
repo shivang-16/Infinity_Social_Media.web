@@ -15,8 +15,8 @@ const Connect = () => {
    const handleFollow = (_id)=>{
     dispatch(followUser(_id))
    }
-
-   const isUserFollowed = (userId) => user.following.includes(userId);
+  
+   const isUserFollowed = (userId) => user.following.some(follow => follow._id === userId);
   return (
     <main>
       <div className="main-box left_sidebar">

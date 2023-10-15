@@ -6,6 +6,7 @@ import BookmarkSection from "./components/ProfilePage/BookmarkSection";
 import Login from "./components/Login/login";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
+import Users from "./components/Users/Users";
 import { loadUser } from "./actions/User";
 import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";
@@ -27,12 +28,13 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route exact path="/" element={isAuthenticated? <Mainbody />: <Login />} />
-        <Route exact path="/connect" element={<Connect />} />
-        <Route exact path="/profile" element={<PostSection />} />
-        <Route exact path="/bookmark" element={<BookmarkSection />} />
-        <Route exact path="/signup" element={<SingUp />} />
-        <Route exact path="/verify" element={<Verification />}/>
+      <Route exact path="/" element={isAuthenticated ? <Mainbody />: <Login />} />
+        <Route exact path="/connect" element={isAuthenticated ? <Connect /> : <Login />} />
+        <Route exact path="/profile" element={isAuthenticated ? <PostSection /> : <Login />} />
+        <Route exact path="/bookmark" element={isAuthenticated ? <BookmarkSection /> : <Login />} />
+        <Route exact path="/signup" element={isAuthenticated ? <SingUp /> : <Login />} />
+        <Route exact path="/verify" element={isAuthenticated ? <Verification /> : <Login />}/>
+        <Route exact path="/user/:userName" element={isAuthenticated ? <Users /> : <Login />}/>
        
       </Routes>
       <Toaster />

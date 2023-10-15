@@ -1,8 +1,24 @@
 import { createReducer } from "@reduxjs/toolkit";
 const initialState={}
 
+
+export const createPostReducer = createReducer(initialState, {
+    CreatePostRequest:(state)=>{
+        state.loading =true;
+    },
+    CreatePostSuccess:(state, action)=>{
+        state.loading =true;
+        state.message = action.payload;
+    },
+    CreatePostFailure:(state, action)=>{
+        state.loading =true;
+        state.error = action.payload;
+    },
+})
+
 export const postReducer = createReducer(initialState, {
 
+ 
     GetPostRequest:(state)=>{
         state.loading =true;
     },
@@ -14,6 +30,7 @@ export const postReducer = createReducer(initialState, {
         state.loading =true;
         state.error = action.payload;
     },
+
   
    
 })

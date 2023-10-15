@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../components/Posts/post.scss';
 import photo from '../../assets/user3.jpg';
-import photo2 from '../../assets/profilepic.jpg';
+import photo2 from '../../assets/user.png';
 import unlike from '../../assets/unlike.png';
 import liked from '../../assets/liked.png';
 import comment from '../../assets/comment.png';
@@ -30,17 +30,19 @@ const PostBody = () => {
     <>
       {user && post ? (
         post.map((element, index) => {
-          const { caption, _id, likes, likesCount } = element;
-          const postIsLiked = likes.includes(user._id);
+          const { caption, _id, likes, owner } = element;
+          const postIsLiked = likes.some(like => like._id === user._id);
 
+          
+         console.log()
           return (
             <div className="post" key={index}>
               <div className="post-header">
                 <div className="user-photo">
-                  <img src={photo2} alt="" />
+                  <img src={photo2} alt="" style={{"filter": "invert(100%)"}}/>
                 </div>
                 <div className="username">
-                  <h4>{user.name}</h4> <span>@{user.userName}</span>
+                  <h4>{owner?.name}</h4> <span>@{owner?.userName}</span>
                 </div>
               </div>
               <div className="post-description">

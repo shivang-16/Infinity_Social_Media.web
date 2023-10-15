@@ -15,7 +15,7 @@ const RightSidebar = () => {
    const handleFollow = (_id)=>{
     dispatch(followUser(_id))
    }
-   const isUserFollowed = (userId) => user.following.includes(userId);
+   const isUserFollowed = (userId) => user.following.some(follow => follow._id === userId);
   return (
     <>
       <div className="right-main">
