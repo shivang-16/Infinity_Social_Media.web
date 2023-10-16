@@ -11,32 +11,7 @@
   margin: 30px 0px 10px 0px;
   position: relative;
 }
-.user{
-  // border: 2px solid red;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  // justify-content: center;
-}
-.userImg {
-  // border: 2px solid red;
 
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  margin: 0px 20px 0px 0px;
-  img {
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
-  }
-}
-
-.name {
-  p {
-    color: gray;
-  }
-}
 .btn {
   position: absolute;
   right: 0;

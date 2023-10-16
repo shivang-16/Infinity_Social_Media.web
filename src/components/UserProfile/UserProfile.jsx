@@ -8,19 +8,24 @@ import bookmark from "../../assets/bookmark.png";
 import { useSelector } from 'react-redux'
 import './userProfile.scss'
 import PostBody from '../Posts/PostBody'
+import Spinner2 from '../../Spinner/Spinner2'
 
 
 const Users = () => {
-  const { users } = useSelector((state) => state.userProfile);
+  const { users, loading: ProfileLoading } = useSelector((state) => state.userProfile);
   const { posts } = useSelector((state)=> state.userposts);
 
   return (
     <>
+    
     <main>
       <div className="main-box left_sidebar">
         <LeftSidebar />
       </div>
-      <div className="main-box middle-section">
+      {ProfileLoading ? (
+       <Spinner2/>
+      ):(
+        <div className="main-box middle-section">
         <div className="user_details">
         <div className="user_section profile_details">
         <div className="profile_box profile_photo">
@@ -81,14 +86,15 @@ const Users = () => {
             <div className="post_detail_content">
             {posts ? (
           posts.map((element)=>{
-            const {caption, _id, likes, owner } = element 
+            const {caption, _id, likes, owner, comments } = element 
             return (
             <PostBody
               key={_id}
               caption={caption}
-              _id = {_id}
+              postId = {_id}
               likes ={likes}
               owner = {owner}
+              comments= {comments}
             />
             )
           })
@@ -103,6 +109,8 @@ const Users = () => {
           <RightSidebar />
         </div>
       </div>
+      )}
+     
     </main>
   </>
   )

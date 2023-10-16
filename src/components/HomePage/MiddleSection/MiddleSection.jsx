@@ -48,14 +48,15 @@ const MiddleSection = () => {
       <div className="middle-content">
         {post ? (
           post.map((element)=>{
-            const {caption, _id, likes, owner } = element 
+            const {caption, _id, likes, owner, comments } = element 
             return (
             <PostBody
               key={_id}
               caption={caption}
-              _id = {_id}
+              postId = {_id}
               likes ={likes}
               owner = {owner}
+              comments= {comments}
             />
             )
           })

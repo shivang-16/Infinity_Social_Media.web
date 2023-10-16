@@ -66,3 +66,49 @@
         filter: invert(100%);
     }
 }
+.post-comments{
+    transition: max-height 0.3s ease; // Add a transition for the max-height property
+    max-height: 0; // Start with a max-height of 0
+    overflow: hidden;
+    margin-top: 10px;
+    span{
+        margin-left: 10px;
+        color: rgb(218, 218, 218);
+        // border: 2px solid red;
+        display: flex;
+
+        .reply-user{
+            margin-left: 10px;
+        }
+    }
+}
+.post-comment{
+    // border: 2px solid green;
+    
+    margin-top: 10px;
+    display: flex;
+    
+    textarea{
+        width: 100%;
+        border: none;
+        background: none;
+        outline: none;
+        padding: 5px 10px;
+        font-size: 19px;
+    }
+    button{
+        padding: 0px 20px;
+        border-radius: 20px;
+        border: none;
+        height: 40px;
+        background-color: rgb(38, 124, 223);
+        font-weight: bold;
+        &:hover{
+            background-color: rgb(20, 99, 190);
+            cursor: pointer;
+        }
+    }
+}
+.open{
+    max-height: 100px;
+}

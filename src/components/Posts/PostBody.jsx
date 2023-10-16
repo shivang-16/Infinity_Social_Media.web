@@ -1,44 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../components/Posts/post.scss';
-import photo from '../../assets/user3.jpg';
-import photo2 from '../../assets/user.png';
+import { Link } from 'react-router-dom';
 import unlike from '../../assets/unlike.png';
 import liked from '../../assets/liked.png';
-import comment from '../../assets/comment.png';
+import commentsImg from '../../assets/comment.png';
 import bookmark from '../../assets/bookmark.png';
 import bookmarked from '../../assets/bookmarksolid.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { likePost } from '../../actions/Post';
-const PostBody = ({caption, _id, likes, owner}) => {
-  
+import { commentPost } from '../../actions/Post';
+import { getPostById } from '../../actions/Post';
+import User from '../User/User';
+import user2Img from '../../assets/user.png'
+
+//get caption , id(postId), likes , owner from props
+const PostBody = ({caption, postId, likes, owner, comments}) => {
+  const [comment, setComment] = useState('')
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
  
+ const [isBookmarked, setIsBookmarked] = useState(false);
+ const [isCommentOpen, setIsCommentOpen] = useState(false);
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
+   const handlePostById = ()=>{
+    dispatch(getPostById(postId))
+   }
 
-
-  const handleLikeClick = (_id) => {
-    dispatch(likePost(_id));
+  const handleLikeClick = () => {
+    dispatch(likePost(postId));
   }
   const postIsLiked = likes.some(like => like._id === user._id);
 
-  const handleBookmarkClick = (_id) => {
+  const handleComment = ()=>{
+    dispatch(commentPost({postId, comment}))
+  }
+  const handleBookmarkClick = (postId) => {
     setIsBookmarked((prevState) => !prevState); 
   };
   
 
+  const toggleCommentBox = () => {
+    setIsCommentOpen((prevState) => !prevState);
+  };
   return (
-    <>
-         
-              <div className="post" key={_id}>
+   
+         <>
+       
+        
+              <div className="post" key={postId}>
+                <Link to={`/post/${postId}`} onClick={handlePostById}>
                 <div className="post-header">
-                  <div className="user-photo">
-                    <img src={photo2} alt="" style={{"filter": "invert(100%)"}}/>
-                  </div>
-                  <div className="username">
-                    <h4>{owner?.name}</h4> <span>@{owner?.userName}</span>
-                  </div>
+                <User 
+               userId={owner?._id} 
+               userName={owner?.userName} 
+               name={owner?.name}
+               avatar = {user2Img}
+               />
                 </div>
                 <div className="post-description">
                   <div className="caption">
@@ -48,31 +65,46 @@ const PostBody = ({caption, _id, likes, owner}) => {
                  {/* <img src='https://www.apple.com/v/ios/photos/g/images/meta/ios-photos__1eiprmm69sym_og.png' alt="" /> */}
                   </div>
                 </div>
+                </Link>
                 <div className="post-footer">
                   <div>
   
-                   <button className="like action" onClick={() => handleLikeClick(_id)}>
+                   <button className="like action" onClick={handleLikeClick}>
                     <img src={postIsLiked ? liked : unlike} alt="" />
                    
                   </button>
                   <span>{likes.length}</span>
                   </div>
                   <div>
-                  <button className="comment action">
-                    <img src={comment} alt="" />
+                  <button className="comment action" onClick={toggleCommentBox}>
+                    <img src={commentsImg} alt="" />
                   </button>
+                  <span>{comments.length}</span>
                   </div>
                 <div>
-                <button className="bookmark action" onClick={()=>handleBookmarkClick(_id)}>
+                <button className="bookmark action" onClick={handleBookmarkClick}>
                     <img src={isBookmarked ? bookmarked : bookmark} alt="" />
                   </button>
                 </div>
                   
                 </div>
               </div>
-         
-       
-    </>
+       <div className={`post-comments ${isCommentOpen ? 'open' : ''}`}>
+        <span>replying to <span className='reply-user'><User 
+               userId={owner?._id} 
+               userName={owner?.userName} 
+               /></span></span>
+        <div className='post-comment'>
+        <textarea
+          placeholder="Post your reply"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          required
+        />
+        <button onClick={handleComment}>Reply</button>
+        </div>
+      </div>
+              </>
   );
 };
 

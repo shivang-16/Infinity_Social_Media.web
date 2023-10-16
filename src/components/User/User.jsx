@@ -1,12 +1,14 @@
 import React from 'react'
 import user2Img from '../../assets/user.png'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile } from '../../actions/User'
 import { getUserPost } from '../../actions/Post'
+import './user.scss'
 
-const User = ({userName, name, userId}) => {
+const User = ({userName, name, userId, avatar}) => {
 
+   
     const dispatch = useDispatch()
     const handleGetUserProfile = ()=>{
         dispatch(getUserProfile(userName))
@@ -16,6 +18,7 @@ const User = ({userName, name, userId}) => {
     }
     
   return (
+   
     <Link to={`/user/${userName}`} >
    
     <div className="user" onClick={()=>{
@@ -23,15 +26,15 @@ const User = ({userName, name, userId}) => {
       handleGetUserPost();
       }}>
                  
-    <div className="userImg">
-      <img src={user2Img} alt="" style={{'filter': 'invert(100%)'}}/>
-    </div>
+    { avatar ? (<div className="userImg">
+      <img src={avatar} alt="" style={{'filter': 'invert(100%)'}}/>
+    </div>):("")}
     <div className="userDetail">
       <div className="username">
         <p>{name}</p>
       </div>
       <div className="name">
-        <p>{userName}</p>
+        <p>@{userName}</p>
       </div>
     </div>
      

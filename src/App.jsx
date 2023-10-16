@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Mainbody from "./components/HomePage/Mainbody/Mainbody";
+import LeftSidebar from "./components/HomePage/LeftSideBar/LeftSidebar";
 import Connect from "./components/Connect/Connect";
 import PostSection from "./components/ProfilePage/PostSection";
 import BookmarkSection from "./components/ProfilePage/BookmarkSection";
@@ -7,6 +8,7 @@ import Login from "./components/Login/login";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
 import Users from "./components/UserProfile/UserProfile";
+import Comment from "./components/Comment/Comment";
 import { loadUser } from "./actions/User";
 import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";
@@ -25,6 +27,7 @@ function App() {
       dispatch(loadUser()) 
       dispatch(getAllPost())
       dispatch(getMyPost())
+      
        }, [dispatch]);
     
   return (
@@ -34,9 +37,10 @@ function App() {
         <Route exact path="/connect" element={isAuthenticated ? <Connect /> : <Login />} />
         <Route exact path="/profile" element={isAuthenticated ? <PostSection /> : <Login />} />
         <Route exact path="/bookmark" element={isAuthenticated ? <BookmarkSection /> : <Login />} />
+        <Route exact path="/user/:userName" element={isAuthenticated ? <Users /> : <Login />}/>
+        <Route exact path="/post/:id" element={isAuthenticated ? <Comment /> : <Login />}/>
         <Route exact path="/signup" element={ <SingUp /> } />
         <Route exact path="/verify" element={ <Verification /> }/>
-        <Route exact path="/user/:userName" element={isAuthenticated ? <Users /> : <Login />}/>
        
       </Routes>
       <Toaster />

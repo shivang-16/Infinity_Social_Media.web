@@ -68,6 +68,25 @@ export const UserPostReducer = createReducer(initialState, {
    
 })
 
+export const GetPostByIDReducer = createReducer(initialState, {
+
+ 
+    GetPostByIDRequest:(state)=>{
+        state.loading =true;
+    },
+    GetPostByIDSuccess:(state, action)=>{
+        state.loading =false;
+        state.post = action.payload;
+    },
+    GetPostByIDFailure:(state, action)=>{
+        state.loading =false;
+        state.error = action.payload;
+    },
+   
+})
+
+
+
 export const likeReducer = createReducer(initialState, {
 
     LikeRequest:(state)=>{

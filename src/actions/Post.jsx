@@ -104,14 +104,40 @@ export const getUserPost = (userId) => async(dispatch)=>{
    }
 }
 
-export const likePost = (_id) => async(dispatch)=>{
-    console.log(_id)
+export const getPostById = (postId) => async(dispatch)=>{
+  try {
+    dispatch({
+        type: "GetPostByIDRequest",
+    })
+
+    const {data} = await axios.get(`${server}/post/${postId}`,{
+        withCredentials: true
+     })
+     
+     console.log(data)
+     dispatch({
+        type: "GetPostByIDSuccess",
+        payload: data.post
+    })
+
+   } catch (error) {
+    console.log(error)
+    dispatch({
+        type: "GetPostByIDFailure",
+        payload: error.response.data.message
+    })
+   }
+}
+
+
+export const likePost = (postId) => async(dispatch)=>{
+    
     try {
         dispatch({
             type: "LikeRequest",
         })
     
-        const {data} = await axios.get(`${server}/post/likes/${_id}`,{
+        const {data} = await axios.get(`${server}/post/likes/${postId}`,{
             withCredentials: true
          })
          
@@ -130,3 +156,34 @@ export const likePost = (_id) => async(dispatch)=>{
         })
        }
 }
+export const commentPost = ({postId, comment}) => async(dispatch)=>{
+    console.log(postId)
+    try {
+        dispatch({
+            type: "LikeRequest",
+        })
+    
+        const {data} = await axios.post(`${server}/post/comments/${postId}`,{
+            comment
+         },{
+            headers:{
+                "Content-Type": "application/json"
+            },
+            withCredentials:true,
+         })
+         
+      
+         dispatch({
+            type: "LikeSuccess",
+            payload: data.message
+        })
+      toast.success(data.message)
+       } catch (error) {
+        console.log(error)
+        dispatch({
+            type: "LikeFailure",
+            payload: error.response.data.message
+        })
+       }
+}
+

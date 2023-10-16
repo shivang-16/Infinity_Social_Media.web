@@ -59,6 +59,7 @@ const RightSidebar = () => {
                userId={_id} 
                userName={userName} 
                name={name}
+               avatar={user2Img}
                />
               <div className="btn">
                 <Link to="#">

@@ -1,0 +1,27 @@
+.user{
+    // border: 2px solid red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+  }
+  .userImg {
+    // border: 2px solid red;
+  
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    margin: 0px 20px 0px 0px;
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 100%;
+    //   filter: invert(100%);
+    }
+  }
+  
+  .name {
+    p {
+      color: rgb(139, 139, 139)
+    }
+  }
