@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
 import PostBody from "../Posts/PostBody";
+import {useSelector} from 'react-redux'
+
 const PostSection = () => {
+  const {posts} = useSelector((state)=> state.myposts)
+
   return (
     <>
       <main>
@@ -33,7 +37,22 @@ const PostSection = () => {
                 </Link>
               </div>
               <div className="post_detail_content">
-                <PostBody/>
+              {posts ? (
+          posts.map((element)=>{
+            const {caption, _id, likes, owner } = element 
+            return (
+            <PostBody
+              key={_id}
+              caption={caption}
+              _id = {_id}
+              likes ={likes}
+              owner = {owner}
+            />
+            )
+          })
+        ):(
+          "No post found"
+        )}
               </div>
             </div>
           </div>

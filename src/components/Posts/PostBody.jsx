@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../../components/Posts/post.scss';
 import photo from '../../assets/user3.jpg';
 import photo2 from '../../assets/user.png';
@@ -9,38 +9,29 @@ import bookmark from '../../assets/bookmark.png';
 import bookmarked from '../../assets/bookmarksolid.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { likePost } from '../../actions/Post';
-import Spinner from '../../Spinner/Spinner';
-const PostBody = () => {
+const PostBody = ({caption, _id, likes, owner}) => {
   
-  const { user, loading: userLoading } = useSelector((state) => state.user);
-  const { post, loading: postLoading } = useSelector((state) => state.post);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+ 
 
   const [isBookmarked, setIsBookmarked] = useState(false);
-   // Store liked post IDs
-  const dispatch = useDispatch();
+
 
   const handleLikeClick = (_id) => {
     dispatch(likePost(_id));
   }
+  const postIsLiked = likes.some(like => like._id === user._id);
 
-
-   
   const handleBookmarkClick = (_id) => {
     setIsBookmarked((prevState) => !prevState); 
   };
+  
 
   return (
     <>
-      { postLoading ?(<Spinner/>):(
-        user && post ? (
-          post.map((element, index) => {
-            const { caption, _id, likes, owner } = element;
-            const postIsLiked = likes.some(like => like._id === user._id);
-  
-            
-           console.log()
-            return (
-              <div className="post" key={index}>
+         
+              <div className="post" key={_id}>
                 <div className="post-header">
                   <div className="user-photo">
                     <img src={photo2} alt="" style={{"filter": "invert(100%)"}}/>
@@ -79,12 +70,8 @@ const PostBody = () => {
                   
                 </div>
               </div>
-            );
-          })
-        ) : (
-          'Not found'
-        )
-      ) }
+         
+       
     </>
   );
 };

@@ -12,6 +12,7 @@ import PostBody from '../Posts/PostBody'
 
 const Users = () => {
   const { users } = useSelector((state) => state.userProfile);
+  const { posts } = useSelector((state)=> state.userposts);
 
   return (
     <>
@@ -28,13 +29,14 @@ const Users = () => {
           </div>
         </div>
         {users ? (
-          users.map((element)=> {
+          users.map((element, index)=> {
             const {userName, name, followers, following} = element
              return(
-              <div className="profile_box profile_content">
+              <div className="profile_box profile_content" key={index}>
               <div className="content_box user_name">
              
                 <h4>{userName}</h4>
+               
                
               </div>
               <div className="content_box followers_section">
@@ -77,7 +79,22 @@ const Users = () => {
               </Link>
             </div>
             <div className="post_detail_content">
-              <PostBody/>
+            {posts ? (
+          posts.map((element)=>{
+            const {caption, _id, likes, owner } = element 
+            return (
+            <PostBody
+              key={_id}
+              caption={caption}
+              _id = {_id}
+              likes ={likes}
+              owner = {owner}
+            />
+            )
+          })
+        ):(
+          "No post found"
+        )}
             </div>
           </div>
         </div>

@@ -35,6 +35,39 @@ export const postReducer = createReducer(initialState, {
    
 })
 
+export const myPostReducer = createReducer(initialState, {
+
+ 
+    MyPostRequest:(state)=>{
+        state.loading =true;
+    },
+    MyPostSuccess:(state, action)=>{
+        state.loading =false;
+        state.posts = action.payload;
+    },
+    MyPostFailure:(state, action)=>{
+        state.loading =false;
+        state.error = action.payload;
+    },
+   
+})
+export const UserPostReducer = createReducer(initialState, {
+
+ 
+    UserPostRequest:(state)=>{
+        state.loading =true;
+    },
+    UserPostSuccess:(state, action)=>{
+        state.loading =false;
+        state.posts = action.payload;
+    },
+    UserPostFailure:(state, action)=>{
+        state.loading =false;
+        state.error = action.payload;
+    },
+   
+})
+
 export const likeReducer = createReducer(initialState, {
 
     LikeRequest:(state)=>{

@@ -48,7 +48,57 @@ export const getAllPost = () => async(dispatch)=>{
    } catch (error) {
     console.log(error)
     dispatch({
-        type: "CreateFailure",
+        type: "GetPostFailure",
+        payload: error.response.data.message
+    })
+   }
+}
+
+export const getMyPost = () => async(dispatch)=>{
+  try {
+    dispatch({
+        type: "MyPostRequest",
+    })
+
+    const {data} = await axios.get(`${server}/user/me/posts`,{
+        withCredentials: true
+     })
+     
+     console.log(data)
+     dispatch({
+        type: "MyPostSuccess",
+        payload: data.posts
+    })
+
+   } catch (error) {
+    console.log(error)
+    dispatch({
+        type: "MyPostFailure",
+        payload: error.response.data.message
+    })
+   }
+}
+
+export const getUserPost = (userId) => async(dispatch)=>{
+  try {
+    dispatch({
+        type: "UserPostRequest",
+    })
+
+    const {data} = await axios.get(`${server}/user/posts/${userId}`,{
+        withCredentials: true
+     })
+     
+     console.log(data)
+     dispatch({
+        type: "UserPostSuccess",
+        payload: data.posts
+    })
+
+   } catch (error) {
+    console.log(error)
+    dispatch({
+        type: "UserPostFailure",
         payload: error.response.data.message
     })
    }

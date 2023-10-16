@@ -55,6 +55,7 @@ const Mainbody = () => {
               placeholder="Write your caption here"
               value={caption}
               onChange={e=> setCaption(e.target.value)}
+              required
             />
             <div className="popup-foot">
             <span>Image</span>

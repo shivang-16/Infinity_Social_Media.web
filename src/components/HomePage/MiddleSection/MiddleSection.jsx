@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./middlesection.scss";
 import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
-import { useDispatch } from "react-redux";
+import Spinner from "../../../Spinner/Spinner";
+import { useDispatch, useSelector } from "react-redux";
 
 const MiddleSection = () => {
   
   const [activeTab, setActiveTab] = useState("Explore");
   const dispatch = useDispatch()
-
+  const { post, loading: postLoading } = useSelector((state) => state.post);
   
   
   const handleAllPosts =()=>{
@@ -45,7 +46,23 @@ const MiddleSection = () => {
         </div>
       </div>
       <div className="middle-content">
-        <PostBody/>
+        {post ? (
+          post.map((element)=>{
+            const {caption, _id, likes, owner } = element 
+            return (
+            <PostBody
+              key={_id}
+              caption={caption}
+              _id = {_id}
+              likes ={likes}
+              owner = {owner}
+            />
+            )
+          })
+        ):(
+          "No post found"
+        )}
+       
       </div>
     </>
   );

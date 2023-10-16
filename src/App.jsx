@@ -10,6 +10,7 @@ import Users from "./components/UserProfile/UserProfile";
 import { loadUser } from "./actions/User";
 import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";
+import { getMyPost } from "./actions/Post";
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
@@ -20,9 +21,10 @@ function App() {
     const { isAuthenticated } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadUser());
-        dispatch(getAllPost())
-        dispatch(getAllUser())
+      dispatch(getAllUser())
+      dispatch(loadUser()) 
+      dispatch(getAllPost())
+      dispatch(getMyPost())
        }, [dispatch]);
     
   return (
@@ -32,8 +34,8 @@ function App() {
         <Route exact path="/connect" element={isAuthenticated ? <Connect /> : <Login />} />
         <Route exact path="/profile" element={isAuthenticated ? <PostSection /> : <Login />} />
         <Route exact path="/bookmark" element={isAuthenticated ? <BookmarkSection /> : <Login />} />
-        <Route exact path="/signup" element={isAuthenticated ? <SingUp /> : <Login />} />
-        <Route exact path="/verify" element={isAuthenticated ? <Verification /> : <Login />}/>
+        <Route exact path="/signup" element={ <SingUp /> } />
+        <Route exact path="/verify" element={ <Verification /> }/>
         <Route exact path="/user/:userName" element={isAuthenticated ? <Users /> : <Login />}/>
        
       </Routes>

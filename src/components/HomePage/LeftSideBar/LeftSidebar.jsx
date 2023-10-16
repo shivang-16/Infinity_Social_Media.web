@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./leftsidebar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import home from "../../../assets/home.png";
@@ -13,8 +13,8 @@ import userDark from "../../../assets/userDark.png";
 import connectDark from "../../../assets/connectDark.png"; // Corrected the asset import name
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
-import toast from "react-hot-toast";
-import axios from "axios";
+import { getMyPost } from "../../../actions/Post";
+import { getAllPost } from "../../../actions/Post";
 
 const LeftSidebar = ({openPopup}) => {
   const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
@@ -33,8 +33,15 @@ const LeftSidebar = ({openPopup}) => {
     }
   };
 
+   const handleAllPosts = () =>{
+    dispatch(getAllPost())
+   }
 
-
+   const handleMyPosts = ()=>{
+    dispatch(getMyPost())
+   }
+   
+ 
 
   return (
     <>
@@ -42,7 +49,7 @@ const LeftSidebar = ({openPopup}) => {
         <h2>SocialApp</h2>
       </div>
       <div className="leftSidebar-content">
-        <Link to="/">
+        <Link to="/" onClick={handleAllPosts}>
           <div
             className={`left-boxes ${selectedOption === "home" ? "active" : ""}`}
             onClick={() => handleOptionClick("home")}
@@ -77,10 +84,10 @@ const LeftSidebar = ({openPopup}) => {
           <img src={create} alt="Create" />
           <p>Create</p>
         </div>
-        <Link to="/profile">
+        <Link to="/profile" onClick={handleMyPosts}>
           <div
             className={`left-boxes ${selectedOption === "profile" ? "active" : ""}`}
-            onClick={() => handleOptionClick("profile")}
+            onClick={() => handleOptionClick("profile")} 
           >
             <img src={selectedOption === "profile" ? userDark : user} alt="Profile" />
             <p>Profile</p>
