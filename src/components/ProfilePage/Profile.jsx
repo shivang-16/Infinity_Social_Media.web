@@ -22,14 +22,18 @@ const Profile = () => {
             <span>{user.userName}</span>
             <button>Edit Profile</button>
           </div>
-          <div className="content_box followers_section">
-            <span>0 Posts</span>
-            <Link to="/followers">
-              <span>{user.followers.length} Followers</span>
-            </Link>
-            <Link to="/following">
-              <span>{user.following.length}  Following</span>
-            </Link>
+          <div className="content_box followers_details_section">
+            <div>
+            <p>{user.posts.length} Posts</p>
+            </div>
+              <div>
+              <p>{user.followers.length} Followers</p>
+              </div>
+               <div>
+
+              <p>{user.following.length}  Following</p>
+               </div>
+        
           </div>
           <div className="content_box user_descripton">
             <h4>{user.name}</h4>
@@ -39,7 +43,7 @@ const Profile = () => {
           </div>
         </div>
         ):(
-          <h2>NOt found</h2>
+          <h2>Not found</h2>
         )}
        
       </div>

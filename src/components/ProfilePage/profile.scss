@@ -47,9 +47,10 @@
     border: none;
   }
 }
-.followers_section {
-  span {
-    margin-right: 30px;
+.followers_details_section {
+  display: flex;
+  p {
+    margin-right: 20px;
     font-size: 17px;
     font-weight: bold;
   }

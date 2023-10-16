@@ -29,9 +29,24 @@ const Comment = () => {
     ) : (
         <Spinner2/>
     )}
-    
+    <div className='display-comments'>
+        {
+            post.comments.length != 0 ? (
+              post.comments.map((element, index)=>{
+                 const {comment} = element
+                 return(
+                    <div>
+                        {comment}
+                    </div>
+                 )
+              })
+            ):(
+                "No Comments"
+            )
+        }
+     </div>
     </div>
-    
+     
     </div>
    </>
   )
