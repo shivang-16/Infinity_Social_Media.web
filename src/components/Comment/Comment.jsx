@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 import LeftSidebar from '../HomePage/LeftSideBar/LeftSidebar'
 import { useSelector } from 'react-redux'
 import PostBody from '../Posts/PostBody'
+import user2Img from '../../assets/user.png'
 import Spinner2 from '../../Spinner/Spinner2'
 import './comment.scss'
+import User from '../User/User'
 
 const Comment = () => {
  
-    const {post} = useSelector((state)=> state.postById)
+    const {post, loading: PostLoading} = useSelector((state)=> state.postById)
 
   return (
    <>
@@ -16,33 +18,43 @@ const Comment = () => {
         <LeftSidebar />
       </div>
       <div className='comment-content'>
-       
-    {post ? (
-        <PostBody
-        key={post._id}
-        caption={post?.caption}
-        postId = {post._id}
-        likes ={post.likes}
-        owner = {post.owner}
-        comments = {post.comments}
-      />
-    ) : (
-        <Spinner2/>
-    )}
-    <div className='display-comments'>
-        {
-            post.comments.length != 0 ? (
-              post.comments.map((element, index)=>{
-                 const {comment} = element
-                 return(
-                    <div>
-                        {comment}
-                    </div>
-                 )
-              })
-            ):(
-                "No Comments"
+       {
+            post ? (
+                <PostBody
+                key={post._id}
+                caption={post?.caption}
+                postId = {post._id}
+                likes ={post.likes}
+                owner = {post?.owner}
+                comments = {post?.comments}
+              />
+            ) : (
+               <Spinner2/>
             )
+        }
+   
+    <div className='display-comments'>
+      {
+            post && post.comments.length != 0 ? (
+                post.comments.map((element, index)=>{
+                   const {comment, user} = element
+                   return(
+                      <div key={index}>
+                         <User
+                         userId={user._id}
+                           name={user.name}
+                           userName={user.userName}
+                        //    avatar={user2Img}
+                         />
+                         <p>{comment}</p>
+                      </div>
+                   )
+                })
+              ):(
+                  "No Comments"
+              )
+      
+            
         }
      </div>
     </div>

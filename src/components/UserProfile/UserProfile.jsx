@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import LeftSidebar from '../HomePage/LeftSideBar/LeftSidebar'
 import RightSidebar from '../HomePage/RightSideBar/RightSidebar'
-import photo from '../../assets/user.png'
+import user2Img from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
@@ -9,12 +9,30 @@ import { useSelector } from 'react-redux'
 import './userProfile.scss'
 import PostBody from '../Posts/PostBody'
 import Spinner2 from '../../Spinner/Spinner2'
+import User from '../User/User'
 
 
 const Users = () => {
   const { users, loading: ProfileLoading } = useSelector((state) => state.userProfile);
   const { posts } = useSelector((state)=> state.userposts);
+  const [isFollowersOpen, setFollowersOpen] = useState(false);
+  const [isFollowingOpen, setFollowingOpen] = useState(false);
 
+  const openFollowersPopup = () => {
+    setFollowersOpen(true);
+  };
+
+  const closeFollowersPopup = () => {
+    setFollowersOpen(false);
+  };
+
+  const openFollowingPopup = () => {
+    setFollowingOpen(true);
+  };
+
+  const closeFollowingPopup = () => {
+    setFollowingOpen(false);
+  };
   return (
     <>
     
@@ -35,7 +53,7 @@ const Users = () => {
         </div>
         {users ? (
           users.map((element, index)=> {
-            const {userName, name, followers, following} = element
+            const {userName, name, followers, following, posts} = element
              return(
               <div className="profile_box profile_content" key={index}>
               <div className="content_box user_name">
@@ -44,14 +62,17 @@ const Users = () => {
                
                
               </div>
-              <div className="content_box followers_section">
-                <span>0 Posts</span>
-                <Link to="/followers">
-                  <span>{followers.length} Followers</span>
-                </Link>
-                <Link to="/following">
-                  <span>{following.length}  Following</span>
-                </Link>
+              <div className="content_box followers_details_section">
+              <div >
+            <p>{posts.length} Posts</p>
+            </div>
+              <div onClick={openFollowersPopup}>
+              <p>{followers.length} Followers</p>
+              </div>
+               <div onClick={openFollowingPopup}>
+
+              <p>{following.length}  Following</p>
+               </div>
               </div>
               <div className="content_box user_descripton">
                 <h3>{name}</h3>
@@ -111,6 +132,78 @@ const Users = () => {
       </div>
       )}
      
+     {users ? (
+         users.map((element)=>{
+          const {followers, following} = element
+          return(
+            <>
+            {isFollowersOpen && (
+        <div className="popup">
+          <div className="popup-content">
+            <div className="popup-head" style={{ "marginBottom": "10px" }}>
+              <h2>Followers</h2>
+            </div>
+            <span className="close-icon" onClick={closeFollowersPopup}>
+              &times;
+            </span>
+            {
+            followers.length != 0 ? (
+              followers.map((element)=>{
+                const {_id, userName, name} = element
+                return(
+                  <User 
+                  key={_id}
+               userId={_id} 
+               userName={userName} 
+               name={name}
+               avatar={user2Img}
+               />
+                )
+              })
+            ):(
+               "Not followed anyone"
+            )
+           }
+          </div>
+        </div>
+      )}
+
+      {isFollowingOpen && (
+        <div className="popup">
+          <div className="popup-content">
+            <div className="popup-head" style={{ "marginBottom": "10px" }}>
+              <h2>Following</h2>
+            </div>
+            <span className="close-icon" onClick={closeFollowingPopup}>
+              &times;
+            </span>
+            {
+            following.length != 0 ? (
+              following.map((element)=>{
+                const {_id, userName, name} = element
+                return(
+                  <User 
+                  key={_id}
+               userId={_id} 
+               userName={userName} 
+               name={name}
+               avatar={user2Img}
+               />
+                )
+              })
+            ):(
+               "Not followed anyone"
+            )
+           }
+          </div>
+        </div>
+      )}
+            </>
+          )
+         })
+     ) : (
+       "Not Found"
+     )}
     </main>
   </>
   )
