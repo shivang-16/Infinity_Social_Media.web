@@ -98,6 +98,8 @@ const LeftSidebar = ({openPopup}) => {
           <p>Logout</p>
         </div>
       </div>
+
+      
     </>
   );
 };

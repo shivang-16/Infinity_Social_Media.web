@@ -42,6 +42,15 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
   const toggleCommentBox = () => {
     setIsCommentOpen((prevState) => !prevState);
   };
+
+const [isLikeopen, setIsLikeOpen] = useState(false)
+  const openLikesPopup = () => {
+    setIsLikeOpen(true);
+  };
+
+  const closeLikesPopup = () => {
+    setIsLikeOpen(false);
+  };
   return (
    
          <>
@@ -73,7 +82,7 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
                     <img src={postIsLiked ? liked : unlike} alt="" />
                    
                   </button>
-                  <span>{likes.length}</span>
+                  <span onClick={openLikesPopup}>{likes.length}</span>
                   </div>
                   <div>
                   <button className="comment action" onClick={toggleCommentBox}>
@@ -104,7 +113,33 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
         <button onClick={handleComment}>Reply</button>
         </div>
       </div>
-              </>
+      {isLikeopen && (<div className="popup">
+          <div className="popup-content">
+            <div className="popup-head" style={{ "marginBottom": "10px" }}>
+              <h2>Likes</h2>
+            </div>
+            <span className="close-icon" onClick={closeLikesPopup}>
+              &times;
+            </span>
+            {likes.length != 0 ? (
+                likes.map((element)=>{
+                  const {_id, userName, name} = element
+                return(
+                  <User 
+                  key={_id}
+                  userId={_id} 
+                  userName={userName} 
+                  name={name}
+                  avatar={user2Img}
+               />
+                )
+                })
+            ) : (
+              "No likes yet"
+              )}
+            </div>
+            </div>)}
+       </>
   );
 };
 
