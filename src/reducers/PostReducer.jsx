@@ -87,20 +87,18 @@ export const GetPostByIDReducer = createReducer(initialState, {
 
 
 
-export const likeReducer = createReducer(initialState, {
-
-    LikeRequest:(state)=>{
+//for like, comment, delete and edit
+export const generalMessageReducer = createReducer(initialState, {
+    GeneralRequest:(state)=>{
         state.loading =true;
     },
-    LikeSuccess:(state, action)=>{
+    GeneralSuccess:(state, action)=>{
         state.loading =false;
         state.message = action.payload;
     },
-    LikeFailure:(state, action)=>{
+    GeneralFailure:(state, action)=>{
         state.loading =false;
         state.error = action.payload;
     },
   
-   
 })
-

@@ -1,29 +1,53 @@
 import React, {useState} from "react";
-
 import photo from "../../assets/profilepic.jpg";
 import user2Img from '../../assets/user.png'
 import "../ProfilePage/profile.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
+import { editUser } from "../../actions/User";
+
 const Profile = () => {
   const { user, loading: userLoading } = useSelector((state) => state.user);
   const [isFollowersOpen, setFollowersOpen] = useState(false);
   const [isFollowingOpen, setFollowingOpen] = useState(false);
+  const [isUpdateOpen, setUpdatedOpen] = useState(false)
+  const [editName, setEditName] = useState('')
+  const [about, setAbout] = useState('')
+  const [dob, setDob] = useState('')
+  const [location, setLocation] = useState('')
+  const [link, setLink] = useState('')
+  
+  const dispatch = useDispatch()
 
+  const openUpdatePopup = () =>{
+    setUpdatedOpen(true)
+    setEditName(user.name)
+    setAbout(user.description.about)
+    setDob(user.description.dob)
+    setLocation(user.description.location)
+    setLink(user.description.link)
+  }
+  const updateUser = () =>{
+    setEditName(editName)
+    setAbout(about)
+    setDob(dob)
+    setLocation(location)
+    setLink(link)
+    dispatch(editUser({name: editName, about, dob, location, link}))
+    setUpdatedOpen(false)
+  }
   const openFollowersPopup = () => {
     setFollowersOpen(true);
-  };
-
-  const closeFollowersPopup = () => {
-    setFollowersOpen(false);
   };
 
   const openFollowingPopup = () => {
     setFollowingOpen(true);
   };
 
-  const closeFollowingPopup = () => {
+  const closePopup = () => {
+    setFollowersOpen(false);
     setFollowingOpen(false);
+    setUpdatedOpen(false)
   };
   return (
     <>
@@ -38,7 +62,7 @@ const Profile = () => {
           <div className="content_box user_name">
          
             <span>{user.userName}</span>
-            <button>Edit Profile</button>
+            <button onClick={openUpdatePopup}>Edit Profile</button>
           </div>
           <div className="content_box followers_details_section">
             <div >
@@ -55,9 +79,17 @@ const Profile = () => {
           </div>
           <div className="content_box user_descripton">
             <h4>{user.name}</h4>
-            <p>Full stack web Developer</p>
-            <p>23 Feb 2005</p>
-            <p>github.com/shivang-16</p>
+            {user.description ? (
+              <>
+               <p>{user.description.about}</p>
+               <p>{user.description.dob}</p>
+               <p>{user.description.location}</p>
+               <a href={`${user.description.link}` } target='_blank'>{user.description.link}</a>
+              </>
+              
+            ) : (
+                  ""
+            )}
           </div>
         </div>
         ):(
@@ -65,14 +97,35 @@ const Profile = () => {
         )}
        
       </div>
+      {isUpdateOpen && (
+        <div className="popup">
+        <div className="popup-content">
+        <div className="popup-head" style={{ "marginBottom": "10px" }}>
+              <h2>Edit Profile</h2>
+            </div>
+            <span className="close-icon" onClick={closePopup}>
+              &times;
+            </span>
+          <div className="information">
+            <input type="text" placeholder="Name" value={editName} onChange={e=>setEditName(e.target.value)}/>
+            <input type="text" placeholder="Bio" value={about} onChange={e=>setAbout(e.target.value)}/>
+            <input type="date" placeholder="DOB" value={dob} onChange={e=>setDob(e.target.value)}/>
+            <input type="text" placeholder="Location" value={location} onChange={e=>setLocation(e.target.value)}/>
+            <input type="text" placeholder="Link" value={link} onChange={e=>setLink(e.target.value)}/>
+          </div>
+          <button onClick={updateUser}>Updated details</button>
+        </div>
+        </div>
+      )
 
+      }
       {isFollowersOpen && (
         <div className="popup">
           <div className="popup-content">
             <div className="popup-head" style={{ "marginBottom": "10px" }}>
               <h2>Followers</h2>
             </div>
-            <span className="close-icon" onClick={closeFollowersPopup}>
+            <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
             {
@@ -103,7 +156,7 @@ const Profile = () => {
             <div className="popup-head" style={{ "marginBottom": "10px" }}>
               <h2>Following</h2>
             </div>
-            <span className="close-icon" onClick={closeFollowingPopup}>
+            <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
             {

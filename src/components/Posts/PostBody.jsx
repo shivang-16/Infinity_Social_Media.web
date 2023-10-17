@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { likePost } from '../../actions/Post';
 import { commentPost } from '../../actions/Post';
 import { getPostById } from '../../actions/Post';
+import { deletePost } from '../../actions/Post';
+import { editPost } from '../../actions/Post';
 import User from '../User/User';
 import user2Img from '../../assets/user.png'
 
@@ -21,7 +23,11 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
  
  const [isBookmarked, setIsBookmarked] = useState(false);
  const [isCommentOpen, setIsCommentOpen] = useState(false);
-
+ const [isLikeopen, setIsLikeOpen] = useState(false);
+ const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+ const [isEditOpen, setIsEditOpen] = useState(false)
+ const [editCaption, setEditCaption] = useState('')
+   
    const handlePostById = ()=>{
     dispatch(getPostById(postId))
    }
@@ -34,6 +40,22 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
   const handleComment = ()=>{
     dispatch(commentPost({postId, comment}))
   }
+
+  const handleDelete = ()=>{
+    console.log('deleted')
+    dispatch(deletePost(postId))
+  }
+ 
+  const handleEditPopup = () =>{
+    setIsEditOpen(true)
+    setEditCaption(caption);
+  }
+   
+  const handleEdit = ()=>{
+     setEditCaption(editCaption)
+     dispatch(editPost({postId, caption: editCaption}))
+     setIsEditOpen(false)
+  }
   const handleBookmarkClick = (postId) => {
     setIsBookmarked((prevState) => !prevState); 
   };
@@ -43,13 +65,21 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
     setIsCommentOpen((prevState) => !prevState);
   };
 
-const [isLikeopen, setIsLikeOpen] = useState(false)
+
+  const toggleOptions = () =>{
+    setIsOptionsOpen((prevState) => !prevState)
+  }
+  const showOptionIcon = user?._id === owner?._id
+
+
   const openLikesPopup = () => {
     setIsLikeOpen(true);
+    
   };
 
-  const closeLikesPopup = () => {
+  const closePopup = () => {
     setIsLikeOpen(false);
+    setIsEditOpen(false)
   };
   return (
    
@@ -57,7 +87,7 @@ const [isLikeopen, setIsLikeOpen] = useState(false)
        
         
               <div className="post" key={postId}>
-                <Link to={`/post/${postId}`} onClick={handlePostById}>
+               
                 <div className="post-header">
                 <User 
                userId={owner?._id} 
@@ -65,7 +95,44 @@ const [isLikeopen, setIsLikeOpen] = useState(false)
                name={owner?.name}
                avatar = {user2Img}
                />
+            {showOptionIcon ? (
+              <>
+                <div className='options-icon' onClick={toggleOptions}>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
+                {isOptionsOpen && (
+                  <div className='options'>
+                    <div onClick={handleEditPopup}>Edit</div>
+                    <div onClick={handleDelete}>Delete</div>
+                  </div>
+                )}
+                </>
+                ) : null}
+               {isEditOpen && ( <div className="popup">
+          <div className="popup-content">
+            <div className="popup-head">
+            <img src={user2Img} alt="" />
+            <h2>Edit Post</h2>
+            </div>
+            <span className="close-icon" onClick={closePopup}>
+              &times;
+            </span>
+            <textarea
+              placeholder="Write your caption here"
+              value={editCaption}
+              onChange={e=>setEditCaption(e.target.value)}
+              required
+            />
+            <div className="popup-foot">
+           <button onClick={handleEdit}>Update</button>
+            
+            </div>
+          </div>
+        </div> )}
+                </div>
+                <Link to={`/post/${postId}`} onClick={handlePostById}>
                 <div className="post-description">
                   <div className="caption">
                     <p>{caption}</p>
@@ -118,7 +185,7 @@ const [isLikeopen, setIsLikeOpen] = useState(false)
             <div className="popup-head" style={{ "marginBottom": "10px" }}>
               <h2>Likes</h2>
             </div>
-            <span className="close-icon" onClick={closeLikesPopup}>
+            <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
             {likes.length != 0 ? (

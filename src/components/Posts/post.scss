@@ -10,7 +10,7 @@
     align-items: center;
     border-bottom: 1px solid rgb(59, 59, 59);
     padding-bottom: 10px;
-
+    position: relative;
 }
 .user-photo{
     height: 40px;
@@ -21,6 +21,47 @@
         width: 100%;
         border-radius: 100%;
     }
+}
+.options-icon{
+    // border: 2px solid red;
+    position: absolute;
+    right: 0px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding: 7px;
+    border-radius: 100%;
+    &:hover{
+        background-color: rgb(54, 54, 54);
+        cursor: pointer;
+    }
+    div{
+        border: 2px solid rgb(157, 157, 157);
+        margin: 2px;
+        border-radius: 30px;
+    }
+}
+.options{
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    border: 2px solid rgb(96, 96, 96);
+   border-radius: 10px;
+   background-color: rgb(38, 38, 38);
+   z-index: 1;
+    div{
+        padding: 5px 10px;
+        border-radius: 10px;
+        &:hover{
+            background-color: gray;
+            cursor: pointer;
+        }
+    }
+    
 }
 .post-description{
     padding: 10px 0px ;

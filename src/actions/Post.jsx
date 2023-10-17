@@ -131,10 +131,10 @@ export const getPostById = (postId) => async(dispatch)=>{
 
 
 export const likePost = (postId) => async(dispatch)=>{
-    
+   
     try {
         dispatch({
-            type: "LikeRequest",
+            type: "GeneralRequest",
         })
     
         const {data} = await axios.get(`${server}/post/likes/${postId}`,{
@@ -143,15 +143,14 @@ export const likePost = (postId) => async(dispatch)=>{
          
       
          dispatch({
-            type: "LikeSuccess",
+            type: "GeneralSuccess",
             payload: data.message
         })
-      console.log(data)
       toast.success(data.message)
        } catch (error) {
         console.log(error)
         dispatch({
-            type: "LikeFailure",
+            type: "GeneralFailure",
             payload: error.response.data.message
         })
        }
@@ -160,7 +159,7 @@ export const commentPost = ({postId, comment}) => async(dispatch)=>{
     console.log(postId)
     try {
         dispatch({
-            type: "LikeRequest",
+            type: "GeneralRequest",
         })
     
         const {data} = await axios.post(`${server}/post/comments/${postId}`,{
@@ -174,16 +173,72 @@ export const commentPost = ({postId, comment}) => async(dispatch)=>{
          
       
          dispatch({
-            type: "LikeSuccess",
+            type: "GeneralSuccess",
             payload: data.message
         })
       toast.success(data.message)
        } catch (error) {
         console.log(error)
         dispatch({
-            type: "LikeFailure",
+            type: "GeneralFailure",
             payload: error.response.data.message
         })
        }
 }
 
+export const editPost = ({postId, caption}) => async(dispatch)=>{
+    console.log(postId)
+    try {
+        dispatch({
+            type: "GeneralRequest",
+        })
+    
+        const {data} = await axios.put(`${server}/post/${postId}`,{
+            caption
+         },{
+            headers:{
+                "Content-Type": "application/json"
+            },
+            withCredentials:true,
+         })
+         
+      
+         dispatch({
+            type: "GeneralSuccess",
+            payload: data.message
+        })
+      toast.success(data.message)
+       } catch (error) {
+        console.log(error)
+        dispatch({
+            type: "GeneralFailure",
+            payload: error.response.data.message
+        })
+       }
+}
+
+export const deletePost = (postId) => async(dispatch)=>{
+   
+    try {
+        dispatch({
+            type: "GeneralRequest",
+        })
+    
+        const {data} = await axios.delete(`${server}/post/${postId}`,{
+            withCredentials: true
+         })
+         
+      
+         dispatch({
+            type: "GeneralSuccess",
+            payload: data.message
+        })
+      toast.success(data.message)
+       } catch (error) {
+        console.log(error)
+        dispatch({
+            type: "GeneralFailure",
+            payload: error.response.data.message
+        })
+       }
+}

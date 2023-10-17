@@ -12,6 +12,7 @@ import Spinner2 from '../../Spinner/Spinner2'
 import User from '../User/User'
 
 
+
 const Users = () => {
   const { users, loading: ProfileLoading } = useSelector((state) => state.userProfile);
   const { posts } = useSelector((state)=> state.userposts);
@@ -22,16 +23,13 @@ const Users = () => {
     setFollowersOpen(true);
   };
 
-  const closeFollowersPopup = () => {
-    setFollowersOpen(false);
-  };
-
   const openFollowingPopup = () => {
     setFollowingOpen(true);
   };
 
-  const closeFollowingPopup = () => {
+  const closePopup = () => {
     setFollowingOpen(false);
+    setFollowersOpen(false);
   };
   return (
     <>
@@ -53,12 +51,13 @@ const Users = () => {
         </div>
         {users ? (
           users.map((element, index)=> {
-            const {userName, name, followers, following, posts} = element
+            const {userName, name, followers, following, posts, description} = element
              return(
               <div className="profile_box profile_content" key={index}>
               <div className="content_box user_name">
              
                 <h4>{userName}</h4>
+                {/* <button className="follow">Follow</button> */}
                
                
               </div>
@@ -76,9 +75,17 @@ const Users = () => {
               </div>
               <div className="content_box user_descripton">
                 <h3>{name}</h3>
-                <p>Hi i am {`${name}`}</p>
-                <p>23 Feb 2005</p>
-                <p>{`github.com/${userName}`}</p>
+                {users && description ? (
+              <>
+               <p>{description.about}</p>
+               <p>{description.dob}</p>
+               <p>{description.location}</p>
+               <a href={`${description.link}` } target='_blank'>{description.link}</a>
+              </>
+              
+            ) : (
+                  ""
+            )}
               </div>
             </div>
              )
@@ -143,7 +150,7 @@ const Users = () => {
             <div className="popup-head" style={{ "marginBottom": "10px" }}>
               <h2>Followers</h2>
             </div>
-            <span className="close-icon" onClick={closeFollowersPopup}>
+            <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
             {
@@ -174,7 +181,7 @@ const Users = () => {
             <div className="popup-head" style={{ "marginBottom": "10px" }}>
               <h2>Following</h2>
             </div>
-            <span className="close-icon" onClick={closeFollowingPopup}>
+            <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
             {

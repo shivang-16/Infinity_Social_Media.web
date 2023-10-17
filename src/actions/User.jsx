@@ -190,16 +190,48 @@ export const followUser= (_id) => async(dispatch)=>{
     })
     console.log(data)
     dispatch({
-      type: "FollowRequest",
+      type: "FollowSuccess",
       payload: data.message
     })
     toast.success(data.message)
   } catch (error) {
     console.log(error)
     dispatch({
-      type: "FollowRequest",
+      type: "FollowFailure",
       payload: error.response.data.message
     })
     toast.error(error.response.data.message)
   }
 }
+
+export const editUser= ({name, about, dob, location, link}) => async(dispatch)=>{
+  try {
+   
+    dispatch({
+      type: "GeneralRequest"
+    })
+    const {data} = await axios.patch(`${server}/user/update`,{
+      name, about, dob, location, link
+  },{
+      headers:{
+          "Content-Type": "application/json"
+      },
+      withCredentials:true,
+  })
+    console.log(data)
+    dispatch({
+      type: "GeneralSuccess",
+      payload: data.message
+    })
+    toast.success(data.message)
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: "GeneralFailure",
+      payload: error.response.data.message
+    })
+    toast.error(error.response.data.message)
+  }
+}
+
+

@@ -15,9 +15,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
 import { getMyPost } from "../../../actions/Post";
 import { getAllPost } from "../../../actions/Post";
+import { createPost } from "../../../actions/Post";
+import photo from '../../../assets/user.png'
 
-const LeftSidebar = ({openPopup}) => {
+const LeftSidebar = () => {
   const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [caption, setCaption] = useState("");
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -41,6 +45,22 @@ const LeftSidebar = ({openPopup}) => {
     dispatch(getMyPost())
    }
    
+
+
+ 
+   const openPopup = () => {
+     setPopupOpen(true);
+   };
+ 
+   const closePopup = () => {
+     setPopupOpen(false);
+   };
+ 
+ 
+   const handlePost = () => {
+    dispatch(createPost(caption))
+     closePopup();
+   };
  
 
   return (
@@ -99,7 +119,30 @@ const LeftSidebar = ({openPopup}) => {
         </div>
       </div>
 
-      
+      {isPopupOpen && (
+        <div className="popup">
+          <div className="popup-content">
+            <div className="popup-head">
+            <img src={photo} alt="" />
+            <h2>Post</h2>
+            </div>
+            <span className="close-icon" onClick={closePopup}>
+              &times;
+            </span>
+            <textarea
+              placeholder="Write your caption here"
+              value={caption}
+              onChange={e=> setCaption(e.target.value)}
+              required
+            />
+            <div className="popup-foot">
+            <span>Image</span>
+            <button onClick={handlePost}>Post</button>
+            
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
