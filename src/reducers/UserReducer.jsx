@@ -76,6 +76,21 @@ createReducer(initialState, {
         state.error = action.payload;
         state.isAuthenticated =true;
       },
+
+      DeleteRequest: (state)=>{
+        state.loading = true;
+        state.isAuthenticated=true;
+      },
+      DeleteSuccess: (state, action)=>{
+        state.loading = false;
+        state.message = action.payload;
+        state.isAuthenticated =false;
+      },
+      DeleteFailure: (state, action)=>{
+        state.loading = false;
+        state.error = action.payload;
+        state.isAuthenticated =true;
+      },
 })
 
 

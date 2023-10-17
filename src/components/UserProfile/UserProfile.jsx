@@ -8,7 +8,7 @@ import bookmark from "../../assets/bookmark.png";
 import { useSelector } from 'react-redux'
 import './userProfile.scss'
 import PostBody from '../Posts/PostBody'
-import Spinner2 from '../../Spinner/Spinner2'
+import Spinner2 from '../Spinner/Spinner2'
 import User from '../User/User'
 
 

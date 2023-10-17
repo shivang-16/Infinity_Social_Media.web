@@ -3,7 +3,7 @@ import LeftSidebar from '../HomePage/LeftSideBar/LeftSidebar'
 import { useSelector } from 'react-redux'
 import PostBody from '../Posts/PostBody'
 import user2Img from '../../assets/user.png'
-import Spinner2 from '../../Spinner/Spinner2'
+import Spinner2 from '../Spinner/Spinner2'
 import './comment.scss'
 import User from '../User/User'
 

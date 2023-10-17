@@ -22,7 +22,6 @@ export const createPost = (caption) => async(dispatch)=>{
     })
     toast.success(data.message)
    } catch (error) {
-    console.log(error)
     dispatch({
         type: "CreatePostFailure",
         payload: error.response.data.message
@@ -39,7 +38,6 @@ export const getAllPost = () => async(dispatch)=>{
         withCredentials: true
      })
      
-     console.log(data.post)
      dispatch({
         type: "GetPostSuccess",
         payload: data.post
@@ -49,6 +47,30 @@ export const getAllPost = () => async(dispatch)=>{
     console.log(error)
     dispatch({
         type: "GetPostFailure",
+        payload: error.response.data.message
+    })
+   }
+}
+
+export const getFollowingPost = () => async(dispatch)=>{
+  try {
+    dispatch({
+        type: "FollowingPostsRequest",
+    })
+
+    const {data} = await axios.get(`${server}/post/following`,{
+        withCredentials: true
+     })
+     console.log(data.posts)
+     dispatch({
+        type: "FollowingPostsSuccess",
+        payload: data.posts
+    })
+
+   } catch (error) {
+    console.log(error)
+    dispatch({
+        type: "FollowingPostsFailure",
         payload: error.response.data.message
     })
    }
@@ -64,7 +86,6 @@ export const getMyPost = () => async(dispatch)=>{
         withCredentials: true
      })
      
-     console.log(data)
      dispatch({
         type: "MyPostSuccess",
         payload: data.posts
@@ -89,7 +110,6 @@ export const getUserPost = (userId) => async(dispatch)=>{
         withCredentials: true
      })
      
-     console.log(data)
      dispatch({
         type: "UserPostSuccess",
         payload: data.posts
@@ -114,7 +134,6 @@ export const getPostById = (postId) => async(dispatch)=>{
         withCredentials: true
      })
      
-     console.log(data)
      dispatch({
         type: "GetPostByIDSuccess",
         payload: data.post

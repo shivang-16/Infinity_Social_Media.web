@@ -51,6 +51,22 @@ export const myPostReducer = createReducer(initialState, {
     },
    
 })
+export const followingPostsReducer = createReducer(initialState, {
+
+ 
+    FollowingPostsRequest:(state)=>{
+        state.loading =true;
+    },
+    FollowingPostsSuccess:(state, action)=>{
+        state.loading =false;
+        state.posts = action.payload;
+    },
+    FollowingPostsFailure:(state, action)=>{
+        state.loading =false;
+        state.error = action.payload;
+    },
+   
+})
 export const UserPostReducer = createReducer(initialState, {
 
  

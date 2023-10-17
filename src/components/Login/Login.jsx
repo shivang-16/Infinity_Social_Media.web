@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 import { loginUser } from '../../actions/User'
 import { useDispatch, useSelector } from 'react-redux'
-import Spinner from '../../Spinner/Spinner'
+import Spinner from '../Spinner/Spinner'
 const Login = () => {
     const { loading: userLoading } = useSelector((state) => state.user);
     const [loginIdentifier, setLoginIdentifier] = useState('')

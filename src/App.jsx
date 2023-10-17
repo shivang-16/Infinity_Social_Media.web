@@ -13,9 +13,11 @@ import { loadUser } from "./actions/User";
 import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";
 import { getMyPost } from "./actions/Post";
+import { getFollowingPost } from "./actions/Post";
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
+import './styles/popup.scss'
 
 import "./App.scss";
 
@@ -27,6 +29,7 @@ function App() {
       dispatch(loadUser()) 
       dispatch(getAllPost())
       dispatch(getMyPost())
+      dispatch(getFollowingPost())
       
        }, [dispatch]);
     

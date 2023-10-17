@@ -10,26 +10,45 @@ import logout from "../../../assets/logout.png";
 import homeDark from "../../../assets/homeDark.png";
 import searchDark from "../../../assets/searchDark.png";
 import userDark from "../../../assets/userDark.png";
-import connectDark from "../../../assets/connectDark.png"; // Corrected the asset import name
+import connectDark from "../../../assets/connectDark.png";
+import options from '../../../assets/options.png'
+import deleteIcon from '../../../assets/delete.png'
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
 import { getMyPost } from "../../../actions/Post";
 import { getAllPost } from "../../../actions/Post";
 import { createPost } from "../../../actions/Post";
+import { deletePost } from "../../../actions/Post";
 import photo from '../../../assets/user.png'
+import Alert from "../../AlertPopup/Alert";
 
 const LeftSidebar = () => {
   const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isOptionOpen, setIsOptionOpen] = useState(false);
+  const [isLogoutOpen, setIsLogoutOpen ] = useState(false)
+  const [isDeleteOpen, setIsDeleteOpen ] = useState(false)
   const [caption, setCaption] = useState("");
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+
   const { isAuthenticated } = useSelector((state) => state.user);
  
+  const handleLogoutPopup = () =>{
+    setIsLogoutOpen(true)
+  }
    const handleLogout = ()=>{
     dispatch(logoutUser());
+    setIsLogoutOpen(false)
    }
   
+   const handleDeletePopup = () =>{
+       setIsDeleteOpen(true)
+   }
+
+   const handleDelete = () =>{
+    dispatch(deletePost())
+         setIsDeleteOpen(false)
+   }
   // Function to handle the click on an option
   const handleOptionClick = (option) => {
     if (option !== selectedOption) {
@@ -46,22 +65,29 @@ const LeftSidebar = () => {
    }
    
 
-
+   
  
    const openPopup = () => {
      setPopupOpen(true);
    };
- 
+
    const closePopup = () => {
      setPopupOpen(false);
+     setIsLogoutOpen(false)
+     setIsDeleteOpen(false)
    };
- 
  
    const handlePost = () => {
     dispatch(createPost(caption))
      closePopup();
    };
  
+   
+   
+   const toogleOptionPopup = () =>{
+    setIsOptionOpen((prevState) => ! prevState)
+   }
+   
 
   return (
     <>
@@ -69,6 +95,7 @@ const LeftSidebar = () => {
         <h2>SocialApp</h2>
       </div>
       <div className="leftSidebar-content">
+      <div className="leftSidebar-Upcontent">
         <Link to="/" onClick={handleAllPosts}>
           <div
             className={`left-boxes ${selectedOption === "home" ? "active" : ""}`}
@@ -113,12 +140,32 @@ const LeftSidebar = () => {
             <p>Profile</p>
           </div>
         </Link>
-        <div onClick={handleLogout} className={`left-boxes ${selectedOption === "logout" ? "active" : ""}`}>
+      </div>
+      <div className="leftSidebar-Downcontent">
+      <div className="left-boxes" onClick={toogleOptionPopup}>
+          <img src={options} alt="" />
+          <p>More</p>
+        </div>
+        
+        {/* option box */}
+       { isOptionOpen && <div className="options-box">
+         
+          <div onClick={handleLogoutPopup} className='left-boxes'>
           <img src={logout} alt="Logout" />
           <p>Logout</p>
         </div>
-      </div>
+          <div onClick={handleDeletePopup} className="left-boxes">
+          <img src={deleteIcon} alt="Logout" />
+            <p>Delete Account</p>
+          </div>
+          <div className="box"></div>
+        </div>}
 
+        <div className="left-footer ">
+          <p>SocialApp@2023</p>
+        </div>
+      </div>
+      </div>
       {isPopupOpen && (
         <div className="popup">
           <div className="popup-content">
@@ -143,6 +190,20 @@ const LeftSidebar = () => {
           </div>
         </div>
       )}
+
+      {isLogoutOpen && <Alert photo={user} 
+      description={'Are you sure want to logout'} 
+      action={'Logout'}
+      actionFunction={handleLogout}
+      closePopup={closePopup}
+      />}
+
+      {isDeleteOpen && <Alert photo={user} 
+      description={'Are you sure want to Delete Account'} 
+      action={'Delete'}
+      actionFunction={handleDelete}
+      closePopup={closePopup}
+      />}
     </>
   );
 };

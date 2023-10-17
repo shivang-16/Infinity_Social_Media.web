@@ -1,0 +1,39 @@
+.alert-popup-head{
+    // border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+    img{
+        filter: invert(100%);
+        height: 80px;
+    }
+}
+
+.alert-popup-content{
+    // border: 2px solid green;
+    text-align: center;
+    padding: 10px 0px;
+    h4{
+        margin-bottom: 10px ;
+    }
+    button{
+        border: none;
+        margin: 10px;
+        padding: 10px 20px;
+        color: red;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color: rgb(33, 33, 33);
+        &:hover{
+            cursor: pointer;
+        }
+        &:nth-child(2){
+            background-color: rgb(167, 7, 7);
+            color: white;
+            &:hover{
+                background-color: rgb(255, 255, 255);
+                color: red;
+            }
+        }
+    }
+}

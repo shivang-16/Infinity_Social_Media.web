@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { verifyOtp } from '../../actions/User'
-import Spinner from '../../Spinner/Spinner'
+import Spinner from '../Spinner/Spinner'
 
 
 const Verification = () => {

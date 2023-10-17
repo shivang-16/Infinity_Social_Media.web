@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { sinupUser } from '../../actions/User';
 import  {useSelector} from 'react-redux'
-import Spinner from '../../Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const SignUp = () => {
   const [name, setName] = useState('');

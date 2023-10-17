@@ -235,3 +235,29 @@ export const editUser= ({name, about, dob, location, link}) => async(dispatch)=>
 }
 
 
+
+export const deleteUser= () => async(dispatch)=>{
+  try {
+   
+    dispatch({
+      type: "DeleteRequest"
+    })
+    const {data} = await axios.delete(`${server}/user/delete`,{
+       withCredentials:true,
+  })
+    dispatch({
+      type: "DeleteSuccess",
+      payload: data.message
+    })
+    toast.success(data.message)
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: "DeleteFailure",
+      payload: error.response.data.message
+    })
+    toast.error(error.response.data.message)
+  }
+}
+
+

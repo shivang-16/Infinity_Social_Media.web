@@ -5,6 +5,7 @@ import { UserProfileReducer } from "./reducers/UserReducer";
 import { myPostReducer } from "./reducers/PostReducer";
 import { UserPostReducer } from "./reducers/PostReducer";
 import { GetPostByIDReducer } from "./reducers/PostReducer";
+import { followingPostsReducer } from "./reducers/PostReducer";
 
 const store = configureStore({
     reducer:{
@@ -12,6 +13,7 @@ const store = configureStore({
         users: allUserReducer,
         userProfile: UserProfileReducer,
         post: postReducer,
+        followingPosts: followingPostsReducer,
         myposts: myPostReducer,
         userposts: UserPostReducer,
         postById : GetPostByIDReducer
