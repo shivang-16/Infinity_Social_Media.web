@@ -212,7 +212,7 @@ export const editPost = ({postId, caption}) => async(dispatch)=>{
             type: "GeneralRequest",
         })
     
-        const {data} = await axios.put(`${server}/post/${postId}`,{
+        const {data} = await axios.patch(`${server}/post/${postId}`,{
             caption
          },{
             headers:{
