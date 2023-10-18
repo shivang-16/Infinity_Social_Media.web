@@ -45,7 +45,7 @@ const Comment = () => {
                          userId={user._id}
                            name={user.name}
                            userName={user.userName}
-                           avatar={user2Img}
+                           avatar={user.avatar.url}
                          />
                          <p>{comment}</p>
                       </div>

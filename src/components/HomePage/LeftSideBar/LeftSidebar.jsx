@@ -43,7 +43,7 @@ const imageHandler = (e) =>{
     setImage(file);
    }
 }
-const handleCreatePost = (e) => {
+const handleCreatePost = async(e) => {
   e.preventDefault()
 
    const myForm = new FormData()
@@ -51,7 +51,8 @@ const handleCreatePost = (e) => {
    myForm.append("caption", caption)
    myForm.append("file", image)
 
-  dispatch(createPost(myForm))
+  await dispatch(createPost(myForm))
+  await dispatch(getAllPost())
    closePopup();
  };
 
@@ -152,10 +153,9 @@ const handleCreatePost = (e) => {
         </div>
         <Link to="/profile" onClick={handleMyPosts}>
           <div
-            className={`left-boxes ${selectedOption === "profile" ? "active" : ""}`}
-            onClick={() => handleOptionClick("profile")} 
+            className='left-boxes profile'
           >
-            <img src={selectedOption === "profile" ? userDark : userImg} alt="Profile" />
+            <img src={user.avatar.url} alt="Profile" />
             <p>Profile</p>
           </div>
         </Link>

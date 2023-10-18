@@ -13,15 +13,34 @@ const SignUp = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [image , setImage] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const {loading: userLoading} = useSelector((state)=> state.user)
 
-  const handleSignUp = (e) => {
+  const imageHandler = (e) =>{
+    const file = e.target.files[0];
+    const reader = new FileReader()
+ 
+    reader.readAsDataURL(file);
+    reader.onloadend= () =>{
+     setImage(file);
+    }
+ }
 
-    e.preventDefault();
-    dispatch(sinupUser(name, userName, email, password))
+  const handleSignUp = async(e) => {
+    e.preventDefault()
+   
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("userName", userName);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("file", image);
+
+
+    await dispatch(sinupUser(formData))
     navigate('/verify')
   };
 
@@ -44,7 +63,9 @@ const SignUp = () => {
               <input type="text" placeholder="Enter Username" value={userName} onChange={(e) => setUserName(e.target.value)} />
               <input type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
               <input type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input type="file" onChange={imageHandler} />
               <input type="submit" value="SignUp" />
+              
             </form>
           </div>
           <div className="signup_link login_form">

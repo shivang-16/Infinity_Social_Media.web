@@ -6,6 +6,7 @@ import userImg from "../../../assets/user2.jpg";
 import user2Img from "../../../assets/user.png";
 import { useSelector, useDispatch} from "react-redux";
 import { followUser } from "../../../actions/User";
+import { getAllUser } from "../../../actions/User";
 import User from "../../User/User";
 
 const RightSidebar = () => {
@@ -13,8 +14,9 @@ const RightSidebar = () => {
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch()
     
-   const handleFollow = (_id)=>{
-    dispatch(followUser(_id))
+   const handleFollow = async(_id)=>{
+    await dispatch(followUser(_id))
+    dispatch(getAllUser())
    }
    const isUserFollowed = (userId) => user.following.some(follow => follow._id === userId);
   return (
@@ -22,7 +24,7 @@ const RightSidebar = () => {
       <div className="right-main">
         <div className="rightSidebar-header">
           <div className="userImg">
-            <img src={profile} alt="" />
+            <img src={user.avatar.url} alt="" />
           </div>
           {user ? (
             <div className="userDetail">

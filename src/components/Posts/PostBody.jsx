@@ -33,19 +33,26 @@ const PostBody = ({caption, postId, likes, owner, comments, image}) => {
     dispatch(getPostById(postId))
    }
 
-  const handleLikeClick = () => {
-    dispatch(likePost(postId));
+  const handleLikeClick = async() => {
+    await dispatch(likePost(postId));
     dispatch(getAllPost())
   }
   const postIsLiked = likes.some(like => like._id === user._id);
 
-  const handleComment = ()=>{
-    dispatch(commentPost({postId, comment}))
+  const toggleCommentBox = () => {
+    setIsCommentOpen((prevState) => !prevState);
+  };
+
+  const handleComment = async()=>{
+    await dispatch(commentPost({postId, comment}))
+    dispatch(getAllPost())
+    setIsCommentOpen((prevState) => !prevState);
   }
 
-  const handleDelete = ()=>{
+  const handleDelete = async()=>{
     console.log('deleted')
-    dispatch(deletePost(postId))
+    await dispatch(deletePost(postId))
+    dispatch(getAllPost())
   }
  
   const handleEditPopup = () =>{
@@ -53,9 +60,10 @@ const PostBody = ({caption, postId, likes, owner, comments, image}) => {
     setEditCaption(caption);
   }
    
-  const handleEdit = ()=>{
+  const handleEdit = async()=>{
      setEditCaption(editCaption)
-     dispatch(editPost({postId, caption: editCaption}))
+     await dispatch(editPost({postId, caption: editCaption}))
+     dispatch(getAllPost())
      setIsEditOpen(false)
   }
   const handleBookmarkClick = (postId) => {
@@ -63,10 +71,7 @@ const PostBody = ({caption, postId, likes, owner, comments, image}) => {
   };
   
 
-  const toggleCommentBox = () => {
-    setIsCommentOpen((prevState) => !prevState);
-  };
-
+  
 
   const toggleOptions = () =>{
     setIsOptionsOpen((prevState) => !prevState)

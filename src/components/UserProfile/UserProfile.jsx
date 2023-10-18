@@ -44,15 +44,17 @@ const Users = () => {
         <div className="main-box middle-section">
         <div className="user_details">
         <div className="user_section profile_details">
-        <div className="profile_box profile_photo">
-          <div className="image">
-            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png' alt="No image"/>
-          </div>
-        </div>
         {users ? (
           users.map((element, index)=> {
-            const {userName, name, followers, following, posts, description} = element
+            const {userName, name, followers, following, posts, description, avatar} = element
              return(
+              <>
+        <div className="profile_box profile_photo">
+          <div className="image">
+            <img src={avatar.url} alt="No image"/>
+          </div>
+        </div>
+        
               <div className="profile_box profile_content" key={index}>
               <div className="content_box user_name">
              
@@ -88,9 +90,10 @@ const Users = () => {
             )}
               </div>
             </div>
+            </>
              )
           })
-
+        
         ):(
           <h2>Not found</h2>
         )}
@@ -156,14 +159,14 @@ const Users = () => {
             {
             followers.length != 0 ? (
               followers.map((element)=>{
-                const {_id, userName, name} = element
+                const {_id, userName, name, avatar} = element
                 return(
                   <User 
                   key={_id}
                userId={_id} 
                userName={userName} 
                name={name}
-               avatar={user2Img}
+               avatar={avatar.url}
                />
                 )
               })
@@ -187,14 +190,14 @@ const Users = () => {
             {
             following.length != 0 ? (
               following.map((element)=>{
-                const {_id, userName, name} = element
+                const {_id, userName, name, avatar} = element
                 return(
                   <User 
                   key={_id}
                userId={_id} 
                userName={userName} 
                name={name}
-               avatar={user2Img}
+               avatar={avatar.url}
                />
                 )
               })

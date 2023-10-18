@@ -46,7 +46,7 @@ const Profile = () => {
     formData.append("dob", dob);
     formData.append("location", location);
     formData.append("link", link);
-      formData.append("file", image);
+    formData.append("file", image);
 
 
       dispatch(editUser(formData));
@@ -179,14 +179,14 @@ const Profile = () => {
             {
             user.followers.length != 0 ? (
               user.followers.map((element)=>{
-                const {_id, userName, name} = element
+                const {_id, userName, name, avatar} = element
                 return(
                   <User 
                   key={_id}
                userId={_id} 
                userName={userName} 
                name={name}
-               avatar={user2Img}
+               avatar={avatar.url}
                />
                 )
               })
@@ -210,14 +210,14 @@ const Profile = () => {
             {
             user.following.length != 0 ? (
               user.following.map((element)=>{
-                const {_id, userName, name} = element
+                const {_id, userName, name, avatar} = element
                 return(
                   <User 
                   key={_id}
                userId={_id} 
                userName={userName} 
                name={name}
-               avatar={user2Img}
+               avatar={avatar.url}
                />
                 )
               })
