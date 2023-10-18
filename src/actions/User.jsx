@@ -204,17 +204,14 @@ export const followUser= (_id) => async(dispatch)=>{
   }
 }
 
-export const editUser= ({name, about, dob, location, link}) => async(dispatch)=>{
-  try {
-   
+export const editUser= (formData) => async(dispatch)=>{
+  try { 
     dispatch({
       type: "GeneralRequest"
     })
-    const {data} = await axios.patch(`${server}/user/update`,{
-      name, about, dob, location, link
-  },{
+    const {data} = await axios.patch(`${server}/user/update`, formData,{
       headers:{
-          "Content-Type": "application/json"
+          "Content-Type": "multipart/form-data"
       },
       withCredentials:true,
   })

@@ -12,11 +12,12 @@ import { commentPost } from '../../actions/Post';
 import { getPostById } from '../../actions/Post';
 import { deletePost } from '../../actions/Post';
 import { editPost } from '../../actions/Post';
+import { getAllPost } from '../../actions/Post';
 import User from '../User/User';
 import user2Img from '../../assets/user.png'
 
 //get caption , id(postId), likes , owner from props
-const PostBody = ({caption, postId, likes, owner, comments}) => {
+const PostBody = ({caption, postId, likes, owner, comments, image}) => {
   const [comment, setComment] = useState('')
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
 
   const handleLikeClick = () => {
     dispatch(likePost(postId));
+    dispatch(getAllPost())
   }
   const postIsLiked = likes.some(like => like._id === user._id);
 
@@ -93,7 +95,7 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
                userId={owner?._id} 
                userName={owner?.userName} 
                name={owner?.name}
-               avatar = {user2Img}
+               avatar = {owner?.avatar?.url}
                />
             {showOptionIcon ? (
               <>
@@ -137,9 +139,9 @@ const PostBody = ({caption, postId, likes, owner, comments}) => {
                   <div className="caption">
                     <p>{caption}</p>
                   </div>
-                  <div className="image">
-                 {/* <img src='https://www.apple.com/v/ios/photos/g/images/meta/ios-photos__1eiprmm69sym_og.png' alt="" /> */}
-                  </div>
+                 {image ? (<div className="image">
+                 <img src={image} alt="" />
+                  </div>) :('')}
                 </div>
                 </Link>
                 <div className="post-footer">

@@ -39,7 +39,7 @@ const PostSection = () => {
               <div className="post_detail_content">
               {posts ? (
           posts.map((element)=>{
-            const {caption, _id, likes, owner, comments } = element 
+            const {caption, _id, likes, owner, comments, image } = element 
             return (
             <PostBody
               key={_id}
@@ -48,6 +48,7 @@ const PostSection = () => {
               likes ={likes}
               owner = {owner}
               comments= {comments}
+              image = {image.url}
             />
             )
           })

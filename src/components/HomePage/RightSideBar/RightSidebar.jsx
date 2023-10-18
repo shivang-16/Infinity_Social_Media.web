@@ -51,7 +51,7 @@ const RightSidebar = () => {
           <div className="content-body">
          {users ? ( 
            users.map((element, index)=>{
-             const {name, userName, _id} = element
+             const {name, userName, _id, avatar} = element
             return (
              
               <div className="suggestions" key={index}>
@@ -59,7 +59,7 @@ const RightSidebar = () => {
                userId={_id} 
                userName={userName} 
                name={name}
-               avatar={user2Img}
+               avatar={avatar.url}
                />
               <div className="btn">
                 <Link to="#">

@@ -16,9 +16,19 @@ const Profile = () => {
   const [dob, setDob] = useState('')
   const [location, setLocation] = useState('')
   const [link, setLink] = useState('')
+  const [image, setImage] = useState(null);
   
   const dispatch = useDispatch()
 
+  const imageHandler = (e) =>{
+    const file = e.target.files[0];
+    const reader = new FileReader()
+ 
+    reader.readAsDataURL(file);
+    reader.onloadend= () =>{
+     setImage(file);
+    }
+ }
   const openUpdatePopup = () =>{
     setUpdatedOpen(true)
     setEditName(user.name)
@@ -27,15 +37,24 @@ const Profile = () => {
     setLocation(user.description.location)
     setLink(user.description.link)
   }
-  const updateUser = () =>{
-    setEditName(editName)
-    setAbout(about)
-    setDob(dob)
-    setLocation(location)
-    setLink(link)
-    dispatch(editUser({name: editName, about, dob, location, link}))
-    setUpdatedOpen(false)
+  const updateUser = (e) =>{
+    e.preventDefault()
+   
+    const formData = new FormData();
+    formData.append("name", editName);
+    formData.append("about", about);
+    formData.append("dob", dob);
+    formData.append("location", location);
+    formData.append("link", link);
+      formData.append("file", image);
+
+
+      dispatch(editUser(formData));
+      setUpdatedOpen(false);
+   
+ 
   }
+
   const openFollowersPopup = () => {
     setFollowersOpen(true);
   };
@@ -54,7 +73,7 @@ const Profile = () => {
       <div className="user_section profile_details">
         <div className="profile_box profile_photo">
           <div className="image">
-            <img src={photo} alt="" />
+            <img src={user.avatar.url} alt="" />
           </div>
         </div>
         {user ? (
@@ -98,27 +117,56 @@ const Profile = () => {
        
       </div>
       {isUpdateOpen && (
-        <div className="popup">
-        <div className="popup-content">
-        <div className="popup-head" style={{ "marginBottom": "10px" }}>
-              <h2>Edit Profile</h2>
-            </div>
-            <span className="close-icon" onClick={closePopup}>
-              &times;
-            </span>
-          <div className="information">
-            <input type="text" placeholder="Name" value={editName} onChange={e=>setEditName(e.target.value)}/>
-            <input type="text" placeholder="Bio" value={about} onChange={e=>setAbout(e.target.value)}/>
-            <input type="date" placeholder="DOB" value={dob} onChange={e=>setDob(e.target.value)}/>
-            <input type="text" placeholder="Location" value={location} onChange={e=>setLocation(e.target.value)}/>
-            <input type="text" placeholder="Link" value={link} onChange={e=>setLink(e.target.value)}/>
-          </div>
-          <button onClick={updateUser}>Updated details</button>
-        </div>
-        </div>
-      )
-
-      }
+              <div className="popup">
+                <div className="popup-content">
+                  <form onSubmit={updateUser}>
+                    <div className="popup-head" style={{ marginBottom: "10px" }}>
+                      <h2>Edit Profile</h2>
+                    </div>
+                    <span className="close-icon" onClick={closePopup}>
+                      &times;
+                    </span>
+                    <div className="information">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        value={editName}
+                        onChange={(e) => setEditName(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Bio"
+                        value={about}
+                        onChange={(e) => setAbout(e.target.value)}
+                      />
+                      <input
+                        type="date"
+                        placeholder="DOB"
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Location"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Link"
+                        value={link}
+                        onChange={(e) => setLink(e.target.value)}
+                      />
+                      <input
+                        type="file"
+                        onChange={imageHandler}
+                      />
+                    </div>
+                    <button type="submit">Update Details</button>
+                  </form>
+                </div>
+              </div>
+            )}
       {isFollowersOpen && (
         <div className="popup">
           <div className="popup-content">

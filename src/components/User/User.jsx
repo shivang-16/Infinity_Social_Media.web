@@ -27,7 +27,7 @@ const User = ({userName, name, userId, avatar}) => {
       }}>
                  
     { avatar ? (<div className="userImg">
-      <img src={avatar} alt="" style={{'filter': 'invert(100%)'}}/>
+      <img src={avatar ? avatar : user2Img} alt=""/>
     </div>):("")}
     <div className="userDetail">
       <div className="username">

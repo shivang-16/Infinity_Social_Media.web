@@ -3,7 +3,7 @@ import "./leftsidebar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import home from "../../../assets/home.png";
 import search from "../../../assets/search.png";
-import user from "../../../assets/user.png";
+import userImg from "../../../assets/user.png";
 import create from "../../../assets/create.png";
 import connect from "../../../assets/connect.png";
 import logout from "../../../assets/logout.png";
@@ -29,10 +29,33 @@ const LeftSidebar = () => {
   const [isLogoutOpen, setIsLogoutOpen ] = useState(false)
   const [isDeleteOpen, setIsDeleteOpen ] = useState(false)
   const [caption, setCaption] = useState("");
+  const [image, setImage] = useState('')
   const dispatch = useDispatch()
 
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
  
+const imageHandler = (e) =>{
+   const file = e.target.files[0];
+   const reader = new FileReader()
+
+   reader.readAsDataURL(file);
+   reader.onloadend= () =>{
+    setImage(file);
+   }
+}
+const handleCreatePost = (e) => {
+  e.preventDefault()
+
+   const myForm = new FormData()
+
+   myForm.append("caption", caption)
+   myForm.append("file", image)
+
+  dispatch(createPost(myForm))
+   closePopup();
+ };
+
+
   const handleLogoutPopup = () =>{
     setIsLogoutOpen(true)
   }
@@ -77,10 +100,6 @@ const LeftSidebar = () => {
      setIsDeleteOpen(false)
    };
  
-   const handlePost = () => {
-    dispatch(createPost(caption))
-     closePopup();
-   };
  
    
    
@@ -136,7 +155,7 @@ const LeftSidebar = () => {
             className={`left-boxes ${selectedOption === "profile" ? "active" : ""}`}
             onClick={() => handleOptionClick("profile")} 
           >
-            <img src={selectedOption === "profile" ? userDark : user} alt="Profile" />
+            <img src={selectedOption === "profile" ? userDark : userImg} alt="Profile" />
             <p>Profile</p>
           </div>
         </Link>
@@ -170,35 +189,37 @@ const LeftSidebar = () => {
         <div className="popup">
           <div className="popup-content">
             <div className="popup-head">
-            <img src={photo} alt="" />
+            <img src={user.avatar.url} alt="" />
             <h2>Post</h2>
             </div>
             <span className="close-icon" onClick={closePopup}>
               &times;
             </span>
+            <form onSubmit={handleCreatePost}>
             <textarea
               placeholder="Write your caption here"
               value={caption}
-              onChange={e=> setCaption(e.target.value)}
+              onChange={e=>setCaption(e.target.value)}
               required
             />
             <div className="popup-foot">
-            <span>Image</span>
-            <button onClick={handlePost}>Post</button>
+            <input type="file" onChange={imageHandler} />
+            <button>Post</button>
             
             </div>
+            </form>
           </div>
         </div>
       )}
 
-      {isLogoutOpen && <Alert photo={user} 
+      {isLogoutOpen && <Alert photo={userImg} 
       description={'Are you sure want to logout'} 
       action={'Logout'}
       actionFunction={handleLogout}
       closePopup={closePopup}
       />}
 
-      {isDeleteOpen && <Alert photo={user} 
+      {isDeleteOpen && <Alert photo={userImg} 
       description={'Are you sure want to Delete Account'} 
       action={'Delete'}
       actionFunction={handleDelete}

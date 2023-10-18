@@ -3,25 +3,26 @@ import axios from "axios";
 import { server } from "../main";
 
 
-export const createPost = (caption) => async(dispatch)=>{
+export const createPost = (myForm) => async(dispatch)=>{
+    console.log(myForm)
   try {
     dispatch({
         type: "CreatePostRequest",
     })
-    const {data} = await axios.post(`${server}/post/create`,{
-        caption
-     },{
+    const {data} = await axios.post(`${server}/post/create`, myForm, {
          headers:{
-             "Content-Type": "application/json"
+             "Content-Type": "multipart/form-data"
          },
          withCredentials: true
      })
+     console.log(data)
      dispatch({
         type: "CreatePostSuccess",
         payload: data.message
     })
     toast.success(data.message)
    } catch (error) {
+    console.log(error)
     dispatch({
         type: "CreatePostFailure",
         payload: error.response.data.message

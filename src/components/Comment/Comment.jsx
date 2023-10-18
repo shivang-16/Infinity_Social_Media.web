@@ -27,6 +27,7 @@ const Comment = () => {
                 likes ={post.likes}
                 owner = {post?.owner}
                 comments = {post?.comments}
+                image = {post?.image.url}
               />
             ) : (
                <Spinner2/>
