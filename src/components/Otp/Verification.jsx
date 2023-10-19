@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
 import Spinner from "../Spinner/Spinner";
@@ -9,12 +10,15 @@ const Verification = () => {
     (state) => state.user,
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [otp, setOtp] = useState("");
-  const hanldeVerify = (e) => {
+  const hanldeVerify = async(e) => {
     e.preventDefault();
-    dispatch(verifyOtp(otp));
+    await dispatch(verifyOtp(otp));
+    navigate('/details')
+    
   };
-  if (isAuthenticated) return <Navigate to={"/"} />;
+  // if (isAuthenticated) return <Navigate to={"/"} />;
   return (
     <>
       {userLoading ? (

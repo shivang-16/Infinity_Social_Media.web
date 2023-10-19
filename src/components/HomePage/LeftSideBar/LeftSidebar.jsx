@@ -9,7 +9,7 @@ import connect from "../../../assets/connect.png";
 import logout from "../../../assets/logout.png";
 import homeDark from "../../../assets/homeDark.png";
 import searchDark from "../../../assets/searchDark.png";
-import userDark from "../../../assets/userDark.png";
+import defaultImg from '../../../assets/user.png'
 import connectDark from "../../../assets/connectDark.png";
 import options from "../../../assets/options.png";
 import deleteIcon from "../../../assets/delete.png";
@@ -57,6 +57,7 @@ const LeftSidebar = () => {
 
     await dispatch(createPost(myForm));
     await dispatch(getAllPost());
+    dispatch(getMyPost())
     closePopup();
   };
 
@@ -118,7 +119,7 @@ const LeftSidebar = () => {
   return (
     <>
       <div className="leftSidebar-header">
-        <h2>SocialApp</h2>
+        <h1>Infinity</h1>
       </div>
       <div className="leftSidebar-content">
         <div className="leftSidebar-Upcontent">
@@ -172,7 +173,7 @@ const LeftSidebar = () => {
           </div>
           <Link to="/profile" onClick={handleMyPosts}>
             <div className="left-boxes profile">
-              <img src={user.avatar.url} alt="Profile" />
+              <img src={user.avatar?.url ? user.avatar?.url : defaultImg } alt="Profile" />
               <p>Profile</p>
             </div>
           </Link>
@@ -207,7 +208,7 @@ const LeftSidebar = () => {
         <div className="popup">
           <div className="popup-content">
             <div className="popup-head">
-              <img src={user.avatar.url} alt="" />
+              <img src={user.avatar?.url} alt="" />
               <h2>Post</h2>
             </div>
             <span className="close-icon" onClick={closePopup}>

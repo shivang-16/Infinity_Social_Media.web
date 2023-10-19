@@ -5,6 +5,7 @@ import PostSection from "./components/ProfilePage/PostSection";
 import Login from "./components/Login/login";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
+import AddDetails from "./components/Add Details/AddDetails";
 import Users from "./components/UserProfile/UserProfile";
 import Comment from "./components/Comment/Comment";
 import { loadUser } from "./actions/User";
@@ -28,8 +29,8 @@ function App() {
   const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllUser());
     dispatch(loadUser());
+    dispatch(getAllUser());
     dispatch(getAllPost());
     dispatch(getMyPost());
     dispatch(getFollowingPost());
@@ -65,6 +66,7 @@ function App() {
         />
         <Route exact path="/signup" element={<SingUp />} />
         <Route exact path="/verify" element={<Verification />} />
+        <Route exact path="/details" element={<AddDetails />} />
       </Routes>
       <Toaster />
     </Router>

@@ -26,7 +26,7 @@ const Comment = () => {
                 likes={post.likes}
                 owner={post?.owner}
                 comments={post?.comments}
-                image={post?.image.url}
+                image={post?.image?.url}
               />
             ) : (
               <Spinner2 />
@@ -42,7 +42,7 @@ const Comment = () => {
                           userId={user._id}
                           name={user.name}
                           userName={user.userName}
-                          avatar={user.avatar.url}
+                          avatar={user.avatar?.url}
                         />
                         <p>{comment}</p>
                       </div>

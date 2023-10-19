@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
-import user2Img from "../../assets/user.png";
 import { Link } from "react-router-dom";
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
@@ -57,7 +56,7 @@ const Users = () => {
                     return (
                       <>
                         <div className="profile_box profile_photo">
-                          <div className="image">
+                          <div className="image-profile">
                             <img src={avatar.url} alt="No image" />
                           </div>
                         </div>

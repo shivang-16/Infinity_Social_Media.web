@@ -67,7 +67,7 @@ const PostSection = () => {
                           likes={likes}
                           owner={owner}
                           comments={comments}
-                          image={image.url}
+                          image={image?.url}
                         />
                       );
                     })

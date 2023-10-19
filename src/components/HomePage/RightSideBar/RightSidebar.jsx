@@ -1,9 +1,7 @@
 import React from "react";
 import "./rightsidebar.scss";
 import { Link } from "react-router-dom";
-import profile from "../../../assets/profilepic.jpg";
-import userImg from "../../../assets/user2.jpg";
-import user2Img from "../../../assets/user.png";
+import defaultImg from '../../../assets/user.png'
 import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../actions/User";
 import { getAllUser } from "../../../actions/User";
@@ -29,7 +27,7 @@ const RightSidebar = () => {
       <div className="right-main">
         <div className="rightSidebar-header">
           <div className="userImg">
-            <img src={user.avatar.url} alt="" />
+            <img src={user.avatar?.url ? user.avatar?.url : defaultImg} alt="" />
           </div>
           {user ? (
             <div className="userDetail">
@@ -67,7 +65,7 @@ const RightSidebar = () => {
                         userId={_id}
                         userName={userName}
                         name={name}
-                        avatar={avatar.url}
+                        avatar={avatar?.url}
                       />
                       <div className="btn">
                         <Link to="#">

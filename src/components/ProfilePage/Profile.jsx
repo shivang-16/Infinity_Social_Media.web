@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import photo from "../../assets/profilepic.jpg";
-import user2Img from "../../assets/user.png";
+import linkIcon from "../../assets/link.png";
+import locationIcon from "../../assets/location.png";
+import dateIcon from "../../assets/date.png";
+import bioIcon from "../../assets/bio.png";
+import defaultProfile from '../../assets/user.png'
 import "../ProfilePage/profile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
@@ -17,6 +20,7 @@ const Profile = () => {
   const [location, setLocation] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -26,6 +30,7 @@ const Profile = () => {
 
     reader.readAsDataURL(file);
     reader.onloadend = () => {
+      setImagePreview(reader.result);
       setImage(file);
     };
   };
@@ -64,13 +69,14 @@ const Profile = () => {
     setFollowersOpen(false);
     setFollowingOpen(false);
     setUpdatedOpen(false);
+    setImagePreview('')
   };
   return (
     <>
       <div className="user_section profile_details">
         <div className="profile_box profile_photo">
-          <div className="image">
-            <img src={user.avatar.url} alt="" />
+          <div className="image-profile">
+            <img src={user.avatar?.url ? user.avatar?.url : defaultProfile} alt="" />
           </div>
         </div>
         {user ? (
@@ -94,12 +100,40 @@ const Profile = () => {
               <h4>{user.name}</h4>
               {user.description ? (
                 <>
-                  <p>{user.description.about}</p>
-                  <p>{user.description.dob}</p>
-                  <p>{user.description.location}</p>
-                  <a href={`${user.description.link}`} target="_blank">
-                    {user.description.link}
-                  </a>
+                  {user.description.about ? (
+                    <p>
+                      <img src={bioIcon} alt="" />
+                      {user.description.about}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  {user.description.dob ? (
+                    <p>
+                      <img src={dateIcon} alt="" />
+                      {user.description.dob}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  {user.description.location ? (
+                    <p>
+                      <img src={locationIcon} alt="" />
+                      {user.description.location}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  {user.description.about ? (
+                    <p>
+                      <img src={linkIcon} alt="" />
+                      <a href={`${user.description.link}`} target="_blank">
+                        {user.description.link}
+                      </a>
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </>
               ) : (
                 ""
@@ -113,47 +147,63 @@ const Profile = () => {
       {isUpdateOpen && (
         <div className="popup">
           <div className="popup-content">
-            <form onSubmit={updateUser}>
-              <div className="popup-head" style={{ marginBottom: "10px" }}>
-                <h2>Edit Profile</h2>
+           <form onSubmit={updateUser}>
+            <div className="popup-head" style={{ marginBottom: "10px" }}>
+              <h2>Edit Profile</h2>
+            </div>
+            <span className="close-icon" onClick={closePopup}>
+              &times;
+            </span>
+            <div className="information">
+              <div className="image-profile">
+                <img src={imagePreview ? imagePreview : user?.avatar?.url || defaultProfile} alt="" />
+              <div>
+
+            
+                <label className="custom-file-input">
+                  <span>Choose photo</span>
+                  <input type="file" onChange={imageHandler} />
+                </label>
+                
+                <button onClick={(e) => { e.preventDefault(); setImagePreview(null); }}>Remove photo</button>
+                </div>
               </div>
-              <span className="close-icon" onClick={closePopup}>
-                &times;
-              </span>
-              <div className="information">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Bio"
-                  value={about}
-                  onChange={(e) => setAbout(e.target.value)}
-                />
-                <input
-                  type="date"
-                  placeholder="DOB"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Link"
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                />
-                <input type="file" onChange={imageHandler} />
+              <input
+                type="text"
+                placeholder="Name"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Bio"
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="DOB"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Link"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+
+              <div>
+                <button type="submit">Update</button>
+                <button onClick={closePopup}>Cancel</button>
               </div>
-              <button type="submit">Update Details</button>
+            </div>
             </form>
           </div>
         </div>
@@ -176,7 +226,7 @@ const Profile = () => {
                       userId={_id}
                       userName={userName}
                       name={name}
-                      avatar={avatar.url}
+                      avatar={avatar?.url}
                     />
                   );
                 })
@@ -203,7 +253,7 @@ const Profile = () => {
                       userId={_id}
                       userName={userName}
                       name={name}
-                      avatar={avatar.url}
+                      avatar={avatar?.url}
                     />
                   );
                 })

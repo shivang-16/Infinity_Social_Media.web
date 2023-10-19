@@ -19,8 +19,10 @@
 }
 .profile_photo {
   width: 50%;
-  // border: 2px solid red;
-
+  // border: 2px solid red; 
+}
+.image-profile{
+ 
   img {
     // border: 2px solid red;
     height: 150px;
@@ -28,7 +30,6 @@
     border-radius: 100%;
   }
 }
-
 .profile_content {
   justify-content: flex-start;
   flex-direction: column;
@@ -62,7 +63,16 @@
 
 .user_descripton {
   p {
-    margin: 5px 0px;
+    margin: 8px 0px;
+    display: flex;
+  }
+  a{
+    color: rgb(0, 123, 255);
+  }
+  img{
+    filter: invert(100%);
+    height: 20px;
+    margin-right: 10px ;
   }
 }
 .post_details_header {
@@ -96,10 +106,87 @@
 }
 
 .information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .image-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+
+    div{
+      display: flex;
+      align-items: center;
+    }
+
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  background-color: rgba(0, 95, 237, 0.934);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  
+  input[type="file"] {
+    position: absolute;
+    // font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    background-color: white;
+  }
+}
+
+/* Define a style for the button hover state */
+.custom-file-input:hover {
+ background-color: rgba(2, 65, 160, 0.934);
+  cursor: pointer; /* Change the background color for the hover state */
+}
+ 
+  }
+  img{
+     height: 100px;
+     width: 100px;
+     margin-bottom: 20px;
+  }
   input {
     color: black;
+    margin-bottom: 10px;
+    width: 70%;
+    padding: 15px ;
+    border-radius: 10px;
+    background-color: rgb(21, 21, 21);
+    border: none;
+    outline: none;
+    color: white;
   }
-  button {
-    color: black;
+  div{
+    
+    button{
+      background: none;
+      margin: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      background-color: rgb(21, 21, 21);
+      cursor: pointer;
+      &:hover{
+        background-color: rgb(34, 34, 34);
+      }
+      &:nth-child(1){
+        background-color: rgba(0, 95, 237, 0.934);
+        color: white;
+        &:hover{
+          background-color: rgba(2, 65, 160, 0.934);
+        }
+      }
+    }
   }
+  
 }

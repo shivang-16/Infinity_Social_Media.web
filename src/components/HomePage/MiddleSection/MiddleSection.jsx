@@ -66,7 +66,7 @@ const MiddleSection = () => {
                     likes={likes}
                     owner={owner}
                     comments={comments}
-                    image={image.url}
+                    image={image?.url}
                   />
                 );
               })
@@ -86,7 +86,7 @@ const MiddleSection = () => {
                     likes={likes}
                     owner={owner}
                     comments={comments}
-                    image={image.url}
+                    image={image?.url}
                   />
                 );
               })

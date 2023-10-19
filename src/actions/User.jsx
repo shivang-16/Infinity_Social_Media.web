@@ -2,14 +2,16 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { server } from "../main";
 
-export const sinupUser = (formData) => async (dispatch) => {
+export const sinupUser = (name, userName, email, password) => async (dispatch) => {
   try {
     dispatch({
       type: "OtpRequest",
     });
-    const { data } = await axios.post(`${server}/user/register`, formData, {
+    const { data } = await axios.post(`${server}/user/register`, {
+      name, userName, email, password
+    }, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
       withCredentials: true,
     });
