@@ -1,13 +1,15 @@
-.comment-section{
-    display: flex;
-    // border: 2px solid red;
-    
+.comment-main-section {
+  display: flex;
+  // border: 2px solid red;
 }
-.comment-content{
-//   border: 2px solid red;
-  width: 50%;
+.comment-section {
+  height: 100vh;
+  overflow-y: scroll;
+  width: 100%;
+  // border: 2px solid red;
 }
-
-.display-comments{
-    // border: 2px solid green;
+.comment-content {
+  // border: 2px solid red;
+  width: 60%;
+  margin: 30px 100px;
 }

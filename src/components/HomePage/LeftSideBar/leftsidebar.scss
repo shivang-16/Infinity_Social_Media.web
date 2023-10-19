@@ -37,23 +37,24 @@
     margin-right: 10px;
   }
 }
-.profile{
-  img{
+.profile {
+  img {
     filter: none;
+    border-radius: 100%;
   }
 }
-.leftSidebar-Downcontent{
+.leftSidebar-Downcontent {
   position: relative;
 }
-.left-footer{
-  p{
+.left-footer {
+  p {
     margin: 0px 10px;
     padding: 5px 20px;
     color: rgb(113, 113, 113);
   }
 }
 
-.options-box{
+.options-box {
   border: 2px solid rgb(65, 65, 65);
   position: absolute;
   border-radius: 10px;

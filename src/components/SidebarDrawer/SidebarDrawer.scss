@@ -1,0 +1,73 @@
+/* SidebarDrawer.scss */
+.sidebar-drawer {
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  transition: left 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  &.open {
+    left: 0; /* Slide in from the left */
+  }
+
+  .drawer-content {
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    //   align-items: flex-start;
+    background-color: rgb(0, 0, 0);
+    //   opacity: 0.95;
+
+    .close-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #ffffff;
+    }
+
+    .drawer-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .input-section {
+        display: flex;
+        // border: 2px solid red;
+        margin-top: 30px;
+        width: 100%;
+        input {
+          flex: 1;
+          border: none;
+          padding: 10px;
+          border: 1px solid #ddd;
+          font-size: 16px;
+
+          width: 90%;
+          border-radius: 15px;
+          color: black;
+          outline: navajowhite;
+        }
+        button {
+          background: none;
+          border: none;
+          margin-left: -30px;
+          // cursor: pointer;
+
+          img {
+            height: 25px;
+          }
+        }
+      }
+    }
+  }
+}

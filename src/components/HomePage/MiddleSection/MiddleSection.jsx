@@ -7,30 +7,28 @@ import Spinner from "../../Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 
 const MiddleSection = () => {
-  
   const [activeTab, setActiveTab] = useState("Explore");
-  const [allPosts , setAllPosts] = useState(true)
-  const [followingPosts, setFollowingPosts] = useState(false)
-  const dispatch = useDispatch()
+  const [allPosts, setAllPosts] = useState(true);
+  const [followingPosts, setFollowingPosts] = useState(false);
+  const dispatch = useDispatch();
   const { post, loading: postLoading } = useSelector((state) => state.post);
-  const { posts, loading: postsLoading } = useSelector((state) => state.followingPosts);
-  
-  
-  const handleAllPosts =()=>{
-    setAllPosts(true)
-    setFollowingPosts(false)
-      dispatch(getAllPost())
-  }
-  const handleFollowingPosts = () =>{
-      setFollowingPosts(true)
-      setAllPosts(false)
-      dispatch(getFollowingPost())
-  }
+  const { posts, loading: postsLoading } = useSelector(
+    (state) => state.followingPosts,
+  );
+
+  const handleAllPosts = () => {
+    setAllPosts(true);
+    setFollowingPosts(false);
+    dispatch(getAllPost());
+  };
+  const handleFollowingPosts = () => {
+    setFollowingPosts(true);
+    setAllPosts(false);
+    dispatch(getFollowingPost());
+  };
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
-
- 
 
   return (
     <>
@@ -38,7 +36,7 @@ const MiddleSection = () => {
         <h2>Home</h2>
         <div className="mid-header-section">
           <div onClick={handleAllPosts}>
-            <h3 
+            <h3
               className={activeTab === "Explore" ? "active" : ""}
               onClick={() => handleTabClick("Explore")}
             >
@@ -55,47 +53,46 @@ const MiddleSection = () => {
           </div>
         </div>
       </div>
-      {allPosts && <div className="middle-content">
-        {post ? (
-          post.map((element)=>{
-            const {caption, _id, likes, owner, comments, image } = element 
-            return (
-            <PostBody
-              key={_id}
-              caption={caption}
-              postId = {_id}
-              likes ={likes}
-              owner = {owner}
-              comments= {comments}
-              image = {image.url}
-            />
-            )
-          })
-        ):(
-          "No post found"
-        )}
-       
-      </div>}
-      {followingPosts && <div className="middle-content">
-        {posts ? (
-          posts.map((element)=>{
-            const {caption, _id, likes, owner, comments } = element 
-            return (
-            <PostBody
-              key={_id}
-              caption={caption}
-              postId = {_id}
-              likes ={likes}
-              owner = {owner}
-              comments= {comments}
-            />
-            )
-          })
-        ):(
-          "No post found"
-        )}
-       
-      </div>}
+      {allPosts && (
+        <div className="middle-content">
+          {post
+            ? post.map((element) => {
+                const { caption, _id, likes, owner, comments, image } = element;
+                return (
+                  <PostBody
+                    key={_id}
+                    caption={caption}
+                    postId={_id}
+                    likes={likes}
+                    owner={owner}
+                    comments={comments}
+                    image={image.url}
+                  />
+                );
+              })
+            : "No post found"}
+        </div>
+      )}
+      {followingPosts && (
+        <div className="middle-content">
+          {posts
+            ? posts.map((element) => {
+                const { caption, _id, likes, owner, comments, image } = element;
+                return (
+                  <PostBody
+                    key={_id}
+                    caption={caption}
+                    postId={_id}
+                    likes={likes}
+                    owner={owner}
+                    comments={comments}
+                    image={image.url}
+                  />
+                );
+              })
+            : "No post found"}
+        </div>
+      )}
     </>
   );
 };

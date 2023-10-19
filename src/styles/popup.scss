@@ -1,39 +1,36 @@
-
 .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #000000;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  position: relative;
+
+  .popup-head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 999;
-  }
-  
-  .popup-content {
-    background: #000000;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    width: 500px;
-    position: relative;
-  
-   .popup-head{
-      display: flex;
-      align-items: center;
-      // border: 2px solid red;
-      img{
-        height: 50px;
-        width: 50px;
-        border-radius: 100%;
-        margin-right: 10px;
-      }
+    // border: 2px solid red;
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      margin-right: 10px;
     }
-  
-   
-    
+  }
+
   textarea {
     width: 96%;
     height: 100px;
@@ -43,35 +40,42 @@
     border-radius: 5px;
     background: #000000;
     outline: none;
-  
   }
-  
-  .popup-foot{
+
+  .popup-foot {
     // border: 2px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
     button {
-      background: #007BFF;
+      background: #007bff;
       color: #fff;
       border: none;
       padding: 10px 20px;
       border-radius: 20px;
-      
+
       cursor: pointer;
       &:hover {
         background: #0056b3;
       }
     }
   }
-  
+  .preview-image {
+    // border: 2px solid red;
+    margin-top: 10px;
+
+    img {
+      max-height: 40vh;
+      width: 100%;
+      border-radius: 10px;
+    }
   }
-  
-  .close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
