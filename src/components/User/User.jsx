@@ -24,13 +24,11 @@ const User = ({ userName, name, userId, avatar }) => {
           handleGetUserPost();
         }}
       >
-        {avatar ? (
+       
           <div className="userImg">
             <img src={avatar ? avatar : user2Img} alt="" />
           </div>
-        ) : (
-          ""
-        )}
+       
         <div className="userDetail">
           <div className="username">
             <p>{name}</p>

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LoadingBar from "react-top-loading-bar";
 import Mainbody from "./components/HomePage/Mainbody/Mainbody";
 import Connect from "./components/Connect/Connect";
 import PostSection from "./components/ProfilePage/PostSection";
@@ -22,7 +23,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
-
 import "./App.scss";
 
 function App() {
@@ -35,9 +35,17 @@ function App() {
     dispatch(getMyPost());
     dispatch(getFollowingPost());
   }, [dispatch]);
-
+   
+  const [progress, setProgress] = useState(0)
+  
   return (
     <Router>
+     <LoadingBar
+        color="orangered"
+        height="5px"
+        progress={progress} // Set the loading bar progress
+        onLoaderFinished={() => setProgress(0)} // Reset progress when loading is finished
+      />
       <Routes>
         <Route
           exact

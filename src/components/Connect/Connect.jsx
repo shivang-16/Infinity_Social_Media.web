@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./connect.scss";
 import { followUser } from "../../actions/User";
 import User from "../User/User";
-import { getAllUser } from "../../actions/User";
+import { loadUser } from "../../actions/User";
 
 const Connect = () => {
   const { users } = useSelector((state) => state.users);
@@ -15,9 +15,7 @@ const Connect = () => {
 
   const handleFollow = async (_id) => {
     await dispatch(followUser(_id));
-    useEffect(() => {
-      dispatch(getAllUser());
-    }, []);
+    dispatch(loadUser())
   };
 
   const isUserFollowed = (userId) =>

@@ -54,12 +54,13 @@ const PostSection = () => {
                   <span>Bookmark</span>
                 </div>
               </div>
-              <div className="post_detail_content">
+              
                 {isPostSection && posts
                   ? posts.map((element) => {
                       const { caption, _id, likes, owner, comments, image } =
                         element;
                       return (
+                        <div className="post_detail_content">
                         <PostBody
                           key={_id}
                           caption={caption}
@@ -69,17 +70,23 @@ const PostSection = () => {
                           comments={comments}
                           image={image?.url}
                         />
+                         </div>
                       );
                     })
                   : "No post found"}
+                  
                 {isBookmarkSection && user
                   ? user.bookmarks.map((element) => {
                       const { caption, _id, likes, owner, comments, image } =
                         element;
-                      return <></>;
+                      return (
+                        <div className="post_detail_content">
+                          
+                        </div>
+                        )
                     })
                   : "No Bookmark found"}
-              </div>
+             
             </div>
           </div>
 

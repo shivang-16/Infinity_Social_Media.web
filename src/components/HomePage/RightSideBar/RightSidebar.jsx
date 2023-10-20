@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import defaultImg from '../../../assets/user.png'
 import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../actions/User";
-import { getAllUser } from "../../../actions/User";
+import { loadUser } from "../../../actions/User";
 import User from "../../User/User";
 
 const RightSidebar = () => {
@@ -18,7 +18,7 @@ const RightSidebar = () => {
 
   const handleFollow = async (_id) => {
     await dispatch(followUser(_id));
-    dispatch(getAllUser());
+    dispatch(loadUser());
   };
   const isUserFollowed = (userId) =>
     user.following.some((follow) => follow._id === userId);

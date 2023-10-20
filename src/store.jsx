@@ -7,6 +7,7 @@ import { UserPostReducer } from "./reducers/PostReducer";
 import { GetPostByIDReducer } from "./reducers/PostReducer";
 import { followingPostsReducer } from "./reducers/PostReducer";
 import { SearchUserReducer } from "./reducers/UserReducer";
+import LoadingBarReducer from "./reducers/LoadingBar";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     myposts: myPostReducer,
     userposts: UserPostReducer,
     postById: GetPostByIDReducer,
+    loadingbar: LoadingBarReducer
   },
 });
 
