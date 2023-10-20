@@ -9,8 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
 import { editUser } from "../../actions/User";
 
+
 const Profile = () => {
-  const { user, loading: userLoading } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const [isFollowersOpen, setFollowersOpen] = useState(false);
   const [isFollowingOpen, setFollowingOpen] = useState(false);
   const [isUpdateOpen, setUpdatedOpen] = useState(false);

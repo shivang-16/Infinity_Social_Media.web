@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../actions/User";
 import { loadUser } from "../../../actions/User";
 import User from "../../User/User";
+import { setProgress } from "../../../reducers/LoadingBar";
 
 const RightSidebar = () => {
   const {
@@ -13,12 +14,16 @@ const RightSidebar = () => {
     loading: userLoading,
     isAuthenticated,
   } = useSelector((state) => state.user);
+
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {
+    dispatch(setProgress(10))
     await dispatch(followUser(_id));
-    dispatch(loadUser());
+    dispatch(setProgress(70))
+    await dispatch(loadUser());
+    dispatch(setProgress(100))
   };
   const isUserFollowed = (userId) =>
     user.following.some((follow) => follow._id === userId);

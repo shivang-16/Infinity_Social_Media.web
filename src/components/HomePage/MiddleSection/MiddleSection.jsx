@@ -3,7 +3,7 @@ import "./middlesection.scss";
 import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
 import { getFollowingPost } from "../../../actions/Post";
-import Spinner from "../../Spinner/Spinner";
+import Spinner2 from "../../Spinner/Spinner2";
 import { useDispatch, useSelector } from "react-redux";
 
 const MiddleSection = () => {
@@ -12,7 +12,7 @@ const MiddleSection = () => {
   const [followingPosts, setFollowingPosts] = useState(false);
   const dispatch = useDispatch();
   const { post, loading: postLoading } = useSelector((state) => state.post);
-  const { posts, loading: postsLoading } = useSelector(
+  const { posts, loading: followingpostsLoading } = useSelector(
     (state) => state.followingPosts,
   );
 
@@ -53,7 +53,7 @@ const MiddleSection = () => {
           </div>
         </div>
       </div>
-      {allPosts && (
+      { postLoading ? (<Spinner2/>) :  (allPosts && (
         <div className="middle-content">
           {post
             ? post.map((element) => {
@@ -72,8 +72,8 @@ const MiddleSection = () => {
               })
             : "No post found"}
         </div>
-      )}
-      {followingPosts && (
+      ))}
+      { followingpostsLoading ? (<Spinner2/>) : (followingPosts && (
         <div className="middle-content">
           {posts
             ? posts.map((element) => {
@@ -92,7 +92,7 @@ const MiddleSection = () => {
               })
             : "No post found"}
         </div>
-      )}
+      ))}
     </>
   );
 };

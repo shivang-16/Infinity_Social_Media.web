@@ -17,11 +17,11 @@ import { getAllPost } from "../../actions/Post";
 import { loadUser } from "../../actions/User";
 import User from "../User/User";
 import user2Img from "../../assets/user.png";
-import LoadingBar from 'react-top-loading-bar'
+import { setProgress } from "../../reducers/LoadingBar";
 
 //get caption , id(postId), likes , owner from props
 const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
-  const [progress, setProgress] = useState(0)
+
  
   const [comment, setComment] = useState("");
   const { user } = useSelector((state) => state.user);
@@ -38,11 +38,11 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
   };
 
   const handleLikeClick = async () => {
-    setProgress(10)
+    dispatch(setProgress(10))
     await dispatch(likePost(postId));
-    setProgress(60)
+    dispatch(setProgress(60))
     dispatch(getAllPost());
-    setProgress(100)
+    dispatch(setProgress(100))
   };
   const postIsLiked = likes.some((like) => like._id === user._id);
 
@@ -51,32 +51,32 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
   };
 
   const handleComment = async () => {
-    setProgress(10)
+    dispatch(setProgress(10))
     await dispatch(commentPost({ postId, comment }));
-    setProgress(50)
+    dispatch(setProgress(50))
     dispatch(getAllPost());
-    setProgress(80)
+    dispatch(setProgress(80))
     setIsCommentOpen((prevState) => !prevState);
-    setProgress(100)
+    dispatch(setProgress(100))
   };
 
   const handleBookmarkClick = async () => {
-    setProgress(10)
+    dispatch(setProgress(10))
     await dispatch(bookmarkPost(postId));
-    setProgress(50)
+    dispatch(setProgress(50))
     dispatch(getAllPost());
-    setProgress(80)
+    dispatch(setProgress(80))
     dispatch(loadUser());
-    setProgress(100)
+    dispatch(setProgress(100))
   };
   const postIsBookmarked = user.bookmarks.includes(postId);
 
   const handleDelete = async () => {
-    setProgress(10)
+    dispatch(setProgress(10))
     await dispatch(deletePost(postId));
-    setProgress(60)
+    dispatch(setProgress(60))
     dispatch(getAllPost());
-    setProgress(100)
+    dispatch(setProgress(100))
   };
 
   const handleEditPopup = () => {
@@ -86,13 +86,13 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
 
   const handleEdit = async () => {
     setEditCaption(editCaption);
-    setProgress(10)
+    dispatch(setProgress(10))
     await dispatch(editPost({ postId, caption: editCaption }));
-    setProgress(60)
+    dispatch(setProgress(60))
     dispatch(getAllPost());
     setIsEditOpen(false);
     setIsOptionsOpen((prevState) => !prevState);
-    setProgress(100)
+    dispatch(setProgress(100))
   };
 
   const toggleOptions = () => {
@@ -110,11 +110,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
   };
   return (
     <>
-      <LoadingBar
-        color='orangered'
-        progress={progress}
-        onLoaderFinished={() => setProgress(0)}
-      />
+     
       <div className="post" key={postId}>
         <div className="post-header">
           <User

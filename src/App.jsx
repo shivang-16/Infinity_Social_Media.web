@@ -24,9 +24,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
 import "./App.scss";
+import { setProgress } from "./reducers/LoadingBar";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.user);
+  const loadingProgress = useSelector((state) => state.loadingBar.progress);
+ 
+  const [progress, setLocalProgress] = useState(0);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
@@ -34,17 +39,24 @@ function App() {
     dispatch(getAllPost());
     dispatch(getMyPost());
     dispatch(getFollowingPost());
-  }, [dispatch]);
-   
-  const [progress, setProgress] = useState(0)
+
+    if (progress !== loadingProgress) {
+      setLocalProgress(loadingProgress);
+    }
+  }, [dispatch, loadingProgress]);
+
+ 
+  useEffect(() => {
+    
+  }, []);
+
   
   return (
     <Router>
      <LoadingBar
         color="orangered"
-        height="5px"
-        progress={progress} // Set the loading bar progress
-        onLoaderFinished={() => setProgress(0)} // Reset progress when loading is finished
+        progress={progress}
+        onLoaderFinished={() => setLocalProgress(0)}
       />
       <Routes>
         <Route

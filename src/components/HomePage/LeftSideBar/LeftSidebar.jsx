@@ -22,9 +22,11 @@ import { deletePost } from "../../../actions/Post";
 import photo from "../../../assets/user.png";
 import Alert from "../../AlertPopup/Alert";
 import SidebarDrawer from "../../SidebarDrawer/SidebarDrawer";
+import { setProgress } from "../../../reducers/LoadingBar";
+
 
 const LeftSidebar = () => {
-  const [selectedOption, setSelectedOption] = useState(""); // Initialize with "home" selected
+  const [selectedOption, setSelectedOption] = useState(""); 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isOptionOpen, setIsOptionOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
@@ -47,6 +49,7 @@ const LeftSidebar = () => {
       setImage(file);
     };
   };
+
   const handleCreatePost = async (e) => {
     e.preventDefault();
 
@@ -54,19 +57,25 @@ const LeftSidebar = () => {
 
     myForm.append("caption", caption);
     myForm.append("file", image);
-
+    
+    dispatch(setProgress(10))
     await dispatch(createPost(myForm));
+    dispatch(setProgress(60))
     await dispatch(getAllPost());
     dispatch(getMyPost())
     closePopup();
+    dispatch(setProgress(100))
   };
 
   const handleLogoutPopup = () => {
     setIsLogoutOpen(true);
   };
   const handleLogout = () => {
+    dispatch(setProgress(10))
     dispatch(logoutUser());
+    dispatch(setProgress(60))
     setIsLogoutOpen(false);
+    dispatch(setProgress(100))
   };
 
   const handleDeletePopup = () => {
@@ -74,8 +83,11 @@ const LeftSidebar = () => {
   };
 
   const handleDelete = () => {
+    dispatch(setProgress(10))
     dispatch(deletePost());
+    dispatch(setProgress(60))
     setIsDeleteOpen(false);
+    dispatch(setProgress(100))
   };
   // Function to handle the click on an option
   const handleOptionClick = (option) => {

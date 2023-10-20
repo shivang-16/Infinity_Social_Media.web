@@ -7,6 +7,7 @@ import "./connect.scss";
 import { followUser } from "../../actions/User";
 import User from "../User/User";
 import { loadUser } from "../../actions/User";
+import { setProgress } from "../../reducers/LoadingBar";
 
 const Connect = () => {
   const { users } = useSelector((state) => state.users);
@@ -14,8 +15,11 @@ const Connect = () => {
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {
+    dispatch(setProgress(10))
     await dispatch(followUser(_id));
-    dispatch(loadUser())
+    dispatch(setProgress(70))
+    await dispatch(loadUser())
+    dispatch(setProgress(100))
   };
 
   const isUserFollowed = (userId) =>

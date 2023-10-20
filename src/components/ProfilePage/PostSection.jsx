@@ -7,10 +7,11 @@ import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
 import PostBody from "../Posts/PostBody";
 import { useSelector } from "react-redux";
+import Spinner2 from "../Spinner/Spinner2";
 
 const PostSection = () => {
   const { user } = useSelector((state) => state.user);
-  const { posts } = useSelector((state) => state.myposts);
+  const { posts , loading: myPostLoading} = useSelector((state) => state.myposts);
   const [isPostSection, setIsPostSection] = useState(true);
   const [isBookmarkSection, setIsBookmarkSection] = useState(false);
 
@@ -55,7 +56,7 @@ const PostSection = () => {
                 </div>
               </div>
               
-                {isPostSection && posts
+                {myPostLoading ? (<Spinner2/>) :  (isPostSection && posts
                   ? posts.map((element) => {
                       const { caption, _id, likes, owner, comments, image } =
                         element;
@@ -73,7 +74,7 @@ const PostSection = () => {
                          </div>
                       );
                     })
-                  : "No post found"}
+                  : "No post found")}
                   
                 {isBookmarkSection && user
                   ? user.bookmarks.map((element) => {
