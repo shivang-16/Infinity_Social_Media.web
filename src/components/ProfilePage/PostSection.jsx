@@ -67,7 +67,7 @@ const PostSection = () => {
                 <div className="post_detail_content">
                   {isPostSection && posts && posts.length > 0
                     ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image } =
+                        const { caption, _id, likes, owner, comments, image, createdAt } =
                           element;
                         return (
                           <PostBody
@@ -78,6 +78,7 @@ const PostSection = () => {
                             owner={owner}
                             comments={comments}
                             image={image?.url}
+                            createdAt={createdAt}
                           />
                         );
                       })
@@ -86,7 +87,7 @@ const PostSection = () => {
                     : ""}
                   {isBookmarkSection && posts && posts.length > 0
                     ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image } =
+                        const { caption, _id, likes, owner, comments, image, createdAt } =
                           element;
                         return (
                           <PostBody
@@ -97,6 +98,7 @@ const PostSection = () => {
                             owner={owner}
                             comments={comments}
                             image={image?.url}
+                            createdAt={createdAt}
                           />
                         );
                       })

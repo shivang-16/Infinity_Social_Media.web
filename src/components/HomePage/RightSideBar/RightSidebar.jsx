@@ -1,7 +1,6 @@
 import React from "react";
 import "./rightsidebar.scss";
 import { Link } from "react-router-dom";
-import defaultImg from '../../../assets/user.png'
 import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../actions/User";
 import { loadUser } from "../../../actions/User";
@@ -30,9 +29,10 @@ const RightSidebar = () => {
   return (
     <>
       <div className="right-main">
+      <Link to="/profile">
         <div className="rightSidebar-header">
           <div className="userImg">
-            <img src={user.avatar?.url ? user.avatar?.url : defaultImg} alt="" />
+            <img src={user.avatar?.url} alt="" />
           </div>
           {user ? (
             <div className="userDetail">
@@ -48,11 +48,12 @@ const RightSidebar = () => {
           )}
 
           <div className="btn">
-            <Link to="/profile">
+   
               <button>View</button>
-            </Link>
+          
           </div>
         </div>
+        </Link>
         <div className="rightSidebar-content">
           <div className="content-heading">
             <p>Suggested for you</p>
@@ -73,15 +74,13 @@ const RightSidebar = () => {
                         avatar={avatar?.url}
                       />
                       <div className="btn">
-                        <Link to="#">
                           <button onClick={() => handleFollow(_id)}>
                             {isAuthenticated && isUserFollowed(_id) ? (
-                              <span className="unfollow">Following</span>
+                              <span className="unfollow2">Following</span>
                             ) : (
-                              <span className="follow">Follow</span>
+                              <span className="follow2">Follow</span>
                             )}
                           </button>
-                        </Link>
                       </div>
                     </div>
                   ) : (

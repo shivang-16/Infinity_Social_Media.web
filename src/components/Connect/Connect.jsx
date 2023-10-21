@@ -44,7 +44,7 @@ const Connect = () => {
                       avatar={avatar.url}
                     />
                     <div className="btn">
-                      <Link to="#">
+                     
                         <button onClick={() => handleFollow(_id)}>
                           {isAuthenticated && isUserFollowed(_id) ? (
                             <span className="unfollow">Following</span>
@@ -52,7 +52,6 @@ const Connect = () => {
                             <span className="follow">Follow</span>
                           )}
                         </button>
-                      </Link>
                     </div>
                   </div>
                 ) : (

@@ -60,7 +60,7 @@ const MiddleSection = () => {
             .slice() 
             .reverse() 
             .map((element) => {
-                const { caption, _id, likes, owner, comments, image } = element;
+                const { caption, _id, likes, owner, comments, image, createdAt } = element;
                 return (
                   <PostBody
                     key={_id}
@@ -70,6 +70,7 @@ const MiddleSection = () => {
                     owner={owner}
                     comments={comments}
                     image={image?.url}
+                    createdAt={createdAt}
                   />
                 );
               })
@@ -80,7 +81,7 @@ const MiddleSection = () => {
         <div className="middle-content">
           {posts
             ? posts.map((element) => {
-                const { caption, _id, likes, owner, comments, image } = element;
+                const { caption, _id, likes, owner, comments, image, createdAt } = element;
                 return (
                   <PostBody
                     key={_id}
@@ -90,6 +91,7 @@ const MiddleSection = () => {
                     owner={owner}
                     comments={comments}
                     image={image?.url}
+                    createdAt={createdAt}
                   />
                 );
               })

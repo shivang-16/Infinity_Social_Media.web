@@ -308,3 +308,62 @@ export const deleteUser = () => async (dispatch) => {
     toast.error(error.response.data.message);
   }
 };
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "GeneralRequest",
+    });
+
+    const { data } = await axios.post(`${server}/user/forgetPassword`, {
+      email
+    },{
+      headers:{
+        "Content-Type":"application/json"
+      },
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "GeneralSuccess",
+      payload: data.message,
+    });
+    toast.success(data.message);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "GeneralFailure",
+      payload: error.response.data.message,
+    });
+    toast.error(error.response.data.message);
+  }
+};
+
+export const changePassword = (userName, otp, newPassword) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "GeneralRequest",
+    });
+    const { data } = await axios.post(`${server}/user/changePassword`, {
+      userName, otp, newPassword
+    }, {
+      headers:{
+        "Content-Type":"application/json"
+      },
+      withCredentials: true,
+    });
+    dispatch({
+      type: "GeneralSuccess",
+      payload: data.message,
+    });
+    toast.success(data.message);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "GeneralFailure",
+      payload: error.response.data.message,
+    });
+    toast.error(error.response.data.message);
+  }
+};
+

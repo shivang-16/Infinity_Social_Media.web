@@ -90,7 +90,40 @@ function App() {
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>
-      <Toaster />
+      <Toaster
+  position="top-right"
+  reverseOrder={false}
+  toastOptions={{
+    success: {
+      style: {
+        backgroundColor: 'black',  
+        color: 'white',      
+        border: '1px solid green',
+        padding: '15px',
+        marginRight: '20px'
+      },
+      iconTheme: {
+        primary: 'green',      
+        secondary: 'white',     
+      },
+    },
+    error: {
+      style: {
+        backgroundColor: 'black',  
+        color: 'red',          
+        border: '1px solid red',
+        padding: '15px',
+        marginRight: '20px'
+      },
+      iconTheme: {
+        primary: 'red',       
+        secondary: 'white',      
+      },
+    },
+  }}
+/>
+
+
     </Router>
   );
 }

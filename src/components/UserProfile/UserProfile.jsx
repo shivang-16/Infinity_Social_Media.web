@@ -8,20 +8,24 @@ import linkIcon from "../../assets/link.png";
 import locationIcon from "../../assets/location.png";
 import dateIcon from "../../assets/date.png";
 import bioIcon from "../../assets/bio.png";
-import defaultProfile from '../../assets/user.png'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./userProfile.scss";
 import PostBody from "../Posts/PostBody";
 import Spinner2 from "../Spinner/Spinner2";
 import User from "../User/User";
+import { followUser } from "../../actions/User";
+import { setProgress } from "../../reducers/LoadingBar";
 
 const Users = () => {
+  const {user, isAuthenticated} = useSelector((state)=>state.user)
   const { users, loading: ProfileLoading } = useSelector(
     (state) => state.userProfile,
   );
   const { posts, loading:postsLoading } = useSelector((state) => state.userposts);
   const [isFollowersOpen, setFollowersOpen] = useState(false);
   const [isFollowingOpen, setFollowingOpen] = useState(false);
+  
+  const dispatch = useDispatch()
 
   const openFollowersPopup = () => {
     setFollowersOpen(true);
@@ -35,6 +39,17 @@ const Users = () => {
     setFollowingOpen(false);
     setFollowersOpen(false);
   };
+
+  const handleFollow = async (_id) => {
+    dispatch(setProgress(10))
+    await dispatch(followUser(_id));
+    dispatch(setProgress(70))
+    await dispatch(loadUser())
+    dispatch(setProgress(100))
+  };
+
+  const isUserFollowed = (userId) => user.following.some((follow) => follow._id === userId);
+
   return (
     <>
       <main>
@@ -57,6 +72,7 @@ const Users = () => {
                       posts,
                       description,
                       avatar,
+                      _id
                     } = element;
                     return (
                       <>
@@ -71,8 +87,18 @@ const Users = () => {
                           key={index}
                         >
                           <div className="content_box user_name">
-                            <h4>{userName}</h4>
-                            {/* <button className="follow">Follow</button> */}
+                            <span>{userName}</span>
+                            {user.userName === userName ?(
+                            <Link to='/profile'> <button>Edit Profile</button> </Link>
+                            ) :  (
+                              <button onClick={() => handleFollow(_id)} className="userProfileFollowbtn">
+                              {isAuthenticated && isUserFollowed(_id) ? (
+                                <span className="unfollow">Following</span>
+                              ) : (
+                                <span className="follow">Follow</span>
+                              )}
+                            </button>
+                            )}
                           </div>
                           <div className="content_box followers_details_section">
                             <div>
@@ -149,7 +175,7 @@ const Users = () => {
                 <div className="post_detail_content">
                   {posts
                     ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image } =
+                        const { caption, _id, likes, owner, comments, image, createdAt } =
                           element;
                         return (
                           <PostBody
@@ -160,6 +186,7 @@ const Users = () => {
                             owner={owner}
                             comments={comments}
                             image={image?.url}
+                            createdAt={createdAt}
                           />
                         );
                       })

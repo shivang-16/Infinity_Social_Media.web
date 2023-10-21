@@ -41,12 +41,14 @@ const Login = () => {
                   placeholder="Enter Email or Username"
                   value={loginIdentifier}
                   onChange={(e) => setLoginIdentifier(e.target.value)}
+                  required
                 />
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 
                 <div className="check_box">

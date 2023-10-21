@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../components/Posts/post.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import unlike from "../../assets/unlike.png";
 import liked from "../../assets/liked.png";
 import commentsImg from "../../assets/comment.png";
@@ -20,12 +20,13 @@ import user2Img from "../../assets/user.png";
 import { setProgress } from "../../reducers/LoadingBar";
 
 //get caption , id(postId), likes , owner from props
-const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
+const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt }) => {
 
- 
+
   const { user } = useSelector((state) => state.user);
   const {post }  = useSelector((state)=>state.postById)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const [comment, setComment] = useState("");
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -53,13 +54,9 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
       return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
     }
   };
-  
-  
-
   useEffect(() => {
-    // dispatch(getPostById(postId));
     if (post) {
-      const createdDate = post.createdAt; // Replace 'createdAt' with the actual property in your post data
+      const createdDate = createdAt; 
       const calculatedTimestamp = calculateTimestamp(createdDate);
       setTimestamp(calculatedTimestamp);
     }
@@ -87,7 +84,8 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
     dispatch(setProgress(10))
     await dispatch(commentPost({ postId, comment }));
     dispatch(setProgress(50))
-    dispatch(getAllPost());
+    await dispatch(getPostById(postId));
+    navigate(`post/${postId}`)
     dispatch(setProgress(80))
     setIsCommentOpen((prevState) => !prevState);
     dispatch(setProgress(100))

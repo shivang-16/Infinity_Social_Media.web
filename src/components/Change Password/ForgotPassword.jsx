@@ -1,12 +1,19 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { forgotPassword } from '../../actions/User'
 
 const ForgotPassword = () => {
      const [email, setEmail] = useState('')
      const navigate = useNavigate()
-     const handleForgot = ()=>{
+     const dispatch = useDispatch()
+
+     const handleForgot = async(e)=>{
+      e.preventDefault()
+       await dispatch(forgotPassword(email))
         navigate('/changePassword')
      }
+
   return (
    <>
      <main id="login_page">
@@ -21,6 +28,7 @@ const ForgotPassword = () => {
                   placeholder="Enter the registered email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               <input type="submit" value="Verify Email"/>
               </form>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
@@ -24,7 +23,12 @@ const Verification = () => {
       {userLoading ? (
         <Spinner />
       ) : (
+        <main id="login_page">
+       
+        <div className="form_area login_box">
         <div className="login_form">
+        <h1 className="infinity">Infinity</h1>
+          <p>Verify OTP to register</p>
           <form onSubmit={hanldeVerify}>
             <input
               type="text"
@@ -35,6 +39,8 @@ const Verification = () => {
             <input type="submit" value="Confirm and signup" />
           </form>
         </div>
+        </div>
+        </main>
       )}
     </>
   );

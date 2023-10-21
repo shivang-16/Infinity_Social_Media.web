@@ -181,6 +181,7 @@ export const likePost = (postId) => async (dispatch) => {
       payload: data.message,
     });
     toast.success(data.message);
+    
   } catch (error) {
     console.log(error);
     dispatch({
@@ -190,8 +191,7 @@ export const likePost = (postId) => async (dispatch) => {
   }
 };
 
-export const commentPost =
-  ({ postId, comment }) =>
+export const commentPost = ({ postId, comment }) =>
   async (dispatch) => {
     console.log(postId);
     try {

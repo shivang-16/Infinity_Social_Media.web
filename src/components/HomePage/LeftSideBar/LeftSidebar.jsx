@@ -203,7 +203,7 @@ const LeftSidebar = () => {
                 <img src={logout} alt="" />
                 <p>Logout</p>
               </div>
-              <Link to='changePassword'><div className="left-boxes">
+              <Link to='/forgotPassword'><div className="left-boxes">
                 <img src={deleteIcon} alt="" />
                 <p>Change Password</p>
               </div>

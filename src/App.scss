@@ -17,3 +17,37 @@ a {
 .infinity{
     font-family: cursive;
 }
+
+.custom-toaster {
+  /* Add your custom styles here */
+  background-color: #333; /* Change the background color */
+  color: #fff; /* Change the text color */
+  border-radius: 5px; /* Add some rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow */
+  max-width: 300px; /* Adjust the maximum width */
+  /* Add more styles as needed */
+}
+
+.custom-toaster > .toast {
+  /* Customize individual toast styles, e.g., spacing between toasts */
+  margin-bottom: 10px;
+}
+
+.custom-toaster .toast-progress {
+  /* Customize the toast progress bar (if needed) */
+  background-color: #ff4500; /* Change the progress bar color */
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+   background-color: rgb(86, 86, 86);
+}
+::-webkit-scrollbar-thumb{
+  background-color: rgb(1, 88, 195);
+  border-radius: 20px;
+  &:hover{
+    background-color: rgb(2, 73, 160);
+  }
+}

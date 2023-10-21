@@ -27,6 +27,7 @@ const Comment = () => {
                 owner={post?.owner}
                 comments={post?.comments}
                 image={post?.image?.url}
+                createdAt={post.createdAt}
               />
             ) : (
               <Spinner2 />
@@ -37,12 +38,12 @@ const Comment = () => {
                 ? post.comments.map((element, index) => {
                     const { comment, user } = element;
                     return (
-                      <div key={index}>
+                      <div key={index} className="comment_box">
                         <User
                           userId={user._id}
                           name={user.name}
                           userName={user.userName}
-                          avatar={user.avatar?.url}
+                          avatar={user?.avatar?.url}
                         />
                         <p>{comment}</p>
                       </div>
