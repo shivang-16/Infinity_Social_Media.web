@@ -71,3 +71,11 @@
     }
   }
 }
+
+
+@media screen and (max-width: 500px) {
+  .sidebar-drawer{
+    left: -320px;
+    width: 320px;
+  }
+}

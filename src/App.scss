@@ -51,3 +51,9 @@ a {
     background-color: rgb(2, 73, 160);
   }
 }
+
+@media screen and (max-width: 650px){
+   ::-webkit-scrollbar{
+    width: 5px;
+   }
+}

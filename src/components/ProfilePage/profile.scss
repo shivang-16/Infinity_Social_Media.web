@@ -1,5 +1,5 @@
+
 .user_details {
-  // border: 2px solid red;
 
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 .profile_box {
-  //    border: 2px solid yellow;
+    //  border: 2px solid yellow;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -22,7 +22,7 @@
   // border: 2px solid red; 
 }
 .image-profile{
- 
+
   img {
     // border: 2px solid red;
     height: 150px;
@@ -38,6 +38,7 @@
 .content_box {
   width: 100%;
   margin: 10px 0px;
+  // border: 2px solid red;
 }
 .user_name {
   button {
@@ -190,3 +191,44 @@
   }
   
 }
+
+@media screen and (max-width: 950px) {
+
+  .user_details{
+    overflow-x: hidden;
+  }
+  .content_box {
+    width: 117%;
+  }
+  .post_detail_content{
+  width: 90%;
+  margin: auto;
+  }
+}
+
+@media screen and (max-width: 650px) {
+   
+  .profile_details {
+    flex-direction: column;
+    margin: auto;
+  }
+  .profile_photo{
+    // border: 2px solid red;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+   
+
+  .profile_details {
+    margin: auto;
+  //  border: 2px solid red;
+   width: 90%;
+    
+  }
+  .content_box {
+    width: 100%;
+  }
+}
+
