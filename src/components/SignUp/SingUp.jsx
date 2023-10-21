@@ -37,7 +37,7 @@ const SignUp = () => {
           </div>
           <div className="form_area login_box">
             <div className="login_form">
-              <h1>Social App</h1>
+            <h1 className="infinity">Infinity</h1>
               <p>Login up to see photos and videos</p>
               <form onSubmit={handleSignUp}>
                 <input

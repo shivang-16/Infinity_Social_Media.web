@@ -48,7 +48,7 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
                     userId={_id}
                     userName={userName}
                     name={name}
-                    avatar={avatar.url}
+                    avatar={avatar?.url}
                   />
                 </div>
               );

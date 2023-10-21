@@ -130,12 +130,14 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutSuccess",
       payload: data.message,
     });
+    toast.success(data.message)
   } catch (error) {
     console.log(error);
     dispatch({
       type: "LogoutFailure",
       payload: error.response.data.message,
     });
+    toast.error(error.response.data.message)
   }
 };
 
@@ -259,6 +261,30 @@ export const editUser = (formData) => async (dispatch) => {
     toast.error(error.response.data.message);
   }
 };
+
+export const deleteAvatar = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "GeneralRequest",
+    });
+    const { data } = await axios.get(`${server}/user/deleteAvatar`, {
+      withCredentials: true,
+    });
+    dispatch({
+      type: "GeneralSuccess",
+      payload: data.message,
+    });
+    toast.success(data.message);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "GeneralFailure",
+      payload: error.response.data.message,
+    });
+    toast.error(error.response.data.message);
+  }
+};
+
 
 export const deleteUser = () => async (dispatch) => {
   try {

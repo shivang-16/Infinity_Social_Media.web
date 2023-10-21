@@ -131,7 +131,7 @@ const LeftSidebar = () => {
   return (
     <>
       <div className="leftSidebar-header">
-        <h1>Infinity</h1>
+        <h1 className="infinity">Infinity</h1>
       </div>
       <div className="leftSidebar-content">
         <div className="leftSidebar-Upcontent">
@@ -200,11 +200,16 @@ const LeftSidebar = () => {
           {isOptionOpen && (
             <div className="options-box">
               <div onClick={handleLogoutPopup} className="left-boxes">
-                <img src={logout} alt="Logout" />
+                <img src={logout} alt="" />
                 <p>Logout</p>
               </div>
+              <Link to='changePassword'><div className="left-boxes">
+                <img src={deleteIcon} alt="" />
+                <p>Change Password</p>
+              </div>
+              </Link>
               <div onClick={handleDeletePopup} className="left-boxes">
-                <img src={deleteIcon} alt="Logout" />
+                <img src={deleteIcon} alt="" />
                 <p>Delete Account</p>
               </div>
               <div className="box"></div>

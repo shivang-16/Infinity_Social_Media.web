@@ -23,15 +23,48 @@ import { setProgress } from "../../reducers/LoadingBar";
 const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
 
  
-  const [comment, setComment] = useState("");
   const { user } = useSelector((state) => state.user);
+  const {post }  = useSelector((state)=>state.postById)
   const dispatch = useDispatch();
-
+  
+  const [comment, setComment] = useState("");
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [isLikeopen, setIsLikeOpen] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editCaption, setEditCaption] = useState("");
+  const [timestamp, setTimestamp] = useState('');
+
+  const calculateTimestamp = (createdDate) => {
+    const currentDate = new Date();
+    const postDate = new Date(createdDate);
+    const timeDifferenceInSeconds = Math.floor((currentDate - postDate) / 1000);
+  
+    if (timeDifferenceInSeconds < 60) {
+      return `${timeDifferenceInSeconds} second${timeDifferenceInSeconds > 1 ? 's' : ''} ago`;
+    } else if (timeDifferenceInSeconds < 3600) {
+      const minutesAgo = Math.floor(timeDifferenceInSeconds / 60);
+      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    } else if (timeDifferenceInSeconds < 86400) {
+      const hoursAgo = Math.floor(timeDifferenceInSeconds / 3600);
+      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+      const daysAgo = Math.floor(timeDifferenceInSeconds / 86400);
+      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    }
+  };
+  
+  
+
+  useEffect(() => {
+    // dispatch(getPostById(postId));
+    if (post) {
+      const createdDate = post.createdAt; // Replace 'createdAt' with the actual property in your post data
+      const calculatedTimestamp = calculateTimestamp(createdDate);
+      setTimestamp(calculatedTimestamp);
+    }
+  }, []);
+  
 
   const handlePostById = () => {
     dispatch(getPostById(postId));
@@ -69,7 +102,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
     dispatch(loadUser());
     dispatch(setProgress(100))
   };
-  const postIsBookmarked = user.bookmarks.includes(postId);
+  const postIsBookmarked = user.bookmarks._id === postId;
 
   const handleDelete = async () => {
     dispatch(setProgress(10))
@@ -119,6 +152,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
             name={owner?.name}
             avatar={owner?.avatar?.url}
           />
+           
           {showOptionIcon ? (
             <>
               <div className="options-icon" onClick={toggleOptions}>
@@ -189,8 +223,9 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
               <img src={postIsBookmarked ? bookmarked : bookmark} alt="" />
             </button>
           </div>
+          
         </div>
-
+       <div className="mini-footer">
         {likes.length !== 0 ? (
           <span className="likes-footer" onClick={openLikesPopup}>
             {likes[0].userName === user.userName ? "You" : likes[0].userName}{" "}
@@ -201,6 +236,8 @@ const PostBody = ({ caption, postId, likes, owner, comments, image }) => {
         ) : (
           <span className="likes-footer">No likes yet</span>
         )}
+        <div className="timestamp">{timestamp}</div>
+        </div>
       </div>
       <div className={`post-comments ${isCommentOpen ? "open" : ""}`}>
         <span>

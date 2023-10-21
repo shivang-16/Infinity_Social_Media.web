@@ -23,6 +23,7 @@
     border-radius: 100%;
   }
 }
+
 .options-icon {
   // border: 2px solid red;
   position: absolute;
@@ -90,7 +91,16 @@
   color: rgb(139, 139, 139);
   cursor: pointer;
 }
-
+.mini-footer{
+  display: flex;
+  justify-content: space-between;
+}
+.timestamp{
+  // border: 2px solid red;
+  color: rgb(127, 127, 127);
+  font-size: 12px;
+  // margin: 0px 0px 20px 10px;
+}
 .action {
   background: none;
   border: none;

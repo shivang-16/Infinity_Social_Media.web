@@ -97,6 +97,29 @@ export const getMyPost = () => async (dispatch) => {
   }
 };
 
+export const getMyBookmark = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "MyPostRequest",
+    });
+
+    const { data } = await axios.get(`${server}/user/me/bookmarks`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "MyPostSuccess",
+      payload: data.posts,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "MyPostFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getUserPost = (userId) => async (dispatch) => {
   try {
     dispatch({

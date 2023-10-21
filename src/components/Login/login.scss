@@ -66,6 +66,22 @@
     margin-top: 30px;
   }
 }
+.check_box{
+  display: flex;
+  // border: 2px solid red;
+  width: 0;
+  position: relative;
+  right: 150px;
+  align-items: center;
+  input{
+    padding: 0;
+    width: 0;
+    // height: 35px;    
+  }
+  label{
+  
+  }
+}
 .signup_link {
   flex-direction: row;
   padding: 25px 123px;

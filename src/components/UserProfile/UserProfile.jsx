@@ -4,6 +4,11 @@ import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
 import { Link } from "react-router-dom";
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
+import linkIcon from "../../assets/link.png";
+import locationIcon from "../../assets/location.png";
+import dateIcon from "../../assets/date.png";
+import bioIcon from "../../assets/bio.png";
+import defaultProfile from '../../assets/user.png'
 import { useSelector } from "react-redux";
 import "./userProfile.scss";
 import PostBody from "../Posts/PostBody";
@@ -14,7 +19,7 @@ const Users = () => {
   const { users, loading: ProfileLoading } = useSelector(
     (state) => state.userProfile,
   );
-  const { posts } = useSelector((state) => state.userposts);
+  const { posts, loading:postsLoading } = useSelector((state) => state.userposts);
   const [isFollowersOpen, setFollowersOpen] = useState(false);
   const [isFollowingOpen, setFollowingOpen] = useState(false);
 
@@ -36,7 +41,7 @@ const Users = () => {
         <div className="main-box left_sidebar">
           <LeftSidebar />
         </div>
-        {ProfileLoading ? (
+        {ProfileLoading && postsLoading ? (
           <Spinner2 />
         ) : (
           <div className="main-box middle-section">
@@ -57,7 +62,7 @@ const Users = () => {
                       <>
                         <div className="profile_box profile_photo">
                           <div className="image-profile">
-                            <img src={avatar.url} alt="No image" />
+                            <img src={avatar?.url} alt="No image" />
                           </div>
                         </div>
 
@@ -81,15 +86,43 @@ const Users = () => {
                             </div>
                           </div>
                           <div className="content_box user_descripton">
-                            <h3>{name}</h3>
+                            <h4>{name}</h4>
                             {users && description ? (
                               <>
-                                <p>{description.about}</p>
-                                <p>{description.dob}</p>
-                                <p>{description.location}</p>
-                                <a href={`${description.link}`} target="_blank">
-                                  {description.link}
-                                </a>
+                              {description.about ? (
+                                <p>
+                                  <img src={bioIcon} alt="" />
+                                  {description.about}
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              {description.dob ? (
+                                <p>
+                                  <img src={dateIcon} alt="" />
+                                  {description.dob}
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              {description.location ? (
+                                <p>
+                                  <img src={locationIcon} alt="" />
+                                  {description.location}
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                              {description.link ? (
+                                <p>
+                                  <img src={linkIcon} alt="" />
+                                  <a href={`${description.link}`} target="_blank">
+                                    {description.link}
+                                  </a>
+                                </p>
+                              ) : (
+                                ""
+                              )}
                               </>
                             ) : (
                               ""
@@ -105,18 +138,13 @@ const Users = () => {
               </div>
               <div className="user_section post_details">
                 <div className="post_details_header">
-                  <Link to="#">
-                    <div className="posts detail_box">
+
+                    <div className="posts detail_box active_class">
                       <img src={post} alt="" />
                       <span>Posts</span>
                     </div>
-                  </Link>
-                  <Link to="#">
-                    <div className="bookmark detail_box">
-                      <img src={bookmark} alt="" />
-                      <span>Bookmark</span>
-                    </div>
-                  </Link>
+            
+                  
                 </div>
                 <div className="post_detail_content">
                   {posts
@@ -131,7 +159,7 @@ const Users = () => {
                             likes={likes}
                             owner={owner}
                             comments={comments}
-                            image={image.url}
+                            image={image?.url}
                           />
                         );
                       })
@@ -172,7 +200,7 @@ const Users = () => {
                                   userId={_id}
                                   userName={userName}
                                   name={name}
-                                  avatar={avatar.url}
+                                  avatar={avatar?.url}
                                 />
                               );
                             })
@@ -202,7 +230,7 @@ const Users = () => {
                                   userId={_id}
                                   userName={userName}
                                   name={name}
-                                  avatar={avatar.url}
+                                  avatar={avatar?.url}
                                 />
                               );
                             })

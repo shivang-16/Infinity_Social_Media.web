@@ -8,6 +8,8 @@ import "../ProfilePage/profile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
 import { editUser } from "../../actions/User";
+import { deleteAvatar } from "../../actions/User";
+import { loadUser } from "../../actions/User";
 
 
 const Profile = () => {
@@ -43,7 +45,7 @@ const Profile = () => {
     setLocation(user.description.location);
     setLink(user.description.link);
   };
-  const updateUser = (e) => {
+  const updateUser = async(e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -54,9 +56,18 @@ const Profile = () => {
     formData.append("link", link);
     formData.append("file", image);
 
-    dispatch(editUser(formData));
+    await dispatch(editUser(formData));
+   dispatch(loadUser())
     setUpdatedOpen(false);
   };
+
+  const handleDeleteAvatar = async(e)=>{
+    e.preventDefault()
+    await dispatch(deleteAvatar())
+    setImagePreview(null)
+
+  }
+
 
   const openFollowersPopup = () => {
     setFollowersOpen(true);
@@ -125,7 +136,7 @@ const Profile = () => {
                   ) : (
                     ""
                   )}
-                  {user.description.about ? (
+                  {user.description.link ? (
                     <p>
                       <img src={linkIcon} alt="" />
                       <a href={`${user.description.link}`} target="_blank">
@@ -166,7 +177,8 @@ const Profile = () => {
                   <input type="file" onChange={imageHandler} />
                 </label>
                 
-                <button onClick={(e) => { e.preventDefault(); setImagePreview(null); }}>Remove photo</button>
+                <button 
+                onClick={handleDeleteAvatar}>Remove photo</button>
                 </div>
               </div>
               <input

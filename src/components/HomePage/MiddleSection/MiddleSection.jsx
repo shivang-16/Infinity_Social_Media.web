@@ -56,7 +56,10 @@ const MiddleSection = () => {
       { postLoading ? (<Spinner2/>) :  (allPosts && (
         <div className="middle-content">
           {post
-            ? post.map((element) => {
+            ? post
+            .slice() 
+            .reverse() 
+            .map((element) => {
                 const { caption, _id, likes, owner, comments, image } = element;
                 return (
                   <PostBody

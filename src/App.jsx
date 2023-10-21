@@ -3,7 +3,9 @@ import LoadingBar from "react-top-loading-bar";
 import Mainbody from "./components/HomePage/Mainbody/Mainbody";
 import Connect from "./components/Connect/Connect";
 import PostSection from "./components/ProfilePage/PostSection";
-import Login from "./components/Login/login";
+import Login from "./components/Login/Login";
+import ForgotPassword from "./components/Change Password/ForgotPassword";
+import ChangePassword from "./components/Change Password/ChangePassword";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
 import AddDetails from "./components/Add Details/AddDetails";
@@ -18,13 +20,11 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
 import "./App.scss";
-import { setProgress } from "./reducers/LoadingBar";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -87,6 +87,8 @@ function App() {
         <Route exact path="/signup" element={<SingUp />} />
         <Route exact path="/verify" element={<Verification />} />
         <Route exact path="/details" element={<AddDetails />} />
+        <Route exact path="/forgotPassword" element={<ForgotPassword />} />
+        <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>
       <Toaster />
     </Router>
