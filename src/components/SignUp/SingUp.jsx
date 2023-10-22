@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { sinupUser } from "../../actions/User";
 import { useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
+import Loader from "../Spinner/loader";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -17,22 +19,31 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading: userLoading } = useSelector((state) => state.user);
+  const { loading: userLoading, isRedirect } = useSelector((state) => state.user);
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    await dispatch(sinupUser(name, userName, email, password));
-    setName(name);
-    setEmail(email);
-    setUserName(userName);
-    navigate("/verify");
-  };
+const handleSignUp = async (e) => {
+  e.preventDefault();
+
+  if (password.length < 6 || !/\d/.test(password) || !/[!@#$%^&*]/.test(password)) {
+    // Password doesn't meet the criteria
+    toast.error("Password must be at least 6 characters long and must contain at least one number and one special character.");
+  } else {
+    await dispatch(sinupUser(name, userName, email, password))
+     
+        setName(name);
+        setEmail(email);
+        setUserName(userName);
+        navigate("/verify");
+    
+  
+  }
+};
+
+  
 
   return (
     <>
-      {userLoading ? (
-        <Spinner />
-      ) : (
+     
         <main id="login_page">
           <div className="brandImage login_box">
             <img src={photo} alt="" />
@@ -78,7 +89,7 @@ const SignUp = () => {
                   />
                   <label>Show</label>
                 </div>
-                <input type="submit" value="SignUp" />
+                <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'SignUp' }</button>
               </form>
             </div>
             <div className="signup_link login_form">
@@ -89,7 +100,7 @@ const SignUp = () => {
             </div>
           </div>
         </main>
-      )}
+   
     </>
   );
 };

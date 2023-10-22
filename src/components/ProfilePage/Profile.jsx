@@ -139,9 +139,9 @@ const Profile = () => {
                   {user.description.link ? (
                     <p>
                       <img src={linkIcon} alt="" />
-                      <a href={`${user.description.link}`} target="_blank">
-                        {user.description.link}
-                      </a>
+                      <a href={user.description.link.startsWith('http') ? user.description.link : `https://${user.description.link}`} target="_blank">
+      {user.description.link}
+    </a>
                     </p>
                   ) : (
                     ""

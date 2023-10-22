@@ -6,6 +6,8 @@ import { loginUser } from "../../actions/User";
 import { loadUser } from "../../actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
+import Loader from "../Spinner/loader";
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const { loading: userLoading, isAuthenticated } = useSelector(
@@ -21,12 +23,11 @@ const Login = () => {
     await dispatch(loginUser(loginIdentifier, password));
     dispatch(loadUser());
   };
+  
 
   return (
     <>
-      {userLoading ? (
-        <Spinner />
-      ) : (
+  
         <main id="login_page">
           <div className="brandImage login_box">
             <img src={photo} alt="" />
@@ -60,7 +61,7 @@ const Login = () => {
                   <label>Show</label>
                 </div>
 
-                <input type="submit" value="Login" />
+                <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Login' }</button>
               </form>
               <span>or</span>
               <Link to="/forgotPassword">
@@ -76,7 +77,7 @@ const Login = () => {
             </div>
           </div>
         </main>
-      )}
+ 
     </>
   );
 };

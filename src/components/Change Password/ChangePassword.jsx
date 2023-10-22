@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changePassword } from "../../actions/User";
 import photo from "../../assets/photo.png";
+import toast from "react-hot-toast";
 
 const ChangePassword = () => {
   const [userName, setUserName] = useState("");
@@ -14,9 +15,16 @@ const ChangePassword = () => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    await dispatch(changePassword(userName, otp, newPassword));
-    navigate("/");
+  
+    if (newPassword.length < 6 || !/\d/.test(newPassword) || !/[!@#$%^&*]/.test(newPassword)) {
+      // New password doesn't meet the criteria
+      toast.error("New password must be at least 6 characters long and must contain at least one number and one special character.");
+    } else {
+      await dispatch(changePassword(userName, otp, newPassword));
+      navigate("/");
+    }
   };
+  
 
   return (
     <>
@@ -59,6 +67,7 @@ const ChangePassword = () => {
                 <label>Show</label>
               </div>
               <input type="submit" value="Confirm" />
+              {/* <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Confirm and Signup' }</button> */}
             </form>
             <span>or</span>
             <Link to="/forgotPassword">

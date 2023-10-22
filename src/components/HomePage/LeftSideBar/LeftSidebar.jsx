@@ -14,6 +14,8 @@ import connectDark from "../../../assets/connectDark.png";
 import options from "../../../assets/options.png";
 import deleteIcon from "../../../assets/delete.png";
 import brandImg from "../../../assets/brand-logo.png";
+import imageicon from '../../../assets/image.png'
+import warninglogo from '../../../assets/warning.png'
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
 import { getMyPost } from "../../../actions/Post";
@@ -219,7 +221,7 @@ const LeftSidebar = () => {
           )}
 
           <div className="left-footer ">
-            <p>SocialApp@2023</p>
+            <p>Infinity@2023</p>
           </div>
         </div>
       </div>
@@ -241,7 +243,10 @@ const LeftSidebar = () => {
                 required
               />
               <div className="popup-foot">
-                <input type="file" onChange={imageHandler} />
+              <label htmlFor="fileInput" className="custom-file-input-label">
+                <img src={imageicon} alt="Custom Image" />
+              </label>
+              <input type="file" id="fileInput" onChange={imageHandler} />
                 <button>Post</button>
               </div>
               <div className="preview-image">
@@ -254,7 +259,7 @@ const LeftSidebar = () => {
 
       {isLogoutOpen && (
         <Alert
-          photo={userImg}
+          photo={warninglogo}
           description={"Are you sure want to logout"}
           action={"Logout"}
           actionFunction={handleLogout}
@@ -264,7 +269,7 @@ const LeftSidebar = () => {
 
       {isDeleteOpen && (
         <Alert
-          photo={userImg}
+          photo={warninglogo}
           description={"Are you sure want to Delete Account"}
           action={"Delete"}
           actionFunction={handleDelete}

@@ -63,15 +63,26 @@
       border-radius: 10px;
       background-color: rgb(234, 234, 234);
 
-      &[type="submit"] {
-        background-color: rgb(49, 155, 255);
-        color: white;
-        margin-top: 20px;
-        width: 100%;
-        cursor: pointer;
+    }
+    
+    .form-btn {
+      background-color: rgb(49, 155, 255);
+      color: white;
+      margin-top: 20px;
+      width: 100%;
+      // padding: 10px;
+      height: 37px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      &:hover{
+        background-color: rgb(23, 123, 216);
       }
     }
+
   }
+
   span {
     background-color: rgb(22, 22, 22);
     margin-top: -22px;
@@ -82,6 +93,8 @@
     text-align: center;
   }
 }
+
+
 
 .signup_link {
   flex-direction: row;

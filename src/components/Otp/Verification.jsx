@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
 import Spinner from "../Spinner/Spinner";
 import photo from "../../assets/photo.png";
+import Loader from "../Spinner/loader";
 
 const Verification = () => {
   const { isAuthenticated, loading: userLoading } = useSelector(
@@ -20,9 +21,7 @@ const Verification = () => {
 
   return (
     <>
-      {userLoading ? (
-        <Spinner />
-      ) : (
+  
         <main id="login_page">
           <div className="brandImage login_box">
             <img src={photo} alt="" />
@@ -38,12 +37,13 @@ const Verification = () => {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                 />
-                <input type="submit" value="Confirm and signup" />
+                <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Confirm and Signup' }</button>
+                <Link to='/signup'><p>Go back</p></Link>
               </form>
             </div>
           </div>
         </main>
-      )}
+
     </>
   );
 };

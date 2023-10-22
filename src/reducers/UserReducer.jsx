@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 const initialState = {
   isAuthenticated: false,
   loading: false,
+  isRedirect: false,
 };
 
 export const userReducer = createReducer(initialState, {
@@ -11,9 +12,12 @@ export const userReducer = createReducer(initialState, {
   OtpSuccess: (state, action) => {
     state.loading = false;
     state.message = action.payload;
+    state.isRedirect = true;
   },
   OtpFailure: (state, action) => {
-    (state.loading = false), (state.error = action.payload);
+    state.loading = false;
+    state.error = action.payload;
+    state.isRedirect = false;
   },
 
   RegisterRequest: (state) => {
@@ -25,7 +29,8 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = true;
   },
   RegisterFailure: (state, action) => {
-    (state.loading = false), (state.error = action.payload);
+    state.loading = false;
+    state.error = action.payload;
     state.isAuthenticated = false;
   },
 
@@ -65,7 +70,6 @@ export const userReducer = createReducer(initialState, {
     state.loading = false;
     state.message = action.payload;
     state.isAuthenticated = false;
-    state.user = null;
   },
   LogoutFailure: (state, action) => {
     state.loading = false;

@@ -2,8 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { server } from "../main";
 
-export const sinupUser =
-  (name, userName, email, password) => async (dispatch) => {
+export const sinupUser = (name, userName, email, password) => async (dispatch) => {
     try {
       dispatch({
         type: "OtpRequest",
@@ -30,7 +29,7 @@ export const sinupUser =
       toast.success(data.message);
     } catch (error) {
       dispatch({
-        type: "OtpFaliure",
+        type: "OtpFailure",
         payload: error.response.data.message,
       });
       toast.error(error.response.data.message);
