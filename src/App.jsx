@@ -23,7 +23,7 @@ import "./styles/popup.scss";
 import "./App.scss";
 
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, isRedirect } = useSelector((state) => state.user);
   const loadingProgress = useSelector((state) => state.loadingBar.progress);
 
   const [progress, setLocalProgress] = useState(0);
@@ -77,8 +77,8 @@ function App() {
           element={isAuthenticated ? <Comment /> : <Login />}
         />
         <Route exact path="/signup" element={<SingUp />} />
-        <Route exact path="/verify" element={<Verification />} />
-        <Route exact path="/details" element={<AddDetails />} />
+        <Route exact path="/verify" element={isRedirect ? <Verification /> : <SingUp/>} />
+        <Route exact path="/details" element={isAuthenticated ? <AddDetails /> : <Verification/>} />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>

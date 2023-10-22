@@ -19,7 +19,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading: userLoading, isRedirect } = useSelector((state) => state.user);
+  const { loading: userLoading } = useSelector((state) => state.user);
 
 const handleSignUp = async (e) => {
   e.preventDefault();

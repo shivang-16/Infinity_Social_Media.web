@@ -81,7 +81,7 @@ const LeftSidebar = () => {
   };
 
   const handleDeletePopup = () => {
-    setIsDeleteOpen(true);
+    // setIsDeleteOpen(true);
   };
 
   const handleDelete = () => {
