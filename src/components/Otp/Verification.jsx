@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
 import Spinner from "../Spinner/Spinner";
 import photo from "../../assets/photo.png";
-import Loader from "../Spinner/loader";
+import Loader from "../Spinner/Loader";
 
 const Verification = () => {
   const { isAuthenticated, loading: userLoading } = useSelector(

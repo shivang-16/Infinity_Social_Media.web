@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { sinupUser } from "../../actions/User";
 import { useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
-import Loader from "../Spinner/loader";
+import Loader from "../Spinner/Loader";
 import toast from "react-hot-toast";
 
 const SignUp = () => {

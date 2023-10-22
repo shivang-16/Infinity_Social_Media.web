@@ -6,9 +6,7 @@ import { loginUser } from "../../actions/User";
 import { loadUser } from "../../actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
-import Loader from "../Spinner/loader";
-import toast from 'react-hot-toast'
-
+import Loader from "../Spinner/Loader";
 const Login = () => {
   const { loading: userLoading, isAuthenticated } = useSelector(
     (state) => state.user,
