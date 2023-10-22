@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Link , useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { changePassword } from '../../actions/User'
+import photo from '../../assets/photo.png'
 
 const ChangePassword = () => {
     const [userName, setUserName] = useState('')
@@ -21,7 +22,9 @@ const ChangePassword = () => {
   return (
    <>
      <main id="login_page">
-         
+     <div className="brandImage login_box">
+            <img src={photo} alt="" />
+          </div>
           <div className="form_area login_box">
             <div className="login_form">
               <h1 className='infinity'>Infinity</h1>

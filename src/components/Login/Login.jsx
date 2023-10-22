@@ -33,7 +33,7 @@ const Login = () => {
           </div>
           <div className="form_area login_box">
             <div className="login_form">
-              <h1>Social App</h1>
+              <h1 className="infinity">Infinity</h1>
               <p>Login to see photos and videos</p>
               <form onSubmit={handleLogin}>
                 <input
@@ -64,7 +64,7 @@ const Login = () => {
                 <input type="submit" value="Login" />
               </form>
               <span>or</span>
-              <Link to="/changePassword">
+              <Link to="/forgotPassword">
                 <p>Forgotten Your Password?</p>
               </Link>
              

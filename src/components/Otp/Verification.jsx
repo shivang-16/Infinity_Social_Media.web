@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
 import Spinner from "../Spinner/Spinner";
+import photo from '../../assets/photo.png'
 
 const Verification = () => {
   const { isAuthenticated, loading: userLoading } = useSelector(
@@ -24,7 +25,9 @@ const Verification = () => {
         <Spinner />
       ) : (
         <main id="login_page">
-       
+       <div className="brandImage login_box">
+            <img src={photo} alt="" />
+          </div>
         <div className="form_area login_box">
         <div className="login_form">
         <h1 className="infinity">Infinity</h1>
