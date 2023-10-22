@@ -19,15 +19,13 @@ const SignUp = () => {
 
   const { loading: userLoading } = useSelector((state) => state.user);
 
-
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     await dispatch(sinupUser(name, userName, email, password));
-    setName(name)
-    setEmail(email)
-    setUserName(userName)
-    navigate('/verify')
+    setName(name);
+    setEmail(email);
+    setUserName(userName);
+    navigate("/verify");
   };
 
   return (
@@ -41,7 +39,7 @@ const SignUp = () => {
           </div>
           <div className="form_area login_box">
             <div className="login_form">
-            <h1 className="infinity">Infinity</h1>
+              <h1 className="infinity">Infinity</h1>
               <p>Signup up to connect with developers</p>
               <form onSubmit={handleSignUp}>
                 <input
@@ -66,21 +64,20 @@ const SignUp = () => {
                   required
                 />
                 <input
-                    type={showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <div className="check_box">
-                
-                <input
-                  type="checkbox"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                />
+                  <input
+                    type="checkbox"
+                    checked={showPassword}
+                    onChange={() => setShowPassword(!showPassword)}
+                  />
                   <label>Show</label>
-              </div>
+                </div>
                 <input type="submit" value="SignUp" />
               </form>
             </div>

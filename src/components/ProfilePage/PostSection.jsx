@@ -14,20 +14,22 @@ import { getMyPost } from "../../actions/Post";
 
 const PostSection = () => {
   const { user } = useSelector((state) => state.user);
-  const { posts , loading: myPostLoading} = useSelector((state) => state.myposts);
+  const { posts, loading: myPostLoading } = useSelector(
+    (state) => state.myposts,
+  );
   const [isPostSection, setIsPostSection] = useState(true);
   const [isBookmarkSection, setIsBookmarkSection] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const openBookmarkSection = async () => {
     setIsPostSection(false);
     setIsBookmarkSection(true);
-    dispatch(getMyBookmark())
+    dispatch(getMyBookmark());
   };
   const openPostsSection = async () => {
     setIsPostSection(true);
     setIsBookmarkSection(false);
-    dispatch(getMyPost())
+    dispatch(getMyPost());
   };
 
   return (
@@ -61,53 +63,69 @@ const PostSection = () => {
                   <span>Bookmark</span>
                 </div>
               </div>
-              
-              {myPostLoading ? (
-                <Spinner3 />
-              ) : (
-                <div className="post_detail_content">
-                  {isPostSection && posts && posts.length > 0
-                    ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image, createdAt } =
-                          element;
-                        return (
-                          <PostBody
-                            key={_id}
-                            caption={caption}
-                            postId={_id}
-                            likes={likes}
-                            owner={owner}
-                            comments={comments}
-                            image={image?.url}
-                            createdAt={createdAt}
-                          />
-                        );
-                      })
-                    : isPostSection && posts && posts.length === 0
-                    ? "No posts found"
-                    : ""}
-                  {isBookmarkSection && posts && posts.length > 0
-                    ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image, createdAt } =
-                          element;
-                        return (
-                          <PostBody
-                            key={_id}
-                            caption={caption}
-                            postId={_id}
-                            likes={likes}
-                            owner={owner}
-                            comments={comments}
-                            image={image?.url}
-                            createdAt={createdAt}
-                          />
-                        );
-                      })
-                    : isBookmarkSection && posts && posts.length === 0
-                    ? "No bookmarks found"
-                    : ""}
-                </div>
-              )}
+
+              <div className="myposts-bookmark-section">
+                {myPostLoading ? (
+                  <Spinner3 />
+                ) : (
+                  <div className="post_detail_content">
+                    {isPostSection && posts && posts.length > 0
+                      ? posts.map((element) => {
+                          const {
+                            caption,
+                            _id,
+                            likes,
+                            owner,
+                            comments,
+                            image,
+                            createdAt,
+                          } = element;
+                          return (
+                            <PostBody
+                              key={_id}
+                              caption={caption}
+                              postId={_id}
+                              likes={likes}
+                              owner={owner}
+                              comments={comments}
+                              image={image?.url}
+                              createdAt={createdAt}
+                            />
+                          );
+                        })
+                      : isPostSection && posts && posts.length === 0
+                      ? "No posts found"
+                      : ""}
+                    {isBookmarkSection && posts && posts.length > 0
+                      ? posts.map((element) => {
+                          const {
+                            caption,
+                            _id,
+                            likes,
+                            owner,
+                            comments,
+                            image,
+                            createdAt,
+                          } = element;
+                          return (
+                            <PostBody
+                              key={_id}
+                              caption={caption}
+                              postId={_id}
+                              likes={likes}
+                              owner={owner}
+                              comments={comments}
+                              image={image?.url}
+                              createdAt={createdAt}
+                            />
+                          );
+                        })
+                      : isBookmarkSection && posts && posts.length === 0
+                      ? "No bookmarks found"
+                      : ""}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

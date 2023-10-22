@@ -17,15 +17,17 @@ import { followUser } from "../../actions/User";
 import { setProgress } from "../../reducers/LoadingBar";
 
 const Users = () => {
-  const {user, isAuthenticated} = useSelector((state)=>state.user)
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const { users, loading: ProfileLoading } = useSelector(
     (state) => state.userProfile,
   );
-  const { posts, loading:postsLoading } = useSelector((state) => state.userposts);
+  const { posts, loading: postsLoading } = useSelector(
+    (state) => state.userposts,
+  );
   const [isFollowersOpen, setFollowersOpen] = useState(false);
   const [isFollowingOpen, setFollowingOpen] = useState(false);
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const openFollowersPopup = () => {
     setFollowersOpen(true);
@@ -41,14 +43,15 @@ const Users = () => {
   };
 
   const handleFollow = async (_id) => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(followUser(_id));
-    dispatch(setProgress(70))
-    await dispatch(loadUser())
-    dispatch(setProgress(100))
+    dispatch(setProgress(70));
+    await dispatch(loadUser());
+    dispatch(setProgress(100));
   };
 
-  const isUserFollowed = (userId) => user.following.some((follow) => follow._id === userId);
+  const isUserFollowed = (userId) =>
+    user.following.some((follow) => follow._id === userId);
 
   return (
     <>
@@ -72,7 +75,7 @@ const Users = () => {
                       posts,
                       description,
                       avatar,
-                      _id
+                      _id,
                     } = element;
                     return (
                       <>
@@ -88,16 +91,22 @@ const Users = () => {
                         >
                           <div className="content_box user_name">
                             <span>{userName}</span>
-                            {user.userName === userName ?(
-                            <Link to='/profile'> <button>Edit Profile</button> </Link>
-                            ) :  (
-                              <button onClick={() => handleFollow(_id)} className="userProfileFollowbtn">
-                              {isAuthenticated && isUserFollowed(_id) ? (
-                                <span className="unfollow">Following</span>
-                              ) : (
-                                <span className="follow">Follow</span>
-                              )}
-                            </button>
+                            {user.userName === userName ? (
+                              <Link to="/profile">
+                                {" "}
+                                <button>Edit Profile</button>{" "}
+                              </Link>
+                            ) : (
+                              <button
+                                onClick={() => handleFollow(_id)}
+                                className="userProfileFollowbtn"
+                              >
+                                {isAuthenticated && isUserFollowed(_id) ? (
+                                  <span className="unfollow">Following</span>
+                                ) : (
+                                  <span className="follow">Follow</span>
+                                )}
+                              </button>
                             )}
                           </div>
                           <div className="content_box followers_details_section">
@@ -115,40 +124,43 @@ const Users = () => {
                             <h4>{name}</h4>
                             {users && description ? (
                               <>
-                              {description.about ? (
-                                <p>
-                                  <img src={bioIcon} alt="" />
-                                  {description.about}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                              {description.dob ? (
-                                <p>
-                                  <img src={dateIcon} alt="" />
-                                  {description.dob}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                              {description.location ? (
-                                <p>
-                                  <img src={locationIcon} alt="" />
-                                  {description.location}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                              {description.link ? (
-                                <p>
-                                  <img src={linkIcon} alt="" />
-                                  <a href={`${description.link}`} target="_blank">
-                                    {description.link}
-                                  </a>
-                                </p>
-                              ) : (
-                                ""
-                              )}
+                                {description.about ? (
+                                  <p>
+                                    <img src={bioIcon} alt="" />
+                                    {description.about}
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                                {description.dob ? (
+                                  <p>
+                                    <img src={dateIcon} alt="" />
+                                    {description.dob}
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                                {description.location ? (
+                                  <p>
+                                    <img src={locationIcon} alt="" />
+                                    {description.location}
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                                {description.link ? (
+                                  <p>
+                                    <img src={linkIcon} alt="" />
+                                    <a
+                                      href={`${description.link}`}
+                                      target="_blank"
+                                    >
+                                      {description.link}
+                                    </a>
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
                               </>
                             ) : (
                               ""
@@ -164,19 +176,23 @@ const Users = () => {
               </div>
               <div className="user_section post_details">
                 <div className="post_details_header">
-
-                    <div className="posts detail_box active_class">
-                      <img src={post} alt="" />
-                      <span>Posts</span>
-                    </div>
-            
-                  
+                  <div className="posts detail_box active_class">
+                    <img src={post} alt="" />
+                    <span>Posts</span>
+                  </div>
                 </div>
                 <div className="post_detail_content">
                   {posts
                     ? posts.map((element) => {
-                        const { caption, _id, likes, owner, comments, image, createdAt } =
-                          element;
+                        const {
+                          caption,
+                          _id,
+                          likes,
+                          owner,
+                          comments,
+                          image,
+                          createdAt,
+                        } = element;
                         return (
                           <PostBody
                             key={_id}

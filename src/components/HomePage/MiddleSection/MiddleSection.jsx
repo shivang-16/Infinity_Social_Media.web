@@ -4,8 +4,8 @@ import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
 import { getFollowingPost } from "../../../actions/Post";
 import Spinner2 from "../../Spinner/Spinner2";
-import Spinner3 from "../../Spinner/Spinner3";
 import { useDispatch, useSelector } from "react-redux";
+import brandImg from "../../../assets/brand-logo.png";
 
 const MiddleSection = () => {
   const [activeTab, setActiveTab] = useState("Explore");
@@ -34,7 +34,8 @@ const MiddleSection = () => {
   return (
     <>
       <div className="middle-header">
-        <h2>Home</h2>
+        <h2 className="home">Home</h2>
+        <img src={brandImg} className="brandLogo brandlogo-middle" />
         <div className="mid-header-section">
           <div onClick={handleAllPosts}>
             <h3
@@ -54,51 +55,75 @@ const MiddleSection = () => {
           </div>
         </div>
       </div>
-      { postLoading ? (<Spinner2/>) :  (allPosts && (
-        <div className="middle-content">
-          {post
-            ? post
-            .slice() 
-            .reverse() 
-            .map((element) => {
-                const { caption, _id, likes, owner, comments, image, createdAt } = element;
-                return (
-                  <PostBody
-                    key={_id}
-                    caption={caption}
-                    postId={_id}
-                    likes={likes}
-                    owner={owner}
-                    comments={comments}
-                    image={image?.url}
-                    createdAt={createdAt}
-                  />
-                );
-              })
-            : "No post found"}
-        </div>
-      ))}
-      { followingpostsLoading ? (<Spinner2/>) : (followingPosts && (
-        <div className="middle-content">
-          {posts
-            ? posts.map((element) => {
-                const { caption, _id, likes, owner, comments, image, createdAt } = element;
-                return (
-                  <PostBody
-                    key={_id}
-                    caption={caption}
-                    postId={_id}
-                    likes={likes}
-                    owner={owner}
-                    comments={comments}
-                    image={image?.url}
-                    createdAt={createdAt}
-                  />
-                );
-              })
-            : "No post found"}
-        </div>
-      ))}
+      {postLoading ? (
+        <Spinner2 />
+      ) : (
+        allPosts && (
+          <div className="middle-content">
+            {post
+              ? post
+                  .slice()
+                  .reverse()
+                  .map((element) => {
+                    const {
+                      caption,
+                      _id,
+                      likes,
+                      owner,
+                      comments,
+                      image,
+                      createdAt,
+                    } = element;
+                    return (
+                      <PostBody
+                        key={_id}
+                        caption={caption}
+                        postId={_id}
+                        likes={likes}
+                        owner={owner}
+                        comments={comments}
+                        image={image?.url}
+                        createdAt={createdAt}
+                      />
+                    );
+                  })
+              : "No post found"}
+          </div>
+        )
+      )}
+      {followingpostsLoading ? (
+        <Spinner2 />
+      ) : (
+        followingPosts && (
+          <div className="middle-content">
+            {posts
+              ? posts.map((element) => {
+                  const {
+                    caption,
+                    _id,
+                    likes,
+                    owner,
+                    comments,
+                    image,
+                    createdAt,
+                  } = element;
+                  return (
+                    <PostBody
+                      key={_id}
+                      caption={caption}
+                      postId={_id}
+                      likes={likes}
+                      owner={owner}
+                      comments={comments}
+                      image={image?.url}
+                      createdAt={createdAt}
+                    />
+                  );
+                })
+              : "No post found"}
+          </div>
+        )
+      )}
     </>
   );
 };

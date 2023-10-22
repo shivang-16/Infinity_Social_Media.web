@@ -20,7 +20,7 @@ const store = configureStore({
     myposts: myPostReducer,
     userposts: UserPostReducer,
     postById: GetPostByIDReducer,
-    loadingBar: LoadingBarReducer
+    loadingBar: LoadingBarReducer,
   },
 });
 

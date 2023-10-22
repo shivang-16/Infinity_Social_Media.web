@@ -15,10 +15,9 @@
 
 .mid-header-section {
   display: flex;
-
+  // margin-top: -10px ;
   div {
     width: 100%;
-    // border: 2px solid red;
     padding: 10px 0px;
     &:hover {
       background-color: rgb(29, 29, 29);
@@ -34,16 +33,37 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+.brandlogo-middle {
+  display: none;
+}
 
-  .middle-header{
+@media screen and (max-width: 500px) {
+  .middle-header {
     width: 95%;
     z-index: 2;
     background-color: black;
     position: fixed;
   }
-  .middle-content{
+  .middle-content {
     margin: 120px 0px;
     padding: 0px 0px 80px 0px;
+  }
+
+  .mid-header-section {
+    margin-top: -20px;
+
+    div {
+      &:hover {
+        background: none;
+      }
+    }
+  }
+
+  .home {
+    display: none;
+  }
+  .brandlogo-middle {
+    display: block;
+    margin: auto;
   }
 }

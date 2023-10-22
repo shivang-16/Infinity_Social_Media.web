@@ -9,10 +9,11 @@ import connect from "../../../assets/connect.png";
 import logout from "../../../assets/logout.png";
 import homeDark from "../../../assets/homeDark.png";
 import searchDark from "../../../assets/searchDark.png";
-import defaultImg from '../../../assets/user.png'
+import defaultImg from "../../../assets/user.png";
 import connectDark from "../../../assets/connectDark.png";
 import options from "../../../assets/options.png";
 import deleteIcon from "../../../assets/delete.png";
+import brandImg from "../../../assets/brand-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
 import { getMyPost } from "../../../actions/Post";
@@ -24,9 +25,8 @@ import Alert from "../../AlertPopup/Alert";
 import SidebarDrawer from "../../SidebarDrawer/SidebarDrawer";
 import { setProgress } from "../../../reducers/LoadingBar";
 
-
 const LeftSidebar = () => {
-  const [selectedOption, setSelectedOption] = useState(""); 
+  const [selectedOption, setSelectedOption] = useState("");
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isOptionOpen, setIsOptionOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
@@ -57,25 +57,25 @@ const LeftSidebar = () => {
 
     myForm.append("caption", caption);
     myForm.append("file", image);
-    
-    dispatch(setProgress(10))
+
+    dispatch(setProgress(10));
     await dispatch(createPost(myForm));
-    dispatch(setProgress(60))
+    dispatch(setProgress(60));
     await dispatch(getAllPost());
-    dispatch(getMyPost())
+    dispatch(getMyPost());
     closePopup();
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
 
   const handleLogoutPopup = () => {
     setIsLogoutOpen(true);
   };
   const handleLogout = () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     dispatch(logoutUser());
-    dispatch(setProgress(60))
+    dispatch(setProgress(60));
     setIsLogoutOpen(false);
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
 
   const handleDeletePopup = () => {
@@ -83,11 +83,11 @@ const LeftSidebar = () => {
   };
 
   const handleDelete = () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     dispatch(deletePost());
-    dispatch(setProgress(60))
+    dispatch(setProgress(60));
     setIsDeleteOpen(false);
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
   // Function to handle the click on an option
   const handleOptionClick = (option) => {
@@ -132,6 +132,7 @@ const LeftSidebar = () => {
     <>
       <div className="leftSidebar-header">
         <h1 className="infinity">Infinity</h1>
+        <img src={brandImg} className="brandLogo brandLogo-leftSidebar" />
       </div>
       <div className="leftSidebar-content">
         <div className="leftSidebar-Upcontent">
@@ -180,12 +181,12 @@ const LeftSidebar = () => {
             </div>
           </Link>
           <div className="left-boxes" onClick={openPopup}>
-            <img src={create} alt="Create" />
+            <img src={create} />
             <p>Create</p>
           </div>
           <Link to="/profile" onClick={handleMyPosts}>
             <div className="left-boxes profile">
-              <img src={user.avatar?.url ? user.avatar?.url : defaultImg } alt="Profile" />
+              <img src={user.avatar?.url ? user.avatar?.url : defaultImg} />
               <p>Profile</p>
             </div>
           </Link>
@@ -203,10 +204,11 @@ const LeftSidebar = () => {
                 <img src={logout} alt="" />
                 <p>Logout</p>
               </div>
-              <Link to='/forgotPassword'><div className="left-boxes">
-                <img src={deleteIcon} alt="" />
-                <p>Change Password</p>
-              </div>
+              <Link to="/forgotPassword">
+                <div className="left-boxes">
+                  <img src={deleteIcon} alt="" />
+                  <p>Change Password</p>
+                </div>
               </Link>
               <div onClick={handleDeletePopup} className="left-boxes">
                 <img src={deleteIcon} alt="" />

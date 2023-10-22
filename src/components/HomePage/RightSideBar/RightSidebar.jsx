@@ -18,41 +18,39 @@ const RightSidebar = () => {
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(followUser(_id));
-    dispatch(setProgress(70))
+    dispatch(setProgress(70));
     await dispatch(loadUser());
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
   const isUserFollowed = (userId) =>
     user.following.some((follow) => follow._id === userId);
   return (
     <>
       <div className="right-main">
-      <Link to="/profile">
-        <div className="rightSidebar-header">
-          <div className="userImg">
-            <img src={user.avatar?.url} alt="" />
-          </div>
-          {user ? (
-            <div className="userDetail">
-              <div className="username">
-                <p>{user.userName}</p>
-              </div>
-              <div className="name">
-                <p>{user.name}</p>
-              </div>
+        <Link to="/profile">
+          <div className="rightSidebar-header">
+            <div className="userImg">
+              <img src={user.avatar?.url} alt="" />
             </div>
-          ) : (
-            <p>Login first</p>
-          )}
+            {user ? (
+              <div className="userDetail">
+                <div className="username">
+                  <p>{user.userName}</p>
+                </div>
+                <div className="name">
+                  <p>{user.name}</p>
+                </div>
+              </div>
+            ) : (
+              <p>Login first</p>
+            )}
 
-          <div className="btn">
-   
+            <div className="btn">
               <button>View</button>
-          
+            </div>
           </div>
-        </div>
         </Link>
         <div className="rightSidebar-content">
           <div className="content-heading">
@@ -74,13 +72,13 @@ const RightSidebar = () => {
                         avatar={avatar?.url}
                       />
                       <div className="btn">
-                          <button onClick={() => handleFollow(_id)}>
-                            {isAuthenticated && isUserFollowed(_id) ? (
-                              <span className="unfollow2">Following</span>
-                            ) : (
-                              <span className="follow2">Follow</span>
-                            )}
-                          </button>
+                        <button onClick={() => handleFollow(_id)}>
+                          {isAuthenticated && isUserFollowed(_id) ? (
+                            <span className="unfollow2">Following</span>
+                          ) : (
+                            <span className="follow2">Follow</span>
+                          )}
+                        </button>
                       </div>
                     </div>
                   ) : (

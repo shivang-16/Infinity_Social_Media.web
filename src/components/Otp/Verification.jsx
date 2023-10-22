@@ -3,46 +3,45 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../actions/User";
 import Spinner from "../Spinner/Spinner";
-import photo from '../../assets/photo.png'
+import photo from "../../assets/photo.png";
 
 const Verification = () => {
   const { isAuthenticated, loading: userLoading } = useSelector(
     (state) => state.user,
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  const hanldeVerify = async(e) => {
+  const hanldeVerify = async (e) => {
     e.preventDefault();
     await dispatch(verifyOtp(otp));
-    navigate('/details')
-    
+    navigate("/details");
   };
- 
+
   return (
     <>
       {userLoading ? (
         <Spinner />
       ) : (
         <main id="login_page">
-       <div className="brandImage login_box">
+          <div className="brandImage login_box">
             <img src={photo} alt="" />
           </div>
-        <div className="form_area login_box">
-        <div className="login_form">
-        <h1 className="infinity">Infinity</h1>
-          <p>Verify OTP to register</p>
-          <form onSubmit={hanldeVerify}>
-            <input
-              type="text"
-              placeholder="Enter your OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-            <input type="submit" value="Confirm and signup" />
-          </form>
-        </div>
-        </div>
+          <div className="form_area login_box">
+            <div className="login_form">
+              <h1 className="infinity">Infinity</h1>
+              <p>Verify OTP to register</p>
+              <form onSubmit={hanldeVerify}>
+                <input
+                  type="text"
+                  placeholder="Enter your OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                <input type="submit" value="Confirm and signup" />
+              </form>
+            </div>
+          </div>
         </main>
       )}
     </>

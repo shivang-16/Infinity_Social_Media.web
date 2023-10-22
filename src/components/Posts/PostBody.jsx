@@ -20,59 +20,66 @@ import user2Img from "../../assets/user.png";
 import { setProgress } from "../../reducers/LoadingBar";
 
 //get caption , id(postId), likes , owner from props
-const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt }) => {
-
-
+const PostBody = ({
+  caption,
+  postId,
+  likes,
+  owner,
+  comments,
+  image,
+  createdAt,
+}) => {
   const { user } = useSelector((state) => state.user);
-  const {post }  = useSelector((state)=>state.postById)
+  const { post } = useSelector((state) => state.postById);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [comment, setComment] = useState("");
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [isLikeopen, setIsLikeOpen] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editCaption, setEditCaption] = useState("");
-  const [timestamp, setTimestamp] = useState('');
+  const [timestamp, setTimestamp] = useState("");
 
   const calculateTimestamp = (createdDate) => {
     const currentDate = new Date();
     const postDate = new Date(createdDate);
     const timeDifferenceInSeconds = Math.floor((currentDate - postDate) / 1000);
-  
+
     if (timeDifferenceInSeconds < 60) {
-      return `${timeDifferenceInSeconds} second${timeDifferenceInSeconds > 1 ? 's' : ''} ago`;
+      return `${timeDifferenceInSeconds} second${
+        timeDifferenceInSeconds > 1 ? "s" : ""
+      } ago`;
     } else if (timeDifferenceInSeconds < 3600) {
       const minutesAgo = Math.floor(timeDifferenceInSeconds / 60);
-      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+      return `${minutesAgo} minute${minutesAgo > 1 ? "s" : ""} ago`;
     } else if (timeDifferenceInSeconds < 86400) {
       const hoursAgo = Math.floor(timeDifferenceInSeconds / 3600);
-      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+      return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`;
     } else {
       const daysAgo = Math.floor(timeDifferenceInSeconds / 86400);
-      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+      return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
     }
   };
   useEffect(() => {
     if (post) {
-      const createdDate = createdAt; 
+      const createdDate = createdAt;
       const calculatedTimestamp = calculateTimestamp(createdDate);
       setTimestamp(calculatedTimestamp);
     }
   }, []);
-  
 
   const handlePostById = () => {
     dispatch(getPostById(postId));
   };
 
   const handleLikeClick = async () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(likePost(postId));
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     dispatch(getAllPost());
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
   const postIsLiked = likes.some((like) => like._id === user._id);
 
@@ -81,33 +88,33 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
   };
 
   const handleComment = async () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(commentPost({ postId, comment }));
-    dispatch(setProgress(50))
+    dispatch(setProgress(50));
     await dispatch(getPostById(postId));
-    navigate(`/post/${postId}`)
-    dispatch(setProgress(80))
+    navigate(`/post/${postId}`);
+    dispatch(setProgress(80));
     setIsCommentOpen((prevState) => !prevState);
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
 
   const handleBookmarkClick = async () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(bookmarkPost(postId));
-    dispatch(setProgress(50))
+    dispatch(setProgress(50));
     dispatch(getAllPost());
-    dispatch(setProgress(80))
+    dispatch(setProgress(80));
     dispatch(loadUser());
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
   const postIsBookmarked = user.bookmarks._id === postId;
 
   const handleDelete = async () => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(deletePost(postId));
-    dispatch(setProgress(60))
+    dispatch(setProgress(60));
     dispatch(getAllPost());
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
 
   const handleEditPopup = () => {
@@ -117,13 +124,13 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
 
   const handleEdit = async () => {
     setEditCaption(editCaption);
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(editPost({ postId, caption: editCaption }));
-    dispatch(setProgress(60))
+    dispatch(setProgress(60));
     dispatch(getAllPost());
     setIsEditOpen(false);
     setIsOptionsOpen((prevState) => !prevState);
-    dispatch(setProgress(100))
+    dispatch(setProgress(100));
   };
 
   const toggleOptions = () => {
@@ -141,7 +148,6 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
   };
   return (
     <>
-     
       <div className="post" key={postId}>
         <div className="post-header">
           <User
@@ -150,7 +156,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
             name={owner?.name}
             avatar={owner?.avatar?.url}
           />
-           
+
           {showOptionIcon ? (
             <>
               <div className="options-icon" onClick={toggleOptions}>
@@ -221,20 +227,19 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
               <img src={postIsBookmarked ? bookmarked : bookmark} alt="" />
             </button>
           </div>
-          
         </div>
-       <div className="mini-footer">
-        {likes.length !== 0 ? (
-          <span className="likes-footer" onClick={openLikesPopup}>
-            {likes[0].userName === user.userName ? "You" : likes[0].userName}{" "}
-            {likes.length > 1
-              ? `and ${likes.length - 1} others liked the post`
-              : "liked the post"}
-          </span>
-        ) : (
-          <span className="likes-footer">No likes yet</span>
-        )}
-        <div className="timestamp">{timestamp}</div>
+        <div className="mini-footer">
+          {likes.length !== 0 ? (
+            <span className="likes-footer" onClick={openLikesPopup}>
+              {likes[0].userName === user.userName ? "You" : likes[0].userName}{" "}
+              {likes.length > 1
+                ? `and ${likes.length - 1} others liked the post`
+                : "liked the post"}
+            </span>
+          ) : (
+            <span className="likes-footer">No likes yet</span>
+          )}
+          <div className="timestamp">{timestamp}</div>
         </div>
       </div>
       <div className={`post-comments ${isCommentOpen ? "open" : ""}`}>

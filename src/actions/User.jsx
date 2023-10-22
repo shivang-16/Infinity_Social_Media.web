@@ -2,32 +2,40 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { server } from "../main";
 
-export const sinupUser = (name, userName, email, password) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "OtpRequest",
-    });
-    const { data } = await axios.post(`${server}/user/register`, {
-      name, userName, email, password
-    }, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
-    dispatch({
-      type: "OtpSuccess",
-      payload: data.message,
-    });
-    toast.success(data.message);
-  } catch (error) {
-    dispatch({
-      type: "OtpFaliure",
-      payload: error.response.data.message,
-    });
-    toast.error(error.response.data.message);
-  }
-};
+export const sinupUser =
+  (name, userName, email, password) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "OtpRequest",
+      });
+      const { data } = await axios.post(
+        `${server}/user/register`,
+        {
+          name,
+          userName,
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        },
+      );
+      dispatch({
+        type: "OtpSuccess",
+        payload: data.message,
+      });
+      toast.success(data.message);
+    } catch (error) {
+      dispatch({
+        type: "OtpFaliure",
+        payload: error.response.data.message,
+      });
+      toast.error(error.response.data.message);
+    }
+  };
 
 export const verifyOtp = (otp) => async (dispatch) => {
   try {
@@ -52,7 +60,6 @@ export const verifyOtp = (otp) => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "RegisterFaliure",
       payload: error.response.data.message,
@@ -85,7 +92,6 @@ export const loginUser = (loginIdentifier, password) => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "LoginFaliure",
       payload: error.response.data.message,
@@ -130,14 +136,13 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutSuccess",
       payload: data.message,
     });
-    toast.success(data.message)
+    toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "LogoutFailure",
       payload: error.response.data.message,
     });
-    toast.error(error.response.data.message)
+    toast.error(error.response.data.message);
   }
 };
 
@@ -177,7 +182,6 @@ export const getUserProfile = (userName) => async (dispatch) => {
       payload: data.users,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "UserProfileFailure",
       payload: error.response.data.message,
@@ -202,7 +206,6 @@ export const SearchUserProfile = (serachQuery) => async (dispatch) => {
       payload: data.users,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "SearchUserFailure",
       payload: error.response.data.message,
@@ -212,21 +215,18 @@ export const SearchUserProfile = (serachQuery) => async (dispatch) => {
 
 export const followUser = (_id) => async (dispatch) => {
   try {
-    console.log(_id);
     dispatch({
       type: "FollowRequest",
     });
     let { data } = await axios.get(`${server}/follow/${_id}`, {
       withCredentials: true,
     });
-    console.log(data);
     dispatch({
       type: "FollowSuccess",
       payload: data.message,
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "FollowFailure",
       payload: error.response.data.message,
@@ -246,14 +246,12 @@ export const editUser = (formData) => async (dispatch) => {
       },
       withCredentials: true,
     });
-    console.log(data);
     dispatch({
       type: "GeneralSuccess",
       payload: data.message,
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,
@@ -276,7 +274,6 @@ export const deleteAvatar = () => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,
@@ -284,7 +281,6 @@ export const deleteAvatar = () => async (dispatch) => {
     toast.error(error.response.data.message);
   }
 };
-
 
 export const deleteUser = () => async (dispatch) => {
   try {
@@ -300,7 +296,6 @@ export const deleteUser = () => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "DeleteFailure",
       payload: error.response.data.message,
@@ -315,14 +310,18 @@ export const forgotPassword = (email) => async (dispatch) => {
       type: "GeneralRequest",
     });
 
-    const { data } = await axios.post(`${server}/user/forgetPassword`, {
-      email
-    },{
-      headers:{
-        "Content-Type":"application/json"
+    const { data } = await axios.post(
+      `${server}/user/forgetPassword`,
+      {
+        email,
       },
-      withCredentials: true,
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
 
     dispatch({
       type: "GeneralSuccess",
@@ -330,7 +329,6 @@ export const forgotPassword = (email) => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,
@@ -339,31 +337,36 @@ export const forgotPassword = (email) => async (dispatch) => {
   }
 };
 
-export const changePassword = (userName, otp, newPassword) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "GeneralRequest",
-    });
-    const { data } = await axios.post(`${server}/user/changePassword`, {
-      userName, otp, newPassword
-    }, {
-      headers:{
-        "Content-Type":"application/json"
-      },
-      withCredentials: true,
-    });
-    dispatch({
-      type: "GeneralSuccess",
-      payload: data.message,
-    });
-    toast.success(data.message);
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: "GeneralFailure",
-      payload: error.response.data.message,
-    });
-    toast.error(error.response.data.message);
-  }
-};
-
+export const changePassword =
+  (userName, otp, newPassword) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "GeneralRequest",
+      });
+      const { data } = await axios.post(
+        `${server}/user/changePassword`,
+        {
+          userName,
+          otp,
+          newPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        },
+      );
+      dispatch({
+        type: "GeneralSuccess",
+        payload: data.message,
+      });
+      toast.success(data.message);
+    } catch (error) {
+      dispatch({
+        type: "GeneralFailure",
+        payload: error.response.data.message,
+      });
+      toast.error(error.response.data.message);
+    }
+  };

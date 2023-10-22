@@ -3,14 +3,13 @@ import linkIcon from "../../assets/link.png";
 import locationIcon from "../../assets/location.png";
 import dateIcon from "../../assets/date.png";
 import bioIcon from "../../assets/bio.png";
-import defaultProfile from '../../assets/user.png'
+import defaultProfile from "../../assets/user.png";
 import "../ProfilePage/profile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
 import { editUser } from "../../actions/User";
 import { deleteAvatar } from "../../actions/User";
 import { loadUser } from "../../actions/User";
-
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -45,7 +44,7 @@ const Profile = () => {
     setLocation(user.description.location);
     setLink(user.description.link);
   };
-  const updateUser = async(e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -57,17 +56,15 @@ const Profile = () => {
     formData.append("file", image);
 
     await dispatch(editUser(formData));
-   dispatch(loadUser())
+    dispatch(loadUser());
     setUpdatedOpen(false);
   };
 
-  const handleDeleteAvatar = async(e)=>{
-    e.preventDefault()
-    await dispatch(deleteAvatar())
-    setImagePreview(null)
-
-  }
-
+  const handleDeleteAvatar = async (e) => {
+    e.preventDefault();
+    await dispatch(deleteAvatar());
+    setImagePreview(null);
+  };
 
   const openFollowersPopup = () => {
     setFollowersOpen(true);
@@ -81,14 +78,17 @@ const Profile = () => {
     setFollowersOpen(false);
     setFollowingOpen(false);
     setUpdatedOpen(false);
-    setImagePreview('')
+    setImagePreview("");
   };
   return (
     <>
       <div className="user_section profile_details">
         <div className="profile_box profile_photo">
           <div className="image-profile">
-            <img src={user.avatar?.url ? user.avatar?.url : defaultProfile} alt="" />
+            <img
+              src={user.avatar?.url ? user.avatar?.url : defaultProfile}
+              alt=""
+            />
           </div>
         </div>
         {user ? (
@@ -159,64 +159,68 @@ const Profile = () => {
       {isUpdateOpen && (
         <div className="popup">
           <div className="popup-content">
-           <form onSubmit={updateUser}>
-            <div className="popup-head" style={{ marginBottom: "10px" }}>
-              <h2>Edit Profile</h2>
-            </div>
-            <span className="close-icon" onClick={closePopup}>
-              &times;
-            </span>
-            <div className="information">
-              <div className="image-profile">
-                <img src={imagePreview ? imagePreview : user?.avatar?.url || defaultProfile} alt="" />
-              <div>
+            <form onSubmit={updateUser}>
+              <div className="popup-head" style={{ marginBottom: "10px" }}>
+                <h2>Edit Profile</h2>
+              </div>
+              <span className="close-icon" onClick={closePopup}>
+                &times;
+              </span>
+              <div className="information">
+                <div className="image-profile">
+                  <img
+                    src={
+                      imagePreview
+                        ? imagePreview
+                        : user?.avatar?.url || defaultProfile
+                    }
+                    alt=""
+                  />
+                  <div>
+                    <label className="custom-file-input">
+                      <span>Choose photo</span>
+                      <input type="file" onChange={imageHandler} />
+                    </label>
 
-            
-                <label className="custom-file-input">
-                  <span>Choose photo</span>
-                  <input type="file" onChange={imageHandler} />
-                </label>
-                
-                <button 
-                onClick={handleDeleteAvatar}>Remove photo</button>
+                    <button onClick={handleDeleteAvatar}>Remove photo</button>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Bio"
+                  value={about}
+                  onChange={(e) => setAbout(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="DOB"
+                  value={dob}
+                  onChange={(e) => setDob(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Link"
+                  value={link}
+                  onChange={(e) => setLink(e.target.value)}
+                />
+
+                <div>
+                  <button type="submit">Update</button>
+                  <button onClick={closePopup}>Cancel</button>
                 </div>
               </div>
-              <input
-                type="text"
-                placeholder="Name"
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Bio"
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="DOB"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Link"
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-              />
-
-              <div>
-                <button type="submit">Update</button>
-                <button onClick={closePopup}>Cancel</button>
-              </div>
-            </div>
             </form>
           </div>
         </div>

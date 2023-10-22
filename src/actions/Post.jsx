@@ -3,7 +3,6 @@ import axios from "axios";
 import { server } from "../main";
 
 export const createPost = (myForm) => async (dispatch) => {
-  console.log(myForm);
   try {
     dispatch({
       type: "CreatePostRequest",
@@ -14,14 +13,12 @@ export const createPost = (myForm) => async (dispatch) => {
       },
       withCredentials: true,
     });
-    console.log(data);
     dispatch({
       type: "CreatePostSuccess",
       payload: data.message,
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "CreatePostFailure",
       payload: error.response.data.message,
@@ -43,7 +40,6 @@ export const getAllPost = () => async (dispatch) => {
       payload: data.post,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GetPostFailure",
       payload: error.response.data.message,
@@ -60,13 +56,11 @@ export const getFollowingPost = () => async (dispatch) => {
     const { data } = await axios.get(`${server}/post/following`, {
       withCredentials: true,
     });
-    console.log(data.posts);
     dispatch({
       type: "FollowingPostsSuccess",
       payload: data.posts,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "FollowingPostsFailure",
       payload: error.response.data.message,
@@ -89,7 +83,6 @@ export const getMyPost = () => async (dispatch) => {
       payload: data.posts,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "MyPostFailure",
       payload: error.response.data.message,
@@ -112,7 +105,6 @@ export const getMyBookmark = () => async (dispatch) => {
       payload: data.posts,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "MyPostFailure",
       payload: error.response.data.message,
@@ -135,7 +127,6 @@ export const getUserPost = (userId) => async (dispatch) => {
       payload: data.posts,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "UserPostFailure",
       payload: error.response.data.message,
@@ -158,7 +149,6 @@ export const getPostById = (postId) => async (dispatch) => {
       payload: data.post,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GetPostByIDFailure",
       payload: error.response.data.message,
@@ -181,9 +171,7 @@ export const likePost = (postId) => async (dispatch) => {
       payload: data.message,
     });
     toast.success(data.message);
-    
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,
@@ -191,9 +179,9 @@ export const likePost = (postId) => async (dispatch) => {
   }
 };
 
-export const commentPost = ({ postId, comment }) =>
+export const commentPost =
+  ({ postId, comment }) =>
   async (dispatch) => {
-    console.log(postId);
     try {
       dispatch({
         type: "GeneralRequest",
@@ -218,7 +206,6 @@ export const commentPost = ({ postId, comment }) =>
       });
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
       dispatch({
         type: "GeneralFailure",
         payload: error.response.data.message,
@@ -242,7 +229,6 @@ export const bookmarkPost = (postId) => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,
@@ -253,7 +239,6 @@ export const bookmarkPost = (postId) => async (dispatch) => {
 export const editPost =
   ({ postId, caption }) =>
   async (dispatch) => {
-    console.log(postId);
     try {
       dispatch({
         type: "GeneralRequest",
@@ -278,7 +263,6 @@ export const editPost =
       });
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
       dispatch({
         type: "GeneralFailure",
         payload: error.response.data.message,
@@ -302,7 +286,6 @@ export const deletePost = (postId) => async (dispatch) => {
     });
     toast.success(data.message);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "GeneralFailure",
       payload: error.response.data.message,

@@ -80,14 +80,12 @@
   cursor: pointer;
 }
 
-
 @media screen and (max-width: 500px) {
-.popup{
-  .popup-content{
-    textarea{
-      width: 90%;
+  .popup {
+    .popup-content {
+      textarea {
+        width: 90%;
+      }
     }
   }
-}
-  
 }

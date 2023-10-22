@@ -72,17 +72,16 @@
   }
 }
 
-
 @media screen and (max-width: 500px) {
-  .sidebar-drawer{
+  .sidebar-drawer {
     left: -320px;
     width: 320px;
     top: 100px;
     // border: 2px solid red;
 
-    .drawer-content{
+    .drawer-content {
       // border: 2px solid red;
-      padding-bottom: 100px ;
+      padding-bottom: 100px;
     }
   }
 }

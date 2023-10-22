@@ -7,20 +7,20 @@ import { loadUser } from "../../actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 
-
 const Login = () => {
-  const { loading: userLoading , isAuthenticated} = useSelector((state) => state.user);
+  const { loading: userLoading, isAuthenticated } = useSelector(
+    (state) => state.user,
+  );
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     await dispatch(loginUser(loginIdentifier, password));
-    dispatch(loadUser())
+    dispatch(loadUser());
   };
-   
 
   return (
     <>
@@ -50,26 +50,24 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                
+
                 <div className="check_box">
-                
-                <input
-                  type="checkbox"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                />
+                  <input
+                    type="checkbox"
+                    checked={showPassword}
+                    onChange={() => setShowPassword(!showPassword)}
+                  />
                   <label>Show</label>
-              </div>
-                  
+                </div>
+
                 <input type="submit" value="Login" />
               </form>
               <span>or</span>
               <Link to="/forgotPassword">
                 <p>Forgotten Your Password?</p>
               </Link>
-             
             </div>
-            
+
             <div className="signup_link login_form">
               <span>Don't have an account?</span>
               <Link to="/signup">

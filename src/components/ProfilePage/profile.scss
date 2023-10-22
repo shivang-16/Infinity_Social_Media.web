@@ -1,9 +1,6 @@
-
 .user_details {
-
   display: flex;
   flex-direction: column;
- 
 }
 
 .profile_details {
@@ -11,7 +8,7 @@
   justify-content: center;
 }
 .profile_box {
-    //  border: 2px solid yellow;
+  //  border: 2px solid yellow;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -20,10 +17,9 @@
 }
 .profile_photo {
   width: 50%;
-  // border: 2px solid red; 
+  // border: 2px solid red;
 }
-.image-profile{
-
+.image-profile {
   img {
     // border: 2px solid red;
     height: 150px;
@@ -68,13 +64,13 @@
     margin: 8px 0px;
     display: flex;
   }
-  a{
+  a {
     color: rgb(0, 123, 255);
   }
-  img{
+  img {
     filter: invert(100%);
     height: 20px;
-    margin-right: 10px ;
+    margin-right: 10px;
   }
 }
 .post_details_header {
@@ -95,7 +91,9 @@
   align-items: center;
   cursor: pointer;
 }
-
+.myposts-bookmark-section {
+  position: relative;
+}
 .active_class {
   border: 2px solid rgb(5, 37, 102);
   padding: 8px;
@@ -111,65 +109,63 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .image-profile{
+  .image-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
 
-    div{
+    div {
       display: flex;
       align-items: center;
     }
 
-.custom-file-input {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  background-color: rgba(0, 95, 237, 0.934);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  
-  input[type="file"] {
-    position: absolute;
-    // font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-    background-color: white;
-  }
-}
+    .custom-file-input {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      background-color: rgba(0, 95, 237, 0.934);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
 
-/* Define a style for the button hover state */
-.custom-file-input:hover {
- background-color: rgba(2, 65, 160, 0.934);
-  cursor: pointer; /* Change the background color for the hover state */
-}
- 
+      input[type="file"] {
+        position: absolute;
+        // font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+        background-color: white;
+      }
+    }
+
+    /* Define a style for the button hover state */
+    .custom-file-input:hover {
+      background-color: rgba(2, 65, 160, 0.934);
+      cursor: pointer; /* Change the background color for the hover state */
+    }
   }
-  img{
-     height: 100px;
-     width: 100px;
-     margin-bottom: 20px;
+  img {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 20px;
   }
   input {
     color: black;
     margin-bottom: 10px;
     width: 70%;
-    padding: 15px ;
+    padding: 15px;
     border-radius: 10px;
     background-color: rgb(21, 21, 21);
     border: none;
     outline: none;
     color: white;
   }
-  div{
-    
-    button{
+  div {
+    button {
       background: none;
       margin: 10px;
       padding: 10px 15px;
@@ -178,58 +174,54 @@
       font-weight: bold;
       background-color: rgb(21, 21, 21);
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: rgb(34, 34, 34);
       }
-      &:nth-child(1){
+      &:nth-child(1) {
         background-color: rgba(0, 95, 237, 0.934);
         color: white;
-        &:hover{
+        &:hover {
           background-color: rgba(2, 65, 160, 0.934);
         }
       }
     }
   }
-  
 }
 
 @media screen and (max-width: 950px) {
-
-  .user_details{
+  .user_details {
     overflow-x: hidden;
   }
   .content_box {
     width: 117%;
   }
-  .post_detail_content{
-  width: 90%;
-  margin: auto;
+  .post_detail_content {
+    width: 90%;
+    margin: auto;
   }
 }
 
 @media screen and (max-width: 650px) {
-   
   .profile_details {
     flex-direction: column;
     margin: auto;
   }
-  .profile_photo{
+  .myposts-bookmark-section {
+    min-height: 20vh;
+  }
+  .profile_photo {
     // border: 2px solid red;
     width: 60%;
   }
 }
 
 @media screen and (max-width: 400px) {
-   
-
   .profile_details {
     margin: auto;
-  //  border: 2px solid red;
-   width: 90%;
-    
+    //  border: 2px solid red;
+    width: 90%;
   }
   .content_box {
     width: 100%;
   }
 }
-

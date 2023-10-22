@@ -16,11 +16,7 @@ import { getAllPost } from "./actions/Post";
 import { getAllUser } from "./actions/User";
 import { getMyPost } from "./actions/Post";
 import { getFollowingPost } from "./actions/Post";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
@@ -29,9 +25,9 @@ import "./App.scss";
 function App() {
   const { isAuthenticated } = useSelector((state) => state.user);
   const loadingProgress = useSelector((state) => state.loadingBar.progress);
- 
+
   const [progress, setLocalProgress] = useState(0);
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
@@ -45,15 +41,11 @@ function App() {
     }
   }, [dispatch, loadingProgress]);
 
- 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
-  
   return (
     <Router>
-     <LoadingBar
+      <LoadingBar
         color="orangered"
         progress={progress}
         onLoaderFinished={() => setLocalProgress(0)}
@@ -91,39 +83,37 @@ function App() {
         <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>
       <Toaster
-  position="top-right"
-  reverseOrder={false}
-  toastOptions={{
-    success: {
-      style: {
-        backgroundColor: 'black',  
-        color: 'white',      
-        border: '1px solid green',
-        padding: '15px',
-        marginRight: '20px'
-      },
-      iconTheme: {
-        primary: 'green',      
-        secondary: 'white',     
-      },
-    },
-    error: {
-      style: {
-        backgroundColor: 'black',  
-        color: 'red',          
-        border: '1px solid red',
-        padding: '15px',
-        marginRight: '20px'
-      },
-      iconTheme: {
-        primary: 'red',       
-        secondary: 'white',      
-      },
-    },
-  }}
-/>
-
-
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          success: {
+            style: {
+              backgroundColor: "black",
+              color: "white",
+              border: "1px solid green",
+              padding: "15px",
+              marginRight: "20px",
+            },
+            iconTheme: {
+              primary: "green",
+              secondary: "white",
+            },
+          },
+          error: {
+            style: {
+              backgroundColor: "black",
+              color: "red",
+              border: "1px solid red",
+              padding: "15px",
+              marginRight: "20px",
+            },
+            iconTheme: {
+              primary: "red",
+              secondary: "white",
+            },
+          },
+        }}
+      />
     </Router>
   );
 }

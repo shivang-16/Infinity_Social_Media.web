@@ -15,11 +15,11 @@ const Connect = () => {
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {
-    dispatch(setProgress(10))
+    dispatch(setProgress(10));
     await dispatch(followUser(_id));
-    dispatch(setProgress(70))
-    await dispatch(loadUser())
-    dispatch(setProgress(100))
+    dispatch(setProgress(70));
+    await dispatch(loadUser());
+    dispatch(setProgress(100));
   };
 
   const isUserFollowed = (userId) =>
@@ -30,8 +30,8 @@ const Connect = () => {
         <LeftSidebar />
       </div>
       <div className="main-box middle-section">
-      <div className="middle-header middle-header-media-query">
-        <h2>Home</h2>
+        <div className="middle-header middle-header-media-query">
+          <h2>Home</h2>
         </div>
         <div className="connect_people hello">
           <h2>Connect</h2>
@@ -47,14 +47,13 @@ const Connect = () => {
                       avatar={avatar.url}
                     />
                     <div className="btn">
-                     
-                        <button onClick={() => handleFollow(_id)}>
-                          {isAuthenticated && isUserFollowed(_id) ? (
-                            <span className="unfollow">Following</span>
-                          ) : (
-                            <span className="follow">Follow</span>
-                          )}
-                        </button>
+                      <button onClick={() => handleFollow(_id)}>
+                        {isAuthenticated && isUserFollowed(_id) ? (
+                          <span className="unfollow">Following</span>
+                        ) : (
+                          <span className="follow">Follow</span>
+                        )}
+                      </button>
                     </div>
                   </div>
                 ) : (

@@ -54,7 +54,7 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
               );
             })
           : "No users found"}
-      </div>      
+      </div>
     </div>
   );
 };
