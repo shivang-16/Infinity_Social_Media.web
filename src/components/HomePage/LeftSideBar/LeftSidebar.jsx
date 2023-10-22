@@ -133,7 +133,7 @@ const LeftSidebar = () => {
   return (
     <>
       <div className="leftSidebar-header">
-        <h1 className="infinity">Infinity</h1>
+        <h1 className="infinity infinity-leftSideBar">Infinity</h1>
         <img src={brandImg} className="brandLogo brandLogo-leftSidebar" />
       </div>
       <div className="leftSidebar-content">
