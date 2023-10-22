@@ -4,8 +4,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store.jsx";
 
-export const server =
-  "https://social-media-app-backend-4y419hsfl-shivang-16.vercel.app/api/v1";
+export const server = import.meta.env.VITE_INFINITY_API;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>

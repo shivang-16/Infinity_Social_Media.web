@@ -42,7 +42,7 @@ const AddDetails = () => {
   };
 
   return (
-    <main id="login-page">
+    <main id="login_page">
       <div className="login_form details_form">
         <form onSubmit={updateUser}>
           <div className="popup-head" style={{ marginBottom: "10px" }}>
@@ -57,7 +57,7 @@ const AddDetails = () => {
               />
               <div>
                 <label className="custom-file-input">
-                  <span>Choose photo</span>
+                  <span style={{background: 'none'}}>Choose photo</span>
                   <input type="file" onChange={imageHandler} />
                 </label>
                 <button
