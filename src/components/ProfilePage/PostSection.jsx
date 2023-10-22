@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Profile from "./profile";
+import Profile from "./Profile";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
 import "../ProfilePage/profile.scss";
