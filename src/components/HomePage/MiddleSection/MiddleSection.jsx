@@ -4,6 +4,7 @@ import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
 import { getFollowingPost } from "../../../actions/Post";
 import Spinner2 from "../../Spinner/Spinner2";
+import Spinner3 from "../../Spinner/Spinner3";
 import { useDispatch, useSelector } from "react-redux";
 
 const MiddleSection = () => {

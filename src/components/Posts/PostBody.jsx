@@ -70,7 +70,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
   const handleLikeClick = async () => {
     dispatch(setProgress(10))
     await dispatch(likePost(postId));
-    dispatch(setProgress(60))
+    dispatch(setProgress(10))
     dispatch(getAllPost());
     dispatch(setProgress(100))
   };
@@ -85,7 +85,7 @@ const PostBody = ({ caption, postId, likes, owner, comments, image, createdAt })
     await dispatch(commentPost({ postId, comment }));
     dispatch(setProgress(50))
     await dispatch(getPostById(postId));
-    navigate(`post/${postId}`)
+    navigate(`/post/${postId}`)
     dispatch(setProgress(80))
     setIsCommentOpen((prevState) => !prevState);
     dispatch(setProgress(100))

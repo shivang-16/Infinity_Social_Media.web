@@ -30,6 +30,9 @@ const Connect = () => {
         <LeftSidebar />
       </div>
       <div className="main-box middle-section">
+      <div className="middle-header middle-header-media-query">
+        <h2>Home</h2>
+        </div>
         <div className="connect_people hello">
           <h2>Connect</h2>
           {users

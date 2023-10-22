@@ -21,3 +21,29 @@
     margin: 5px 0px ;
   }
 }
+.middle-header-media-query{
+  display: none;
+}
+
+@media screen and (max-width: 1100px) {
+  .comment-content{
+    width: 80%;
+    margin: 30px auto;
+  }
+}
+@media screen and (max-width: 650px) {
+  .comment-content{
+    width: 90%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .comment-content{
+    width: 95%;
+    margin: 80px auto;
+  }
+  .middle-header-media-query{
+    display: block;
+    width: 100%;
+  }
+  
+}

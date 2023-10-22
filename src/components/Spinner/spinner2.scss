@@ -1,0 +1,16 @@
+.spinner2 {
+    position: fixed;
+    text-align: center;
+    background: none!important;
+    border: none!important;
+    // border: 1px solid red;
+    // margin: auto;
+  }
+  
+
+  @media screen and (max-width: 500px) {
+    .spinner2 {
+     
+         top: 120px;
+      }
+  }

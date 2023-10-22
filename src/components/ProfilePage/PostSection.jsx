@@ -8,6 +8,7 @@ import bookmark from "../../assets/bookmark.png";
 import PostBody from "../Posts/PostBody";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner2 from "../Spinner/Spinner2";
+import Spinner3 from "../Spinner/Spinner3";
 import { getMyBookmark } from "../../actions/Post";
 import { getMyPost } from "../../actions/Post";
 
@@ -62,7 +63,7 @@ const PostSection = () => {
               </div>
               
               {myPostLoading ? (
-                <Spinner2 />
+                <Spinner3 />
               ) : (
                 <div className="post_detail_content">
                   {isPostSection && posts && posts.length > 0

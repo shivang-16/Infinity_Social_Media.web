@@ -33,3 +33,17 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+
+  .middle-header{
+    width: 95%;
+    z-index: 2;
+    background-color: black;
+    position: fixed;
+  }
+  .middle-content{
+    margin: 120px 0px;
+    padding: 0px 0px 80px 0px;
+  }
+}

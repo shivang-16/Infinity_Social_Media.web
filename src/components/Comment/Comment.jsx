@@ -13,6 +13,9 @@ const Comment = () => {
   return (
     <>
       <div className="comment-main-section">
+      <div className="middle-header middle-header-media-query">
+        <h2>Home</h2>
+        </div>
         <div className="main-box left_sidebar">
           <LeftSidebar />
         </div>

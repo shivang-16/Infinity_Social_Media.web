@@ -21,7 +21,7 @@ const Login = () => {
     dispatch(loadUser())
   };
    
-  if(isAuthenticated) return <Navigate to='/home'/>
+
   return (
     <>
       {userLoading ? (

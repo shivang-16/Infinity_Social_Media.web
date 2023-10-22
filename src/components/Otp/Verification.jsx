@@ -17,7 +17,7 @@ const Verification = () => {
     navigate('/details')
     
   };
-  // if (isAuthenticated) return <Navigate to={"/"} />;
+ 
   return (
     <>
       {userLoading ? (

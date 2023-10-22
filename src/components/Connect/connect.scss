@@ -21,3 +21,10 @@
   padding: 8px 15px;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 500px) {
+  .connect_people{
+    // border: 2px solid red;
+    margin: 50px 0px;
+  }
+}
