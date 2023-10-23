@@ -27,6 +27,7 @@
 }
 .connect-btn {
   // border: 2px solid red;
+  margin-top: -40px;
   button {
     border: 2px solid rgb(52, 52, 52);
     border-radius: 10px;
@@ -40,6 +41,29 @@
     }
   }
 }
+.connect-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  button{
+    border: 2px solid rgb(52, 52, 52);
+    border-radius: 10px;
+    background-color: rgb(21, 21, 21);
+    padding: 8px 20px;
+   
+
+    &:hover {
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+    }
+  }
+}
+.more{
+  border-color: rgb(95, 3, 3)!important;
+}
+
+
 :disabled {
   color: rgb(109, 109, 109);
 }
@@ -49,7 +73,9 @@
     // border: 2px solid red;
     // margin: 50px 0px;
   }
-
+.connect-header{
+  margin-top: 30px;
+}
   .middle-section-connect {
     padding: 50px 0px;
   }

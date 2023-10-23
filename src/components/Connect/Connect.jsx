@@ -48,7 +48,11 @@ const Connect = () => {
           <h2>Home</h2>
         </div>
         <div className="connect_people hello">
+          <div className="connect-header">
           <h2>Connect</h2>
+          <button onClick={handleMore} className="more">More</button>
+          </div>
+         
           {users
             ? users.map((element, index) => {
                 const { name, userName, _id, avatar } = element;
@@ -81,7 +85,7 @@ const Connect = () => {
           <button onClick={handlePrev} disabled={page === 1}>
             Prev
           </button>
-          <button onClick={handleMore}>More</button>
+          <button onClick={handleMore} className="more">More</button>
         </div>
       </div>
     </main>
