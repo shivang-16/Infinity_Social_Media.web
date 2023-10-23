@@ -31,7 +31,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
-    dispatch(getAllUser());
+    dispatch(getAllUser({}));
     dispatch(getAllPost());
     dispatch(getMyPost());
     dispatch(getFollowingPost());
@@ -77,8 +77,16 @@ function App() {
           element={isAuthenticated ? <Comment /> : <Login />}
         />
         <Route exact path="/signup" element={<SingUp />} />
-        <Route exact path="/verify" element={isRedirect ? <Verification /> : <SingUp/>} />
-        <Route exact path="/details" element={isAuthenticated ? <AddDetails /> : <Verification/>} />
+        <Route
+          exact
+          path="/verify"
+          element={isRedirect ? <Verification /> : <SingUp />}
+        />
+        <Route
+          exact
+          path="/details"
+          element={isAuthenticated ? <AddDetails /> : <Verification />}
+        />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>

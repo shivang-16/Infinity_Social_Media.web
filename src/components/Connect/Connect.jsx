@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
-import { Link } from "react-router-dom";
-import user2Img from "../../assets/user.png";
 import { useSelector, useDispatch } from "react-redux";
 import "./connect.scss";
 import { followUser } from "../../actions/User";
 import User from "../User/User";
 import { loadUser } from "../../actions/User";
 import { setProgress } from "../../reducers/LoadingBar";
+import { getAllUser } from "../../actions/User";
 
 const Connect = () => {
   const { users } = useSelector((state) => state.users);
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {
@@ -22,6 +22,20 @@ const Connect = () => {
     dispatch(setProgress(100));
   };
 
+  useEffect(() => {
+    dispatch(getAllUser({ limit: 8, page }));
+  }, [dispatch, page]);
+
+  const handlePrev = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleMore = () => {
+    setPage(page + 1);
+  };
+
   const isUserFollowed = (userId) =>
     user.following.some((follow) => follow._id === userId);
   return (
@@ -29,7 +43,7 @@ const Connect = () => {
       <div className="main-box left_sidebar">
         <LeftSidebar />
       </div>
-      <div className="main-box middle-section">
+      <div className="main-box middle-section middle-section-connect">
         <div className="middle-header middle-header-media-query">
           <h2>Home</h2>
         </div>
@@ -61,6 +75,13 @@ const Connect = () => {
                 );
               })
             : "No users found"}
+        </div>
+
+        <div className="connect-btn">
+          <button onClick={handlePrev} disabled={page === 1}>
+            Prev
+          </button>
+          <button onClick={handleMore}>More</button>
         </div>
       </div>
     </main>

@@ -26,6 +26,7 @@ const RightSidebar = () => {
   };
   const isUserFollowed = (userId) =>
     user.following.some((follow) => follow._id === userId);
+
   return (
     <>
       <div className="right-main">

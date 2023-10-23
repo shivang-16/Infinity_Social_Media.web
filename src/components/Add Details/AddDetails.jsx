@@ -57,7 +57,7 @@ const AddDetails = () => {
               />
               <div>
                 <label className="custom-file-input">
-                  <span style={{background: 'none'}}>Choose photo</span>
+                  <span style={{ background: "none" }}>Choose photo</span>
                   <input type="file" onChange={imageHandler} />
                 </label>
                 <button

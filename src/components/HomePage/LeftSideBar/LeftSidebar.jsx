@@ -14,15 +14,15 @@ import connectDark from "../../../assets/connectDark.png";
 import options from "../../../assets/options.png";
 import deleteIcon from "../../../assets/delete.png";
 import brandImg from "../../../assets/brand-logo.png";
-import imageicon from '../../../assets/image.png'
-import warninglogo from '../../../assets/warning.png'
+import imageicon from "../../../assets/image.png";
+import warninglogo from "../../../assets/warning.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/User";
 import { getMyPost } from "../../../actions/Post";
 import { getAllPost } from "../../../actions/Post";
 import { createPost } from "../../../actions/Post";
 import { deletePost } from "../../../actions/Post";
-import photo from "../../../assets/user.png";
+import { getAllUser } from "../../../actions/User";
 import Alert from "../../AlertPopup/Alert";
 import SidebarDrawer from "../../SidebarDrawer/SidebarDrawer";
 import { setProgress } from "../../../reducers/LoadingBar";
@@ -96,6 +96,12 @@ const LeftSidebar = () => {
     if (option !== selectedOption) {
       setSelectedOption(option);
     }
+  };
+
+  const handleConnect = () => {
+    dispatch(setProgress(50));
+    dispatch(getAllUser({}));
+    dispatch(setProgress(100));
   };
 
   const handleAllPosts = () => {
@@ -173,7 +179,10 @@ const LeftSidebar = () => {
               className={`left-boxes ${
                 selectedOption === "connect" ? "active" : ""
               }`}
-              onClick={() => handleOptionClick("connect")}
+              onClick={() => {
+                handleOptionClick("connect");
+                handleConnect();
+              }}
             >
               <img
                 src={selectedOption === "connect" ? connectDark : connect}
@@ -214,7 +223,7 @@ const LeftSidebar = () => {
               </Link>
               <div onClick={handleDeletePopup} className="left-boxes">
                 <img src={deleteIcon} alt="" />
-                <p>Delete Account</p>
+                <p>Delete Account**</p>
               </div>
               <div className="box"></div>
             </div>
@@ -243,10 +252,10 @@ const LeftSidebar = () => {
                 required
               />
               <div className="popup-foot">
-              <label htmlFor="fileInput" className="custom-file-input-label">
-                <img src={imageicon} alt="Custom Image" />
-              </label>
-              <input type="file" id="fileInput" onChange={imageHandler} />
+                <label htmlFor="fileInput" className="custom-file-input-label">
+                  <img src={imageicon} alt="Custom Image" />
+                </label>
+                <input type="file" id="fileInput" onChange={imageHandler} />
                 <button>Post</button>
               </div>
               <div className="preview-image">

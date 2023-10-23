@@ -40,24 +40,22 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
           </div>
         </div>
         <div className="searched-user">
-
-    
-        {users
-          ? users.map((element, index) => {
-              const { name, userName, _id, avatar } = element;
-              return (
-                <div className="suggestions" key={index}>
-                  <User
-                    userId={_id}
-                    userName={userName}
-                    name={name}
-                    avatar={avatar?.url}
-                  />
-                </div>
-              );
-            })
-          : "No users found"}
-      </div>
+          {users
+            ? users.map((element, index) => {
+                const { name, userName, _id, avatar } = element;
+                return (
+                  <div className="suggestions" key={index}>
+                    <User
+                      userId={_id}
+                      userName={userName}
+                      name={name}
+                      avatar={avatar?.url}
+                    />
+                  </div>
+                );
+              })
+            : "No users found"}
+        </div>
       </div>
     </div>
   );

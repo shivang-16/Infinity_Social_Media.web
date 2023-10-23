@@ -62,9 +62,8 @@
       width: 300px;
       border-radius: 10px;
       background-color: rgb(234, 234, 234);
-
     }
-    
+
     .form-btn {
       background-color: rgb(49, 155, 255);
       color: white;
@@ -76,11 +75,10 @@
       border: none;
       cursor: pointer;
       position: relative;
-      &:hover{
+      &:hover {
         background-color: rgb(23, 123, 216);
       }
     }
-
   }
 
   span {
@@ -93,8 +91,6 @@
     text-align: center;
   }
 }
-
-
 
 .signup_link {
   flex-direction: row;

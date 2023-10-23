@@ -2,7 +2,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { server } from "../main";
 
-export const sinupUser = (name, userName, email, password) => async (dispatch) => {
+export const sinupUser =
+  (name, userName, email, password) => async (dispatch) => {
     try {
       dispatch({
         type: "OtpRequest",
@@ -145,27 +146,32 @@ export const logoutUser = () => async (dispatch) => {
   }
 };
 
-export const getAllUser = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: "allUserRequest",
-    });
+export const getAllUser =
+  ({ limit = 9, page = 1 }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: "allUserRequest",
+      });
 
-    let { data } = await axios.get(`${server}/user/all`, {
-      withCredentials: true,
-    });
+      let { data } = await axios.get(
+        `${server}/user/all?limit=${limit}&page=${page}`,
+        {
+          withCredentials: true,
+        },
+      );
 
-    dispatch({
-      type: "allUserSuccess",
-      payload: data.users,
-    });
-  } catch (error) {
-    dispatch({
-      type: "allUserFailure",
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: "allUserSuccess",
+        payload: data.users,
+      });
+    } catch (error) {
+      dispatch({
+        type: "allUserFailure",
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 export const getUserProfile = (userName) => async (dispatch) => {
   try {

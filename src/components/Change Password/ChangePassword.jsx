@@ -15,16 +15,21 @@ const ChangePassword = () => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-  
-    if (newPassword.length < 6 || !/\d/.test(newPassword) || !/[!@#$%^&*]/.test(newPassword)) {
+
+    if (
+      newPassword.length < 6 ||
+      !/\d/.test(newPassword) ||
+      !/[!@#$%^&*]/.test(newPassword)
+    ) {
       // New password doesn't meet the criteria
-      toast.error("New password must be at least 6 characters long and must contain at least one number and one special character.");
+      toast.error(
+        "New password must be at least 6 characters long and must contain at least one number and one special character.",
+      );
     } else {
       await dispatch(changePassword(userName, otp, newPassword));
       navigate("/");
     }
   };
-  
 
   return (
     <>
@@ -66,7 +71,9 @@ const ChangePassword = () => {
                 />
                 <label>Show</label>
               </div>
-              <button type="submit" className="form-btn">Confirm</button>
+              <button type="submit" className="form-btn">
+                Confirm
+              </button>
               {/* <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Confirm and Signup' }</button> */}
             </form>
             <span>or</span>
