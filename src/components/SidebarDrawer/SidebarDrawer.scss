@@ -11,7 +11,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   &.open {
-    left: 0; /* Slide in from the left */
+    left: 0;
   }
 
   .drawer-content {
@@ -19,9 +19,9 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    //   align-items: flex-start;
     background-color: rgb(0, 0, 0);
-    //   opacity: 0.95;
+
+
 
     .close-button {
       background: none;
@@ -70,6 +70,11 @@
       }
     }
   }
+}
+
+.searched-user{
+  overflow-y: auto;
+  padding-bottom: 100px;
 }
 
 @media screen and (max-width: 500px) {

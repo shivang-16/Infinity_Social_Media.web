@@ -1,13 +1,13 @@
 .connect_people {
   display: flex;
   flex-direction: column;
-  // border: 2px solid red;
-  padding: 50px 0px;
+  padding: 50px;
   width: 350px;
   h2 {
     margin-bottom: 15px;
   }
 }
+
 .follow {
   color: white;
   background-color: rgb(0, 115, 255);

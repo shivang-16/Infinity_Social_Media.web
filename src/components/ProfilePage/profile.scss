@@ -85,6 +85,11 @@
     margin: 0px 3px;
   }
 }
+
+.post_detail_content{
+   padding-bottom: 60px;
+}
+
 .detail_box {
   margin: 0px 20px;
   display: flex;
@@ -133,7 +138,6 @@
 
       input[type="file"] {
         position: absolute;
-        // font-size: 100px;
         right: 0;
         top: 0;
         opacity: 0;
@@ -145,7 +149,7 @@
     /* Define a style for the button hover state */
     .custom-file-input:hover {
       background-color: rgba(2, 65, 160, 0.934);
-      cursor: pointer; /* Change the background color for the hover state */
+      cursor: pointer; 
     }
   }
   img {
@@ -187,6 +191,7 @@
     }
   }
 }
+
 
 @media screen and (max-width: 950px) {
   .user_details {

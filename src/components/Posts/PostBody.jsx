@@ -62,6 +62,7 @@ const PostBody = ({
       return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
     }
   };
+
   useEffect(() => {
     if (post) {
       const createdDate = createdAt;
@@ -107,7 +108,7 @@ const PostBody = ({
     dispatch(loadUser());
     dispatch(setProgress(100));
   };
-  const postIsBookmarked = user.bookmarks._id === postId;
+  const postIsBookmarked = user.bookmarks.some((bookmark) => bookmark._id === postId);
 
   const handleDelete = async () => {
     dispatch(setProgress(10));

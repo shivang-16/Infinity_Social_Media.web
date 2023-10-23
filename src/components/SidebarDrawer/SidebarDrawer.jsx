@@ -39,6 +39,9 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
             </button>
           </div>
         </div>
+        <div className="searched-user">
+
+    
         {users
           ? users.map((element, index) => {
               const { name, userName, _id, avatar } = element;
@@ -54,6 +57,7 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
               );
             })
           : "No users found"}
+      </div>
       </div>
     </div>
   );

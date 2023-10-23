@@ -66,7 +66,7 @@ const ChangePassword = () => {
                 />
                 <label>Show</label>
               </div>
-              <input type="submit" value="Confirm" />
+              <button type="submit" className="form-btn">Confirm</button>
               {/* <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Confirm and Signup' }</button> */}
             </form>
             <span>or</span>
