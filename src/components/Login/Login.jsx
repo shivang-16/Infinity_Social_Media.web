@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../components/Login/login.scss";
 import photo from "../../assets/photo.png";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { loginUser } from "../../actions/User";
 import { loadUser } from "../../actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 import Loader from "../Spinner/Loader";
 const Login = () => {
-  const { loading: userLoading, isAuthenticated } = useSelector(
+  const { loading: userLoading } = useSelector(
     (state) => state.user,
   );
   const [loginIdentifier, setLoginIdentifier] = useState("");
