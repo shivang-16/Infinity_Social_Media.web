@@ -147,7 +147,7 @@ export const logoutUser = () => async (dispatch) => {
 };
 
 export const getAllUser =
-  ({ limit = 9, page = 1 }) =>
+  ({ limit = 8, page = 1 }) =>
   async (dispatch) => {
     try {
       dispatch({

@@ -18,6 +18,8 @@
   border-radius: 8px;
   width: 500px;
   position: relative;
+  max-height: 65vh;
+  overflow: auto;
 
   .popup-head {
     display: flex;

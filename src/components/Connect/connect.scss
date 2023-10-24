@@ -24,6 +24,7 @@
 .middle-section-connect {
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 .connect-btn {
   // border: 2px solid red;
@@ -47,10 +48,11 @@
   align-items: flex-start;
   margin-top: 10px;
   button{
-    border: 2px solid rgb(52, 52, 52);
     border-radius: 10px;
-    background-color: rgb(21, 21, 21);
+    background: none;
+    border: none;
     padding: 8px 20px;
+    font-weight: bold;
    
 
     &:hover {
@@ -69,18 +71,12 @@
 }
 
 @media screen and (max-width: 500px) {
-  .connect_people {
-    // border: 2px solid red;
-    // margin: 50px 0px;
-  }
+
 .connect-header{
   margin-top: 30px;
 }
   .middle-section-connect {
-    padding: 50px 0px;
+    padding: 0px 0px 60px 0px;
   }
-  .connect-btn {
-    // margin-bottom: 40px;
-    margin-top: -40px;
-  }
+
 }

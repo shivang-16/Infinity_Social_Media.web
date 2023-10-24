@@ -50,7 +50,7 @@ const Connect = () => {
         <div className="connect_people hello">
           <div className="connect-header">
           <h2>Connect</h2>
-          <button onClick={handleMore} className="more">More</button>
+          <button onClick={handleMore}>More</button>
           </div>
          
           {users
