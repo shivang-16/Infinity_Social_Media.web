@@ -26,7 +26,8 @@ Before you start, make sure you have [Node.js](https://nodejs.org/) and [npm](ht
 
 2. **Navigate to the Project Directory:**
     `cd social-media-app-frontend`
-
+3. **Add environment variable in .env file**
+    Add this variable to you `VITE_INFINITY_API` .env file and add you backend server link to this
 3. **Install Dependencies:**
     Run `npm install` to install all the dependencies
    
