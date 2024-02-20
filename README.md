@@ -1,6 +1,7 @@
 # Infinity - A Social Media Platform for Developers
 
-Built on the MERN stack - combining MongoDB, Express.js, React, and Node.js - Infinity is dynamic, and secure platform for connecting and sharing with your network. 
+Built on the MERN stack - combining MongoDB, Express.js, React, and Node.js - Infinity is dynamic, and secure platform for connecting and sharing with your network.
+Backend repo - [Social Media App Backend Repository](https://github.com/shivang-16/Social_Media_App_Backend)
 
 ## Overview
 
