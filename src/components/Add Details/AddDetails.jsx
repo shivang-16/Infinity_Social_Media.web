@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { editUser } from "../../actions/User";
+import { editUser } from "../../redux/actions/User";
 import "./details.scss";
 
 const AddDetails = () => {

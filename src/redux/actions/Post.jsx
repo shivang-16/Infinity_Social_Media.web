@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import axios from "axios";
-import { server } from "../main";
+import { server } from "../../main";
 
 export const createPost = (myForm) => async (dispatch) => {
   try {
@@ -170,7 +170,6 @@ export const likePost = (postId) => async (dispatch) => {
       type: "GeneralSuccess",
       payload: data.message,
     });
-    toast.success(data.message);
   } catch (error) {
     dispatch({
       type: "GeneralFailure",

@@ -75,6 +75,28 @@
   padding-bottom: 100px;
 }
 
+.noti-users{
+  border-bottom: 2px solid rgb(52, 52, 52);
+  margin: 20px 0px;
+}
+
+.noti-content {
+ padding: 0px 20px;
+ display: flex;
+ align-items: center;
+}
+
+.unread {
+  border-bottom: 3px solid rgb(5, 87, 159);
+  background-color: rgb(40, 51, 62);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.noti_caption{
+    color: gray;
+}
+
 @media screen and (max-width: 500px) {
   .sidebar-drawer {
     left: -320px;

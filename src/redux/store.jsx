@@ -7,6 +7,7 @@ import { UserPostReducer } from "./reducers/PostReducer";
 import { GetPostByIDReducer } from "./reducers/PostReducer";
 import { followingPostsReducer } from "./reducers/PostReducer";
 import { SearchUserReducer } from "./reducers/UserReducer";
+import { getNotificationReducer, geUnreadNotificationReducer } from "./reducers/NotificationReducer";
 import LoadingBarReducer from "./reducers/LoadingBar";
 
 const store = configureStore({
@@ -21,6 +22,8 @@ const store = configureStore({
     userposts: UserPostReducer,
     postById: GetPostByIDReducer,
     loadingBar: LoadingBarReducer,
+    notifications: getNotificationReducer,
+    unread: geUnreadNotificationReducer
   },
 });
 

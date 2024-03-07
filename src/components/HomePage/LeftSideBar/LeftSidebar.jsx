@@ -16,16 +16,19 @@ import deleteIcon from "../../../assets/delete.png";
 import brandImg from "../../../assets/brand-logo.png";
 import imageicon from "../../../assets/image.png";
 import warninglogo from "../../../assets/warning.png";
+import notificationImg from "../../../assets/notification.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../../actions/User";
-import { getMyPost } from "../../../actions/Post";
-import { getAllPost } from "../../../actions/Post";
-import { createPost } from "../../../actions/Post";
-import { deletePost } from "../../../actions/Post";
-import { getAllUser } from "../../../actions/User";
+import { logoutUser } from "../../../redux/actions/User";
+import { getMyPost } from "../../../redux/actions/Post";
+import { getAllPost } from "../../../redux/actions/Post";
+import { createPost } from "../../../redux/actions/Post";
+import { deletePost } from "../../../redux/actions/Post";
+import { getAllUser } from "../../../redux/actions/User";
 import Alert from "../../AlertPopup/Alert";
-import SidebarDrawer from "../../SidebarDrawer/SidebarDrawer";
-import { setProgress } from "../../../reducers/LoadingBar";
+import { setProgress } from "../../../redux/reducers/LoadingBar";
+import SearchDrawer from "../../SidebarDrawer/SearchDrawer";
+import NotificationDrawer from "../../SidebarDrawer/NotificationDrawer";
+
 
 const LeftSidebar = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -34,12 +37,14 @@ const LeftSidebar = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [isNotificationDrawer, setIsNotificationDrawer] = useState(false)
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const dispatch = useDispatch();
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { notifications } = useSelector((state) => state.unread);
 
   const imageHandler = (e) => {
     const file = e.target.files[0];
@@ -130,6 +135,7 @@ const LeftSidebar = () => {
 
   const closeDrawer = () => {
     setDrawerOpen(false);
+    setIsNotificationDrawer(false)
   };
 
   const toogleOptionPopup = () => {
@@ -168,17 +174,39 @@ const LeftSidebar = () => {
               openDrawer();
             }}
           >
-            <img
+           
+           <img
               src={selectedOption === "search" ? searchDark : search}
-              alt="Search"
+              alt="Notification"
             />
             <p>Search</p>
           </div>
+          
+         
+          <div
+            className={`left-boxes ${
+              selectedOption === "notification" ? "active" : ""
+            }`}
+            onClick={() => {
+              handleOptionClick("notification");
+              setIsNotificationDrawer(true)
+            }}
+          >
+            {notifications && notifications.length > 0 && <span className="notification">{notifications.length}</span>}
+                  
+           <img
+              src={selectedOption === "search" ? notificationImg : notificationImg}
+              alt="Notification"
+            />
+           
+            <p>Notifications</p>
+          </div>
+        
           <Link to="/connect">
             <div
               className={`left-boxes ${
                 selectedOption === "connect" ? "active" : ""
-              }`}
+              } connect`}
               onClick={() => {
                 handleOptionClick("connect");
                 handleConnect();
@@ -211,6 +239,21 @@ const LeftSidebar = () => {
           {/* option box */}
           {isOptionOpen && (
             <div className="options-box">
+               <Link to="/connect">
+            <div
+              className="left-boxes option-connect"
+              onClick={() => {
+                handleOptionClick("connect");
+                handleConnect();
+              }}
+            >
+              <img
+                src={connect}
+                alt="Connect"
+              />
+              <p>Connect</p>
+            </div>
+          </Link>
               <div onClick={handleLogoutPopup} className="left-boxes">
                 <img src={logout} alt="" />
                 <p>Logout</p>
@@ -286,7 +329,8 @@ const LeftSidebar = () => {
         />
       )}
 
-      <SidebarDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+      <SearchDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+      <NotificationDrawer isOpen={isNotificationDrawer} onClose={closeDrawer} />
     </>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Profile from "./Profile";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
@@ -9,8 +10,8 @@ import PostBody from "../Posts/PostBody";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner2 from "../Spinner/Spinner2";
 import Spinner3 from "../Spinner/Spinner3";
-import { getMyBookmark } from "../../actions/Post";
-import { getMyPost } from "../../actions/Post";
+import { getMyBookmark } from "../../redux/actions/Post";
+import { getMyPost } from "../../redux/actions/Post";
 
 const PostSection = () => {
   const { user } = useSelector((state) => state.user);

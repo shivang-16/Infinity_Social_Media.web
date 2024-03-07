@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import photo from "../../assets/user.png";
 import searchImg from "../../assets/search.png";
 import "./SidebarDrawer.scss";
-import { SearchUserProfile } from "../../actions/User";
+import { SearchUserProfile } from "../../redux/actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import User from "../User/User";
 
-const SidebarDrawer = ({ isOpen, onClose }) => {
+const SearchDrawer = ({ isOpen, onClose }) => {
   const [serachQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.searchUser);
@@ -61,4 +61,4 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
   );
 };
 
-export default SidebarDrawer;
+export default SearchDrawer;

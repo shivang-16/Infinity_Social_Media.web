@@ -7,9 +7,9 @@ import defaultProfile from "../../assets/user.png";
 import "../ProfilePage/profile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import User from "../User/User";
-import { editUser } from "../../actions/User";
-import { deleteAvatar } from "../../actions/User";
-import { loadUser } from "../../actions/User";
+import { editUser } from "../../redux/actions/User";
+import { deleteAvatar } from "../../redux/actions/User";
+import { loadUser } from "../../redux/actions/User";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
