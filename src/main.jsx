@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./redux/store.jsx";
 
-export const server = `${import.meta.env.VITE_INFINITY_API}/api/v1`;
+export const server = `${import.meta.env.VITE_INFINITY_API}`;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
