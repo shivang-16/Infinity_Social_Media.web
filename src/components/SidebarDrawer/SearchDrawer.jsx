@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import photo from "../../assets/user.png";
 import searchImg from "../../assets/search.png";
 import "./SidebarDrawer.scss";
-import { SearchUserProfile } from "../../actions/User";
+import { SearchUserProfile } from "../../redux/actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import User from "../User/User";
 

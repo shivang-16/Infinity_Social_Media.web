@@ -82,6 +82,22 @@ input[type="file"] {
   display: none;
 }
 
+.notification{
+    // height: 10px;
+    padding: 3px 6px;
+    margin: 10px 0px 0px 13px;
+    font-size: 10px;
+    background-color: rgb(2, 148, 211);
+    color: white;
+    border-radius: 100px;
+    position: absolute;
+    z-index: 2;
+}
+
+.option-connect {
+ display: none;
+}
+
 @media screen and (max-width: 1100px) {
   .leftSidebar-header {
     overflow: hidden;
@@ -135,11 +151,22 @@ input[type="file"] {
     display: flex;
     align-items: center;
   }
+
   .options-box {
-    right: 0px;
+    right: 60px;
+    z-index: 10;
     p {
       display: block;
     }
+  }
+ 
+  .option-connect {
+    display: block;
+    display: flex;
+   }
+
+  .connect {
+    display: none;
   }
   .left-boxes {
     margin: 0px 0px;

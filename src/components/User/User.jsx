@@ -2,8 +2,8 @@ import React from "react";
 import user2Img from "../../assets/user.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../../actions/User";
-import { getUserPost } from "../../actions/Post";
+import { getUserProfile } from "../../redux/actions/User";
+import { getUserPost } from "../../redux/actions/Post";
 import "./user.scss";
 
 const User = ({ userName, name, userId, avatar }) => {

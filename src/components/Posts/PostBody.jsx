@@ -8,17 +8,17 @@ import commentsImg from "../../assets/comment.png";
 import bookmark from "../../assets/bookmark.png";
 import bookmarked from "../../assets/bookmarksolid.png";
 import { useSelector, useDispatch } from "react-redux";
-import { likePost } from "../../actions/Post";
-import { commentPost } from "../../actions/Post";
-import { bookmarkPost } from "../../actions/Post";
-import { getPostById } from "../../actions/Post";
-import { deletePost } from "../../actions/Post";
-import { editPost } from "../../actions/Post";
-import { getAllPost } from "../../actions/Post";
-import { loadUser } from "../../actions/User";
+import { likePost } from "../../redux/actions/Post";
+import { commentPost } from "../../redux/actions/Post";
+import { bookmarkPost } from "../../redux/actions/Post";
+import { getPostById } from "../../redux/actions/Post";
+import { deletePost } from "../../redux/actions/Post";
+import { editPost } from "../../redux/actions/Post";
+import { getAllPost } from "../../redux/actions/Post";
+import { loadUser } from "../../redux/actions/User";
 import User from "../User/User";
 import user2Img from "../../assets/user.png";
-import { setProgress } from "../../reducers/LoadingBar";
+import { setProgress } from "../../redux/reducers/LoadingBar";
 
 //get caption , id(postId), likes , owner from props
 const PostBody = ({

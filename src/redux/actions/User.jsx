@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { server } from "../main";
+import { server } from "../../main";
 
 export const sinupUser =
   (name, userName, email, password) => async (dispatch) => {
@@ -201,7 +201,7 @@ export const SearchUserProfile = (serachQuery) => async (dispatch) => {
     });
 
     let { data } = await axios.get(
-      `${server}/user/all?userName=${serachQuery}&name=${serachQuery}`,
+      `${server}/user/search?userName=${serachQuery}&name=${serachQuery}`,
       {
         withCredentials: true,
       },

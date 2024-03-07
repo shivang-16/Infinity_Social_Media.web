@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { forgotPassword } from "../../actions/User";
+import { forgotPassword } from "../../redux/actions/User";
 import photo from "../../assets/photo.png";
 
 const ForgotPassword = () => {

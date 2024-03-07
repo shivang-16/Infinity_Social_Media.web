@@ -16,16 +16,16 @@ import deleteIcon from "../../../assets/delete.png";
 import brandImg from "../../../assets/brand-logo.png";
 import imageicon from "../../../assets/image.png";
 import warninglogo from "../../../assets/warning.png";
+import notificationImg from "../../../assets/notification.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../../actions/User";
-import { getMyPost } from "../../../actions/Post";
-import { getAllPost } from "../../../actions/Post";
-import { createPost } from "../../../actions/Post";
-import { deletePost } from "../../../actions/Post";
-import { getAllUser } from "../../../actions/User";
+import { logoutUser } from "../../../redux/actions/User";
+import { getMyPost } from "../../../redux/actions/Post";
+import { getAllPost } from "../../../redux/actions/Post";
+import { createPost } from "../../../redux/actions/Post";
+import { deletePost } from "../../../redux/actions/Post";
+import { getAllUser } from "../../../redux/actions/User";
 import Alert from "../../AlertPopup/Alert";
-import { setProgress } from "../../../reducers/LoadingBar";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { setProgress } from "../../../redux/reducers/LoadingBar";
 import SearchDrawer from "../../SidebarDrawer/SearchDrawer";
 import NotificationDrawer from "../../SidebarDrawer/NotificationDrawer";
 
@@ -44,6 +44,7 @@ const LeftSidebar = () => {
   const dispatch = useDispatch();
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { notifications } = useSelector((state) => state.unread);
 
   const imageHandler = (e) => {
     const file = e.target.files[0];
@@ -175,12 +176,13 @@ const LeftSidebar = () => {
           >
            
            <img
-              src={selectedOption === "notification" ? searchDark : search}
+              src={selectedOption === "search" ? searchDark : search}
               alt="Notification"
             />
             <p>Search</p>
           </div>
           
+         
           <div
             className={`left-boxes ${
               selectedOption === "notification" ? "active" : ""
@@ -190,15 +192,21 @@ const LeftSidebar = () => {
               setIsNotificationDrawer(true)
             }}
           >
-            <IoMdNotificationsOutline height={30} width={20}/>
+            {notifications && notifications.length > 0 && <span className="notification">{notifications.length}</span>}
+                  
+           <img
+              src={selectedOption === "search" ? notificationImg : notificationImg}
+              alt="Notification"
+            />
            
             <p>Notifications</p>
           </div>
+        
           <Link to="/connect">
             <div
               className={`left-boxes ${
                 selectedOption === "connect" ? "active" : ""
-              }`}
+              } connect`}
               onClick={() => {
                 handleOptionClick("connect");
                 handleConnect();
@@ -231,6 +239,21 @@ const LeftSidebar = () => {
           {/* option box */}
           {isOptionOpen && (
             <div className="options-box">
+               <Link to="/connect">
+            <div
+              className="left-boxes option-connect"
+              onClick={() => {
+                handleOptionClick("connect");
+                handleConnect();
+              }}
+            >
+              <img
+                src={connect}
+                alt="Connect"
+              />
+              <p>Connect</p>
+            </div>
+          </Link>
               <div onClick={handleLogoutPopup} className="left-boxes">
                 <img src={logout} alt="" />
                 <p>Logout</p>

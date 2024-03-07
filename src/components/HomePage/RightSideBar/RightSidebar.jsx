@@ -1,8 +1,8 @@
 import "./rightsidebar.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { followUser } from "../../../actions/User";
-import { loadUser } from "../../../actions/User";
+import { followUser } from "../../../redux/actions/User";
+import { loadUser } from "../../../redux/actions/User";
 import User from "../../User/User";
 
 const RightSidebar = () => {
@@ -13,6 +13,7 @@ const RightSidebar = () => {
   } = useSelector((state) => state.user);
 
   const { users } = useSelector((state) => state.users);
+
   const dispatch = useDispatch();
 
   const handleFollow = async (_id) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOtp } from "../../actions/User";
+import { verifyOtp } from "../../redux/actions/User";
 import Spinner from "../Spinner/Spinner";
 import photo from "../../assets/photo.png";
 import Loader from "../Spinner/Loader";

@@ -4,7 +4,7 @@ import "../../components/Login/login.scss";
 import photo from "../../assets/photo.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { sinupUser } from "../../actions/User";
+import { sinupUser } from "../../redux/actions/User";
 import { useSelector } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 import Loader from "../Spinner/Loader";

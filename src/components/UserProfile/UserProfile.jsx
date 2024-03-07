@@ -13,8 +13,8 @@ import "./userProfile.scss";
 import PostBody from "../Posts/PostBody";
 import Spinner2 from "../Spinner/Spinner2";
 import User from "../User/User";
-import { followUser, loadUser } from "../../actions/User";
-import { setProgress } from "../../reducers/LoadingBar";
+import { followUser, loadUser } from "../../redux/actions/User";
+import { setProgress } from "../../redux/reducers/LoadingBar";
 
 const Users = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);

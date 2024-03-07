@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 import { useSelector, useDispatch } from "react-redux";
 import "./connect.scss";
-import { followUser } from "../../actions/User";
+import { followUser } from "../../redux/actions/User";
 import User from "../User/User";
-import { loadUser } from "../../actions/User";
-import { setProgress } from "../../reducers/LoadingBar";
-import { getAllUser } from "../../actions/User";
+import { loadUser } from "../../redux/actions/User";
+import { setProgress } from "../../redux/reducers/LoadingBar";
+import { getAllUser } from "../../redux/actions/User";
 
 const Connect = () => {
   const { users } = useSelector((state) => state.users);

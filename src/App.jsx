@@ -11,16 +11,17 @@ import Verification from "./components/Otp/Verification";
 import AddDetails from "./components/Add Details/AddDetails";
 import Users from "./components/UserProfile/UserProfile";
 import Comment from "./components/Comment/Comment";
-import { loadUser } from "./actions/User";
-import { getAllPost } from "./actions/Post";
-import { getAllUser } from "./actions/User";
-import { getMyPost } from "./actions/Post";
-import { getFollowingPost } from "./actions/Post";
+import { loadUser } from "./redux/actions/User";
+import { getAllPost } from "./redux/actions/Post";
+import { getAllUser } from "./redux/actions/User";
+import { getMyPost } from "./redux/actions/Post";
+import { getFollowingPost } from "./redux/actions/Post";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
 import "./App.scss";
+import { getAllNotifications, getUnreadNotifications } from "./redux/actions/Notifications";
 
 function App() {
   const { isAuthenticated, isRedirect } = useSelector((state) => state.user);
@@ -35,6 +36,8 @@ function App() {
     dispatch(getAllPost());
     dispatch(getMyPost());
     dispatch(getFollowingPost());
+    dispatch(getAllNotifications());
+    dispatch(getUnreadNotifications());
 
     if (progress !== loadingProgress) {
       setLocalProgress(loadingProgress);

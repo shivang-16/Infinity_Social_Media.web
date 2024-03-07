@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import axios from "axios";
-import { server } from "../main";
+import { server } from "../../main";
 
 export const createPost = (myForm) => async (dispatch) => {
   try {
