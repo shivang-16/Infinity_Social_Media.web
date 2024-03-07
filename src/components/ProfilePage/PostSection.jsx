@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Profile from "./Profile";
 import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";

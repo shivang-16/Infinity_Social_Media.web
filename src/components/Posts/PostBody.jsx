@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import "../../components/Posts/post.scss";
 import { Link, useNavigate } from "react-router-dom";
 import unlike from "../../assets/unlike.png";
@@ -75,47 +76,49 @@ const PostBody = ({
     dispatch(getPostById(postId));
   };
 
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(likes.length);
   const handleLikeClick = async () => {
-    dispatch(setProgress(10));
+    setIsLiked((prev) => !prev);
+    if (isLiked) {
+      setLikesCount((prev) => prev - 1);
+    } else {
+      setLikesCount((prev) => prev + 1);
+    }
     await dispatch(likePost(postId));
-    dispatch(setProgress(10));
-    dispatch(getAllPost());
-    dispatch(setProgress(100));
   };
-  const postIsLiked = likes.some((like) => like._id === user._id);
+
+  const [isBookmark, setIsBookmark] = useState(false);
+  const handleBookmarkClick = async () => {
+    setIsBookmark((prev) => !prev);
+    await dispatch(bookmarkPost(postId));
+    dispatch(loadUser());
+  };
+
+  useEffect(() => {
+    const postIsLiked = likes.some((like) => like._id === user._id);
+    setIsLiked(postIsLiked);
+
+    const postIsBookmarked = user.bookmarks.some(
+      (bookmark) => bookmark._id === postId
+    );
+    setIsBookmark(postIsBookmarked);
+  }, []);
 
   const toggleCommentBox = () => {
     setIsCommentOpen((prevState) => !prevState);
   };
 
   const handleComment = async () => {
-    dispatch(setProgress(10));
     await dispatch(commentPost({ postId, comment }));
-    dispatch(setProgress(50));
     await dispatch(getPostById(postId));
     navigate(`/post/${postId}`);
-    dispatch(setProgress(80));
     setIsCommentOpen((prevState) => !prevState);
-    dispatch(setProgress(100));
   };
-
-  const handleBookmarkClick = async () => {
-    dispatch(setProgress(10));
-    await dispatch(bookmarkPost(postId));
-    dispatch(setProgress(50));
-    dispatch(getAllPost());
-    dispatch(setProgress(80));
-    dispatch(loadUser());
-    dispatch(setProgress(100));
-  };
-  const postIsBookmarked = user.bookmarks.some(
-    (bookmark) => bookmark._id === postId,
-  );
 
   const handleDelete = async () => {
     dispatch(setProgress(10));
     await dispatch(deletePost(postId));
-    dispatch(setProgress(60));
     dispatch(getAllPost());
     dispatch(setProgress(100));
   };
@@ -129,7 +132,6 @@ const PostBody = ({
     setEditCaption(editCaption);
     dispatch(setProgress(10));
     await dispatch(editPost({ postId, caption: editCaption }));
-    dispatch(setProgress(60));
     dispatch(getAllPost());
     setIsEditOpen(false);
     setIsOptionsOpen((prevState) => !prevState);
@@ -215,9 +217,9 @@ const PostBody = ({
         <div className="post-footer">
           <div>
             <button className="like action" onClick={handleLikeClick}>
-              <img src={postIsLiked ? liked : unlike} alt="" />
+              <img src={isLiked ? liked : unlike} alt="" />
             </button>
-            <span>{likes.length}</span>
+            <span>{likesCount}</span>
           </div>
           <div>
             <button className="comment action" onClick={toggleCommentBox}>
@@ -227,7 +229,7 @@ const PostBody = ({
           </div>
           <div>
             <button className="bookmark action" onClick={handleBookmarkClick}>
-              <img src={postIsBookmarked ? bookmarked : bookmark} alt="" />
+              <img src={isBookmark ? bookmarked : bookmark} alt="" />
             </button>
           </div>
         </div>

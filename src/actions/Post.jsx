@@ -170,7 +170,6 @@ export const likePost = (postId) => async (dispatch) => {
       type: "GeneralSuccess",
       payload: data.message,
     });
-    toast.success(data.message);
   } catch (error) {
     dispatch({
       type: "GeneralFailure",

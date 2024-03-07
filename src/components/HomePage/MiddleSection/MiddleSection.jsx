@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./middlesection.scss";
 import PostBody from "../../Posts/PostBody";
 import { getAllPost } from "../../../actions/Post";
