@@ -7,7 +7,7 @@ import { SearchUserProfile } from "../../actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import User from "../User/User";
 
-const SidebarDrawer = ({ isOpen, onClose }) => {
+const NotificationDrawer = ({ isOpen, onClose }) => {
   const [serachQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.searchUser);
@@ -23,8 +23,8 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
           &times;
         </button>
         <div className="drawer-header">
-          <img src={photo} alt="" />
-          <div className="input-section">
+          <h3>Notifications</h3>
+          {/* <div className="input-section">
             <input
               type="text"
               placeholder="Search..."
@@ -37,7 +37,7 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
             <button>
               <img src={searchImg} alt="" />
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="searched-user">
           {users
@@ -61,4 +61,4 @@ const SidebarDrawer = ({ isOpen, onClose }) => {
   );
 };
 
-export default SidebarDrawer;
+export default NotificationDrawer;

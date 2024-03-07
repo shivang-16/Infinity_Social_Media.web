@@ -76,7 +76,8 @@ const PostBody = ({
     dispatch(getPostById(postId));
   };
 
-  const [isLiked, setIsLiked] = useState(false);
+  let postIsLiked, postIsBookmarked;
+  const [isLiked, setIsLiked] = useState(postIsLiked);
   const [likesCount, setLikesCount] = useState(likes.length);
   const handleLikeClick = async () => {
     setIsLiked((prev) => !prev);
@@ -88,7 +89,7 @@ const PostBody = ({
     await dispatch(likePost(postId));
   };
 
-  const [isBookmark, setIsBookmark] = useState(false);
+  const [isBookmark, setIsBookmark] = useState(postIsBookmarked);
   const handleBookmarkClick = async () => {
     setIsBookmark((prev) => !prev);
     await dispatch(bookmarkPost(postId));
@@ -96,10 +97,10 @@ const PostBody = ({
   };
 
   useEffect(() => {
-    const postIsLiked = likes.some((like) => like._id === user._id);
+    postIsLiked = likes.some((like) => like._id === user._id);
     setIsLiked(postIsLiked);
 
-    const postIsBookmarked = user.bookmarks.some(
+    postIsBookmarked = user.bookmarks.some(
       (bookmark) => bookmark._id === postId
     );
     setIsBookmark(postIsBookmarked);

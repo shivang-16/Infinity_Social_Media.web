@@ -13,7 +13,7 @@ import "./userProfile.scss";
 import PostBody from "../Posts/PostBody";
 import Spinner2 from "../Spinner/Spinner2";
 import User from "../User/User";
-import { followUser } from "../../actions/User";
+import { followUser, loadUser } from "../../actions/User";
 import { setProgress } from "../../reducers/LoadingBar";
 
 const Users = () => {

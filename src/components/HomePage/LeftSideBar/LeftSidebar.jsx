@@ -24,8 +24,11 @@ import { createPost } from "../../../actions/Post";
 import { deletePost } from "../../../actions/Post";
 import { getAllUser } from "../../../actions/User";
 import Alert from "../../AlertPopup/Alert";
-import SidebarDrawer from "../../SidebarDrawer/SidebarDrawer";
 import { setProgress } from "../../../reducers/LoadingBar";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import SearchDrawer from "../../SidebarDrawer/SearchDrawer";
+import NotificationDrawer from "../../SidebarDrawer/NotificationDrawer";
+
 
 const LeftSidebar = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -34,6 +37,7 @@ const LeftSidebar = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [isNotificationDrawer, setIsNotificationDrawer] = useState(false)
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
@@ -130,6 +134,7 @@ const LeftSidebar = () => {
 
   const closeDrawer = () => {
     setDrawerOpen(false);
+    setIsNotificationDrawer(false)
   };
 
   const toogleOptionPopup = () => {
@@ -168,11 +173,26 @@ const LeftSidebar = () => {
               openDrawer();
             }}
           >
-            <img
-              src={selectedOption === "search" ? searchDark : search}
-              alt="Search"
+           
+           <img
+              src={selectedOption === "notification" ? searchDark : search}
+              alt="Notification"
             />
             <p>Search</p>
+          </div>
+          
+          <div
+            className={`left-boxes ${
+              selectedOption === "notification" ? "active" : ""
+            }`}
+            onClick={() => {
+              handleOptionClick("notification");
+              setIsNotificationDrawer(true)
+            }}
+          >
+            <IoMdNotificationsOutline height={30} width={20}/>
+           
+            <p>Notifications</p>
           </div>
           <Link to="/connect">
             <div
@@ -286,7 +306,8 @@ const LeftSidebar = () => {
         />
       )}
 
-      <SidebarDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+      <SearchDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+      <NotificationDrawer isOpen={isNotificationDrawer} onClose={closeDrawer} />
     </>
   );
 };
