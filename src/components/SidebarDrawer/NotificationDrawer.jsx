@@ -48,20 +48,7 @@ const NotificationDrawer = ({ isOpen, onClose }) => {
         </button>
         <div className="drawer-header">
           <h3>Notifications</h3>
-          {/* <div className="input-section">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={serachQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                handleSearch();
-              }}
-            />
-            <button>
-              <img src={searchImg} alt="" />
-            </button>
-          </div> */}
+          {/* <p className="text-blue m-10">Mark all as read</p> */}
         </div>
         <div className="searched-user ">
           {notifications

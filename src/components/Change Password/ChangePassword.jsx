@@ -5,8 +5,7 @@ import { changePassword } from "../../redux/actions/User";
 import photo from "../../assets/photo.png";
 import toast from "react-hot-toast";
 
-const ChangePassword = () => {
-  const [userName, setUserName] = useState("");
+const ChangePassword = ({email}) => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -26,29 +25,17 @@ const ChangePassword = () => {
         "New password must be at least 6 characters long and must contain at least one number and one special character.",
       );
     } else {
-      await dispatch(changePassword(userName, otp, newPassword));
+      await dispatch(changePassword(email, otp, newPassword));
       navigate("/");
     }
   };
 
   return (
     <>
-      <main id="login_page">
-        <div className="brandImage login_box">
-          <img src={photo} alt="" />
-        </div>
-        <div className="form_area login_box">
+      
           <div className="login_form">
-            <h1 className="infinity">Infinity</h1>
             <p>Change Password</p>
             <form onSubmit={handleChangePassword}>
-              <input
-                type="text"
-                placeholder="Enter your username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-              />
               <input
                 type="text"
                 placeholder="Enter the verification otp"
@@ -76,13 +63,7 @@ const ChangePassword = () => {
               </button>
               {/* <button type="submit" className="form-btn">{userLoading ? <Loader/> : 'Confirm and Signup' }</button> */}
             </form>
-            <span>or</span>
-            <Link to="/forgotPassword">
-              <p>Go Back</p>
-            </Link>
           </div>
-        </div>
-      </main>
     </>
   );
 };

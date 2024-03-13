@@ -343,7 +343,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 
 export const changePassword =
-  (userName, otp, newPassword) => async (dispatch) => {
+  (email, otp, newPassword) => async (dispatch) => {
     try {
       dispatch({
         type: "GeneralRequest",
@@ -351,7 +351,7 @@ export const changePassword =
       const { data } = await axios.post(
         `${server}/user/changePassword`,
         {
-          userName,
+          email,
           otp,
           newPassword,
         },

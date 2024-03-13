@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../components/Login/login.scss";
 import photo from "../../assets/photo.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sinupUser } from "../../redux/actions/User";
-import { useSelector } from "react-redux";
-import Spinner from "../Spinner/Spinner";
 import Loader from "../Spinner/Loader";
 import toast from "react-hot-toast";
 
@@ -18,11 +16,12 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
 
-  const { loading: userLoading } = useSelector((state) => state.user);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     if (
       password.length < 6 ||
@@ -40,7 +39,9 @@ const SignUp = () => {
       setEmail(email);
       setUserName(userName);
       navigate("/verify");
+     
     }
+    setLoading(false)
   };
 
   return (
@@ -91,7 +92,7 @@ const SignUp = () => {
                 <label>Show</label>
               </div>
               <button type="submit" className="form-btn">
-                {userLoading ? <Loader /> : "SignUp"}
+                {loading ? <Loader /> : "SignUp"}
               </button>
             </form>
           </div>

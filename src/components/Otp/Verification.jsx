@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { verifyOtp } from "../../redux/actions/User";
-import Spinner from "../Spinner/Spinner";
 import photo from "../../assets/photo.png";
 import Loader from "../Spinner/Loader";
 
 const Verification = () => {
-  const { isAuthenticated, loading: userLoading } = useSelector(
-    (state) => state.user,
-  );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState("")
+
   const hanldeVerify = async (e) => {
     e.preventDefault();
+    setLoading(true)
     await dispatch(verifyOtp(otp));
     navigate("/details");
+    setLoading(false)
   };
 
   return (
@@ -37,7 +38,7 @@ const Verification = () => {
                 onChange={(e) => setOtp(e.target.value)}
               />
               <button type="submit" className="form-btn">
-                {userLoading ? <Loader /> : "Confirm and Signup"}
+                {loading ? <Loader /> : "Confirm and Signup"}
               </button>
               <Link to="/signup">
                 <p>Go back</p>

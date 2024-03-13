@@ -58,7 +58,7 @@ const RightSidebar = () => {
           </div>
           <div className="content-body">
             {users
-              ? users.map((element, index) => {
+              ? users .map((element, index) => {
                   const { name, userName, _id, avatar } = element;
                   return user.userName !== userName ? (
                     <div className="suggestions" key={index}>
