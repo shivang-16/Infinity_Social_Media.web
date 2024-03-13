@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../redux/actions/User";
 import photo from "../../assets/photo.png";
+import ChangePassword from "./ChangePassword";
+import Loader from "../Spinner/Loader";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
+  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
   const handleForgot = async (e) => {
     e.preventDefault();
+    setLoading(true)
     await dispatch(forgotPassword(email));
-    navigate("/changePassword");
+    setLoading(false)
+    setIsEmailSent(true)
   };
 
+  console.log(isEmailSent, "isemalsend")
   return (
     <>
       <main id="login_page">
@@ -34,7 +40,7 @@ const ForgotPassword = () => {
                 required
               />
               <button type="submit" className="form-btn">
-                Verify email
+                {loading ? <Loader/> : "Verify email"}
               </button>
             </form>
             <span>or</span>
@@ -43,8 +49,18 @@ const ForgotPassword = () => {
             </Link>
           </div>
         </div>
-      </main>
+     { isEmailSent && <div className="popup">
+          <div className="popup-content">
+            <span className="close-icon" onClick={() => setIsEmailSent(false)}>
+              &times;
+            </span>
+             <ChangePassword email={email}/>
+          </div>
+        </div>}
+        </main>
     </>
+
+  
   );
 };
 

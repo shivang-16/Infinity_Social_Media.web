@@ -19,6 +19,7 @@ import { loadUser } from "../../redux/actions/User";
 import User from "../User/User";
 import user2Img from "../../assets/user.png";
 import { setProgress } from "../../redux/reducers/LoadingBar";
+import Linkify from 'react-linkify';
 
 //get caption , id(postId), likes , owner from props
 const PostBody = ({
@@ -152,6 +153,12 @@ const PostBody = ({
     setIsLikeOpen(false);
     setIsEditOpen(false);
   };
+
+
+
+// Example usage
+<Linkify>See examples at tasti.github.io/react-linkify/.</Linkify>
+
   return (
     <>
       <div className="post" key={postId}>
@@ -201,10 +208,13 @@ const PostBody = ({
             </div>
           )}
         </div>
-        <Link to={`/post/${postId}`} onClick={handlePostById}>
+        <div onClick={handlePostById}>
           <div className="post-description">
             <div className="caption">
-              <p>{caption}</p>
+              <Linkify>{caption}</Linkify>
+              <div className="read-more">
+              <Link to={`/post/${postId}`}>See More</Link>
+              </div>
             </div>
             {image ? (
               <div className="image">
@@ -214,7 +224,8 @@ const PostBody = ({
               ""
             )}
           </div>
-        </Link>
+         
+        </div>
         <div className="post-footer">
           <div>
             <button className="like action" onClick={handleLikeClick}>

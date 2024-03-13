@@ -66,9 +66,30 @@
 }
 .post-description {
   padding: 15px 0px;
+
+  a{
+    color: rgb(18, 126, 188);
+  }
+
 }
+
+.caption{
+  position: relative;
+  margin: 5px 0px 10px 0px;
+}
+.read-more{
+  position: absolute;
+  font-size: 12px;
+  right: 15px;
+  margin-top: 5px;
+  a{
+
+    color: gray !important;
+  }
+}
+
 .image {
-  margin: 10px 0px;
+  margin: 23px 0px;
   img {
     border-radius: 10px;
     // height: 500px;

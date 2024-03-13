@@ -142,6 +142,7 @@ const LeftSidebar = () => {
     setIsOptionOpen((prevState) => !prevState);
   };
 
+ 
   return (
     <>
       <div className="leftSidebar-header">
@@ -273,10 +274,11 @@ const LeftSidebar = () => {
           )}
 
           <div className="left-footer ">
-            <p>Infinity@2023</p>
+            <p>Infinity@{new Date().getFullYear()}</p>
           </div>
         </div>
       </div>
+      
       {isPopupOpen && (
         <div className="popup">
           <div className="popup-content">

@@ -5,7 +5,6 @@ import Connect from "./components/Connect/Connect";
 import PostSection from "./components/ProfilePage/PostSection";
 import Login from "./components/Login/Login";
 import ForgotPassword from "./components/Change Password/ForgotPassword";
-import ChangePassword from "./components/Change Password/ChangePassword";
 import SingUp from "./components/SignUp/SingUp";
 import Verification from "./components/Otp/Verification";
 import AddDetails from "./components/Add Details/AddDetails";
@@ -91,7 +90,6 @@ function App() {
           element={isAuthenticated ? <AddDetails /> : <Verification />}
         />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
-        <Route exact path="/changePassword" element={<ChangePassword />} />
       </Routes>
       <Toaster
         position="top-right"

@@ -18,11 +18,12 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
 
-  const { loading: userLoading } = useSelector((state) => state.user);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     if (
       password.length < 6 ||
@@ -40,7 +41,9 @@ const SignUp = () => {
       setEmail(email);
       setUserName(userName);
       navigate("/verify");
+     
     }
+    setLoading(false)
   };
 
   return (
@@ -91,7 +94,7 @@ const SignUp = () => {
                 <label>Show</label>
               </div>
               <button type="submit" className="form-btn">
-                {userLoading ? <Loader /> : "SignUp"}
+                {loading ? <Loader /> : "SignUp"}
               </button>
             </form>
           </div>
