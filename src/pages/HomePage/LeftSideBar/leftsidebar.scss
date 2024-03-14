@@ -57,13 +57,12 @@
 
 .options-box {
   border: 2px solid rgb(65, 65, 65);
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
   padding: 10px 0px;
-  width: 100%;
-  top: -200px;
+  bottom: 110px;
   background-color: rgb(27, 27, 27);
-  z-index: 1;
+  z-index: 4;
 }
 
 .brandLogo-leftSidebar {
@@ -114,8 +113,6 @@ input[type="file"] {
     }
   }
   .options-box {
-    width: 260px;
-    padding-left: 30px;
     p {
       display: block;
     }
@@ -153,7 +150,9 @@ input[type="file"] {
   }
 
   .options-box {
-    right: 60px;
+    right: 20px;
+    bottom: 70px;
+    padding: 0px 30px;
     z-index: 10;
     p {
       display: block;

@@ -15,12 +15,14 @@ import { getAllPost } from "./redux/actions/Post";
 import { getAllUser } from "./redux/actions/User";
 import { getMyPost } from "./redux/actions/Post";
 import { getFollowingPost } from "./redux/actions/Post";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
 import "./App.scss";
 import { getAllNotifications, getUnreadNotifications } from "./redux/actions/Notifications";
+import Chatgpt from "./pages/ChatGPT";
+import Blog from "./pages/Blogs";
 
 function App() {
   const { isAuthenticated, isRedirect } = useSelector((state) => state.user);
@@ -29,6 +31,10 @@ function App() {
   const [progress, setLocalProgress] = useState(0);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log("here is the path ->", location.pathname)
+
   useEffect(() => {
     dispatch(loadUser());
     dispatch(getAllUser({}));
@@ -43,10 +49,16 @@ function App() {
     }
   }, [dispatch, loadingProgress]);
 
-  useEffect(() => {}, []);
+
+  
+  useEffect(() => {
+    if (location.pathname !== '/' && window.onbeforeunload) {
+      navigate('/');
+    }
+  }, [location.pathname, navigate]);
 
   return (
-    <Router>
+    <>
       <LoadingBar
         color="orangered"
         progress={progress}
@@ -90,6 +102,8 @@ function App() {
           element={isAuthenticated ? <AddDetails /> : <Verification />}
         />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
+        <Route exact path="/gpt" element={isAuthenticated ? < Chatgpt/> : <Login />} />
+        <Route exact path="/blogs" element={isAuthenticated ? < Blog/> : <Login />} />
       </Routes>
       <Toaster
         position="top-right"
@@ -123,7 +137,7 @@ function App() {
           },
         }}
       />
-    </Router>
+    </>
   );
 }
 

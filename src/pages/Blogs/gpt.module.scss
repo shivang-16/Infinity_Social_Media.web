@@ -1,0 +1,82 @@
+.connect_people {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  width: 350px;
+  h2 {
+    margin-bottom: 15px;
+  }
+}
+
+.follow {
+  color: white;
+  background-color: rgb(0, 115, 255);
+  padding: 8px 15px;
+  border-radius: 10px;
+}
+.unfollow {
+  background-color: white;
+  color: rgb(0, 115, 255);
+  padding: 8px 15px;
+  border-radius: 10px;
+}
+
+.middle-section-connect {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.connect-btn {
+  // border: 2px solid red;
+  margin-top: -40px;
+  button {
+    border: 2px solid rgb(52, 52, 52);
+    border-radius: 10px;
+    background-color: rgb(21, 21, 21);
+    padding: 10px 20px;
+    margin: 0px 50px;
+
+    &:hover {
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+    }
+  }
+}
+.connect-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  button{
+    border-radius: 10px;
+    background: none;
+    border: none;
+    padding: 8px 20px;
+    font-weight: bold;
+   
+
+    &:hover {
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+    }
+  }
+}
+.more{
+  border-color: rgb(95, 3, 3)!important;
+}
+
+
+:disabled {
+  color: rgb(109, 109, 109);
+}
+
+@media screen and (max-width: 500px) {
+
+.connect-header{
+  margin-top: 30px;
+}
+  .middle-section-connect {
+    padding: 0px 0px 60px 0px;
+  }
+
+}
