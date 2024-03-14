@@ -4,7 +4,6 @@ import "./gpt.module.scss";
 import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
 import OpenAI from "openai";
 import InProgress from '../../assets/workinprogress.gif'
-import running from '../../assets/running.gif'
 
 const Blog = () => {
   // console.log(import.meta.env.VITE_OPEN_AI_API)
