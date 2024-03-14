@@ -23,7 +23,7 @@ const Chatgpt = () => {
   //   });
 
   //   console.log(completion.choices, "Gpt result");
-  };
+  // };
 
   // useEffect(() => {}, []);
 
