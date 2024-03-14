@@ -7,22 +7,22 @@ import InProgress from '../../assets/workinprogress.gif'
 
 const Chatgpt = () => {
   // console.log(import.meta.env.VITE_OPEN_AI_API)
-  const [prompt, setPrompt] = useState("");
-  const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPEN_AI_API,
-    dangerouslyAllowBrowser: true  // defaults to process.env["OPENAI_API_KEY"]
-  });
+  // const [prompt, setPrompt] = useState("");
+  // const openai = new OpenAI({
+  //   apiKey: import.meta.env.VITE_OPEN_AI_API,
+  //   dangerouslyAllowBrowser: true  // defaults to process.env["OPENAI_API_KEY"]
+  // });
 
 
-  const getResult = async (e) => {
-    e.preventDefault()
-    console.log(prompt)
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: `${prompt}` }],
-      model: "gpt-3.5-turbo",
-    });
+  // const getResult = async (e) => {
+  //   e.preventDefault()
+  //   console.log(prompt)
+  //   const completion = await openai.chat.completions.create({
+  //     messages: [{ role: "user", content: `${prompt}` }],
+  //     model: "gpt-3.5-turbo",
+  //   });
 
-    console.log(completion.choices, "Gpt result");
+  //   console.log(completion.choices, "Gpt result");
   };
 
   // useEffect(() => {}, []);
