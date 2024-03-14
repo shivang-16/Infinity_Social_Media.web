@@ -15,6 +15,8 @@ import deleteIcon from "../../../assets/delete.png";
 import brandImg from "../../../assets/brand-logo.png";
 import imageicon from "../../../assets/image.png";
 import warninglogo from "../../../assets/warning.png";
+import gpt from "../../../assets/gpt.png"
+import blogImg from "../../../assets/blog.png"
 import notificationImg from "../../../assets/notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../redux/actions/User";
@@ -223,6 +225,18 @@ const LeftSidebar = () => {
             <img src={create} />
             <p>Create</p>
           </div>
+          <Link to="/gpt">
+            <div className="left-boxes connect">
+            <img src={gpt} />
+              <p>Ask AI</p>
+            </div>
+          </Link>
+          <Link to="/blogs">
+            <div className="left-boxes connect">
+            <img src={blogImg} />
+              <p>Blogs</p>
+            </div>
+          </Link>
           <Link to="/profile" onClick={handleMyPosts}>
             <div className="left-boxes profile">
               <img src={user.avatar?.url ? user.avatar?.url : defaultImg} />
@@ -238,7 +252,8 @@ const LeftSidebar = () => {
 
           {/* option box */}
           {isOptionOpen && (
-            <div className="options-box">
+            
+            <div className="options-box ">
                <Link to="/connect">
             <div
               className="left-boxes option-connect"
@@ -252,6 +267,18 @@ const LeftSidebar = () => {
                 alt="Connect"
               />
               <p>Connect</p>
+            </div>
+          </Link>
+          <Link to="/gpt">
+            <div className="left-boxes option-connect">
+            <img src={gpt} />
+              <p>Ask AI</p>
+            </div>
+          </Link>
+          <Link to="/blogs">
+            <div className="left-boxes option-connect">
+            <img src={blogImg} />
+              <p>Blogs</p>
             </div>
           </Link>
               <div onClick={handleLogoutPopup} className="left-boxes">
