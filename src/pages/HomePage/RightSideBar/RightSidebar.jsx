@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../redux/actions/User";
 import { loadUser } from "../../../redux/actions/User";
-import User from "../../User/User";
+import User from "../../../components/User/User";
 
 const RightSidebar = () => {
   const {

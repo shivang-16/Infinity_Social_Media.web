@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./leftsidebar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import home from "../../../assets/home.png";
 import search from "../../../assets/search.png";
-import userImg from "../../../assets/user.png";
 import create from "../../../assets/create.png";
 import connect from "../../../assets/connect.png";
 import logout from "../../../assets/logout.png";
@@ -24,10 +23,10 @@ import { getAllPost } from "../../../redux/actions/Post";
 import { createPost } from "../../../redux/actions/Post";
 import { deletePost } from "../../../redux/actions/Post";
 import { getAllUser } from "../../../redux/actions/User";
-import Alert from "../../AlertPopup/Alert";
+import Alert from "../../../components/AlertPopup/Alert";
 import { setProgress } from "../../../redux/reducers/LoadingBar";
-import SearchDrawer from "../../SidebarDrawer/SearchDrawer";
-import NotificationDrawer from "../../SidebarDrawer/NotificationDrawer";
+import SearchDrawer from "../../../components/SidebarDrawer/SearchDrawer";
+import NotificationDrawer from "../../../components/SidebarDrawer/NotificationDrawer";
 
 
 const LeftSidebar = () => {

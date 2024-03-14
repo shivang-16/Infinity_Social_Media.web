@@ -6,10 +6,9 @@ import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
 import "../ProfilePage/profile.scss";
 import post from "../../assets/posts.png";
 import bookmark from "../../assets/bookmark.png";
-import PostBody from "../Posts/PostBody";
+import PostBody from "../../components/Posts/PostBody";
 import { useSelector, useDispatch } from "react-redux";
-import Spinner2 from "../Spinner/Spinner2";
-import Spinner3 from "../Spinner/Spinner3";
+import Spinner3 from "../../components/Spinner/Spinner3";
 import { getMyBookmark } from "../../redux/actions/Post";
 import { getMyPost } from "../../redux/actions/Post";
 

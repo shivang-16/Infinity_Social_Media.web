@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import linkIcon from "../../assets/link.png";
 import locationIcon from "../../assets/location.png";
 import dateIcon from "../../assets/date.png";
@@ -6,7 +6,7 @@ import bioIcon from "../../assets/bio.png";
 import defaultProfile from "../../assets/user.png";
 import "../ProfilePage/profile.scss";
 import { useSelector, useDispatch } from "react-redux";
-import User from "../User/User";
+import User from "../../components/User/User";
 import { editUser } from "../../redux/actions/User";
 import { deleteAvatar } from "../../redux/actions/User";
 import { loadUser } from "../../redux/actions/User";

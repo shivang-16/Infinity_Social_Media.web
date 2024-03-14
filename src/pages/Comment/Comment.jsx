@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LeftSidebar from "../../components/HomePage/LeftSideBar/LeftSidebar";
+import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 import { useSelector } from "react-redux";
 import PostBody from "../../components/Posts/PostBody";
 import user2Img from "../../assets/user.png";

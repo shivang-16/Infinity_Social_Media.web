@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
-import RightSidebar from "../HomePage/RightSideBar/RightSidebar";
+import { useState } from "react";
+import RightSidebar from "../../pages/HomePage/RightSideBar/RightSidebar";
+import LeftSidebar from "../../pages/HomePage/LeftSideBar/LeftSidebar";
 import { Link } from "react-router-dom";
 import post from "../../assets/posts.png";
-import bookmark from "../../assets/bookmark.png";
 import linkIcon from "../../assets/link.png";
 import locationIcon from "../../assets/location.png";
 import dateIcon from "../../assets/date.png";

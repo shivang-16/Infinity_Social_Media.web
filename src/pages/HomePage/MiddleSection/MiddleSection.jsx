@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./middlesection.scss";
-import PostBody from "../../Posts/PostBody";
+import PostBody from "../../../components/Posts/PostBody";
 import { getAllPost } from "../../../redux/actions/Post";
 import { getFollowingPost } from "../../../redux/actions/Post";
-import Spinner2 from "../../Spinner/Spinner2";
+import Spinner2 from "../../../components/Spinner/Spinner2";
 import { useDispatch, useSelector } from "react-redux";
 import brandImg from "../../../assets/brand-logo.png";
 
