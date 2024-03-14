@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LeftSidebar from "../../components/HomePage/LeftSideBar/LeftSidebar";
+import LeftSidebar from "../HomePage/LeftSideBar/LeftSidebar";
 import { useSelector, useDispatch } from "react-redux";
 import "./connect.scss";
 import { followUser } from "../../redux/actions/User";
