@@ -54,6 +54,7 @@ const NotificationDrawer = ({ isOpen, onClose }) => {
           {notifications
             ? notifications.map((element, index) => {
                 const {_id, sender, message, unread, refPost=null, tag } = element;
+                console.log(unread)
                 return (
                   <div className={`${unread ? 'unread' : ''} noti-users`} key={index} onClick={() => handleChangeStatus(_id, refPost)}>
                   <div className="suggestions" >
