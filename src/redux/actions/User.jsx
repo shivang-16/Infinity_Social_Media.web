@@ -155,7 +155,7 @@ export const getAllUser =
       });
 
       let { data } = await axios.get(
-        `${server}/user/all?limit=${limit}&page=${page}`,
+        `${server}/user/allusers?limit=${limit}&page=${page}`,
         {
           withCredentials: true,
         },
