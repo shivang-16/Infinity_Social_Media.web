@@ -155,7 +155,7 @@ export const getAllUser =
       });
 
       let { data } = await axios.get(
-        `${server}/user/all?limit=${limit}&page=${page}`,
+        `${server}/user/allusers?limit=${limit}&page=${page}`,
         {
           withCredentials: true,
         },
@@ -179,12 +179,12 @@ export const getUserProfile = (userName) => async (dispatch) => {
       type: "UserProfileRequest",
     });
 
-    let { data } = await axios.get(`${server}/user/all?userName=${userName}`, {
+    let { data } = await axios.get(`${server}/user/${userName}`, {
       withCredentials: true,
     });
     dispatch({
       type: "UserProfileSuccess",
-      payload: data.users,
+      payload: data.user,
     });
   } catch (error) {
     dispatch({
