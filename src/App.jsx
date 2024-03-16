@@ -37,21 +37,6 @@ function App() {
   const location = useLocation();
   console.log("here is the path ->", location.pathname)
 
-  const getRedisStatus = async() =>{
-    try {
-    const {data} = await axios.get(`${server}/redis-status`)
-    console.log(data)
-    if (data.success === true) {
-      toast.success(data.message)
-    } else {
-      toast.error(data.message)
-    }
-    } catch (error) {
-      toast.error(error.response.data.message)
-    }
-
-  }
-
   useEffect(() => {
     dispatch(loadUser());
     dispatch(getAllUser({}));
@@ -60,14 +45,27 @@ function App() {
     dispatch(getFollowingPost());
     dispatch(getAllNotifications());
     dispatch(getUnreadNotifications());
-    getRedisStatus()
 
     if (progress !== loadingProgress) {
       setLocalProgress(loadingProgress);
     }
   }, [dispatch, loadingProgress]);
 
-
+  useEffect(()=>{
+    (async() => {
+      try {
+        const {data} = await axios.get(`${server}/redis-status`)
+        console.log(data)
+        if (data.success === true) {
+          toast.success(data.message)
+        } else {
+          toast.error(data.message)
+        }
+        } catch (error) {
+          toast.error(error.response.data.message)
+        }
+    })();
+  },[])
   
   useEffect(() => {
     if (location.pathname !== '/' && window.onbeforeunload) {
