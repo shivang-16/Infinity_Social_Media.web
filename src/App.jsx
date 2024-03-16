@@ -17,12 +17,14 @@ import { getMyPost } from "./redux/actions/Post";
 import { getFollowingPost } from "./redux/actions/Post";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import "./styles/popup.scss";
 import "./App.scss";
 import { getAllNotifications, getUnreadNotifications } from "./redux/actions/Notifications";
 import Chatgpt from "./pages/ChatGPT";
 import Blog from "./pages/Blogs";
+import axios from "axios";
+import { server } from "./main";
 
 function App() {
   const { isAuthenticated, isRedirect } = useSelector((state) => state.user);
@@ -35,6 +37,21 @@ function App() {
   const location = useLocation();
   console.log("here is the path ->", location.pathname)
 
+  const getRedisStatus = async() =>{
+    try {
+    const {data} = await axios.get(`${server}/redis-status`)
+    console.log(data)
+    if (data.success === true) {
+      toast.success(data.message)
+    } else {
+      toast.error(data.message)
+    }
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+
+  }
+
   useEffect(() => {
     dispatch(loadUser());
     dispatch(getAllUser({}));
@@ -43,6 +60,7 @@ function App() {
     dispatch(getFollowingPost());
     dispatch(getAllNotifications());
     dispatch(getUnreadNotifications());
+    getRedisStatus()
 
     if (progress !== loadingProgress) {
       setLocalProgress(loadingProgress);
