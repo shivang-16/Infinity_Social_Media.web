@@ -31,9 +31,10 @@ export const getAllPost = () => async (dispatch) => {
       type: "GetPostRequest",
     });
 
-    const { data } = await axios.get(`${server}/post/allposts`, {
+    const { data } = await axios.get(`${server}/post/all`, {
       withCredentials: true,
     });
+
     dispatch({
       type: "GetPostSuccess",
       payload: data.post,
