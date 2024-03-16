@@ -17,7 +17,7 @@ import { setProgress } from "../../redux/reducers/LoadingBar";
 
 const Users = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { users, loading: ProfileLoading } = useSelector(
+  const { reqUser , loading: ProfileLoading } = useSelector(
     (state) => state.userProfile,
   );
   const { posts, loading: postsLoading } = useSelector(
@@ -64,43 +64,30 @@ const Users = () => {
           <div className="main-box middle-section">
             <div className="user_details">
               <div className="user_section profile_details">
-                {users ? (
-                  users.map((element, index) => {
-                    const {
-                      userName,
-                      name,
-                      followers,
-                      following,
-                      posts,
-                      description,
-                      avatar,
-                      _id,
-                    } = element;
-                    return (
-                      <>
+               { reqUser ? (
+                 <>
                         <div className="profile_box profile_photo">
                           <div className="image-profile">
-                            <img src={avatar?.url} alt="No image" />
+                            <img src={reqUser.avatar?.url} alt="No image" />
                           </div>
                         </div>
 
                         <div
                           className="profile_box profile_content"
-                          key={index}
                         >
                           <div className="content_box user_name">
-                            <span>{userName}</span>
-                            {user.userName === userName ? (
+                            <span>{reqUser.userName}</span>
+                            {user.userName === reqUser.userName ? (
                               <Link to="/profile">
                                 {" "}
                                 <button>Edit Profile</button>{" "}
                               </Link>
                             ) : (
                               <button
-                                onClick={() => handleFollow(_id)}
+                                onClick={() => handleFollow(reqUser._id)}
                                 className="userProfileFollowbtn"
                               >
-                                {isAuthenticated && isUserFollowed(_id) ? (
+                                {isAuthenticated && isUserFollowed(reqUser._id) ? (
                                   <span className="unfollow">Following</span>
                                 ) : (
                                   <span className="follow">Follow</span>
@@ -110,51 +97,51 @@ const Users = () => {
                           </div>
                           <div className="content_box followers_details_section">
                             <div>
-                              <p>{posts.length} Posts</p>
+                              <p>{reqUser.posts.length} Posts</p>
                             </div>
                             <div onClick={openFollowersPopup}>
-                              <p>{followers.length} Followers</p>
+                              <p>{reqUser.followers.length} Followers</p>
                             </div>
                             <div onClick={openFollowingPopup}>
-                              <p>{following.length} Following</p>
+                              <p>{reqUser.following.length} Following</p>
                             </div>
                           </div>
                           <div className="content_box user_descripton">
-                            <h4>{name}</h4>
-                            {users && description ? (
+                            <h4>{reqUser.name}</h4>
+                            {reqUser && reqUser.description ? (
                               <>
-                                {description.about ? (
+                                {reqUser.description.about ? (
                                   <p>
                                     <img src={bioIcon} alt="" />
-                                    {description.about}
+                                    {reqUser.description.about}
                                   </p>
                                 ) : (
                                   ""
                                 )}
-                                {description.dob ? (
+                                {reqUser.description.dob ? (
                                   <p>
                                     <img src={dateIcon} alt="" />
-                                    {description.dob}
+                                    {reqUser.description.dob}
                                   </p>
                                 ) : (
                                   ""
                                 )}
-                                {description.location ? (
+                                {reqUser.description.location ? (
                                   <p>
                                     <img src={locationIcon} alt="" />
-                                    {description.location}
+                                    {reqUser.description.location}
                                   </p>
                                 ) : (
                                   ""
                                 )}
-                                {description.link ? (
+                                {reqUser.description.link ? (
                                   <p>
                                     <img src={linkIcon} alt="" />
                                     <a
-                                      href={`${description.link}`}
+                                      href={`${reqUser.description.link}`}
                                       target="_blank"
                                     >
-                                      {description.link}
+                                      {reqUser.description.link}
                                     </a>
                                   </p>
                                 ) : (
@@ -166,9 +153,7 @@ const Users = () => {
                             )}
                           </div>
                         </div>
-                      </>
-                    );
-                  })
+                        </>
                 ) : (
                   <h2>Not found</h2>
                 )}
@@ -216,10 +201,8 @@ const Users = () => {
           </div>
         )}
 
-        {users
-          ? users.map((element) => {
-              const { followers, following } = element;
-              return (
+        {reqUser
+          ?  (
                 <>
                   {isFollowersOpen && (
                     <div className="popup">
@@ -233,8 +216,8 @@ const Users = () => {
                         <span className="close-icon" onClick={closePopup}>
                           &times;
                         </span>
-                        {followers.length != 0
-                          ? followers.map((element) => {
+                        {reqUser?.followers.length != 0
+                          ? reqUser.followers.map((element) => {
                               const { _id, userName, name, avatar } = element;
                               return (
                                 <User
@@ -263,8 +246,8 @@ const Users = () => {
                         <span className="close-icon" onClick={closePopup}>
                           &times;
                         </span>
-                        {following.length != 0
-                          ? following.map((element) => {
+                        {reqUser.following.length != 0
+                          ? reqUser.following.map((element) => {
                               const { _id, userName, name, avatar } = element;
                               return (
                                 <User
@@ -281,8 +264,7 @@ const Users = () => {
                     </div>
                   )}
                 </>
-              );
-            })
+            )
           : "Not Found"}
       </main>
     </>
