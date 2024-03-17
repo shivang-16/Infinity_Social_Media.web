@@ -106,9 +106,20 @@ export const loadUser = () => async (dispatch) => {
       type: "LoadUserRequest",
     });
 
+  let cachedUsers = sessionStorage.getItem("MyProfile")
+  if(cachedUsers) {
+    let user = await JSON.parse(cachedUsers)
+    dispatch({
+      type: "LoadUserSuccess",
+      payload: user,
+    });
+  }
+
     const { data } = await axios.get(`${server}/user/myProfile`, {
       withCredentials: true,
     });
+
+  sessionStorage.setItem("MyProfile", JSON.stringify(data.user))
 
     dispatch({
       type: "LoadUserSuccess",
@@ -154,17 +165,31 @@ export const getAllUser =
         type: "allUserRequest",
       });
 
+      let cacheKey = `Users_page_${page}`;
+      let cachedUsers = sessionStorage.getItem(cacheKey);
+  
+      if (cachedUsers) {
+        let users = JSON.parse(cachedUsers);
+        dispatch({
+          type: "allUserSuccess",
+          payload: users,
+        });
+      } else {
+
       let { data } = await axios.get(
         `${server}/user/allusers?limit=${limit}&page=${page}`,
         {
           withCredentials: true,
         },
       );
+      
+      sessionStorage.setItem(cacheKey, JSON.stringify(data.users))
 
       dispatch({
         type: "allUserSuccess",
         payload: data.users,
       });
+    }
     } catch (error) {
       dispatch({
         type: "allUserFailure",

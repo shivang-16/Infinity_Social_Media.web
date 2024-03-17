@@ -97,7 +97,7 @@ const MiddleSection = () => {
         followingPosts && (
           <div className="middle-content">
             {posts
-              ? posts.map((element) => {
+              ? [...posts].reverse().map((element) => {
                   const {
                     caption,
                     _id,
