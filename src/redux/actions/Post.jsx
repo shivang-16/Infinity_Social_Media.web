@@ -13,6 +13,9 @@ export const createPost = (myForm) => async (dispatch) => {
       },
       withCredentials: true,
     });
+
+    sessionStorage.removeItem("post")
+
     dispatch({
       type: "CreatePostSuccess",
       payload: data.message,
@@ -31,13 +34,26 @@ export const getAllPost = () => async (dispatch) => {
       type: "GetPostRequest",
     });
 
+    let cachedPosts = sessionStorage.getItem("post")
+    if(cachedPosts) {
+      let post = await JSON.parse(cachedPosts)
+      dispatch({
+        type: "GetPostSuccess",
+        payload: post,
+      });
+    } else {
+
     const { data } = await axios.get(`${server}/post/allposts`, {
       withCredentials: true,
     });
+
+    sessionStorage.setItem("post", JSON.stringify(data.post))
+
     dispatch({
       type: "GetPostSuccess",
       payload: data.post,
     });
+  }
   } catch (error) {
     dispatch({
       type: "GetPostFailure",
@@ -52,13 +68,27 @@ export const getFollowingPost = () => async (dispatch) => {
       type: "FollowingPostsRequest",
     });
 
+    let cachedPosts = sessionStorage.getItem("FollowingPosts")
+    if(cachedPosts) {
+      let posts = await JSON.parse(cachedPosts)
+      dispatch({
+        type: "FollowingPostsSuccess",
+        payload: posts,
+      });
+    } else {
+
+
     const { data } = await axios.get(`${server}/post/following`, {
       withCredentials: true,
     });
+
+    sessionStorage.setItem("FollowingPosts", JSON.stringify(data.posts))
+
     dispatch({
       type: "FollowingPostsSuccess",
       payload: data.posts,
     });
+  }
   } catch (error) {
     dispatch({
       type: "FollowingPostsFailure",
@@ -73,9 +103,20 @@ export const getMyPost = () => async (dispatch) => {
       type: "MyPostRequest",
     });
 
+    let cachedPosts = sessionStorage.getItem("MyPosts")
+    if(cachedPosts) {
+      let posts = await JSON.parse(cachedPosts)
+      dispatch({
+        type: "MyPostSuccess",
+        payload: posts,
+      });
+    }
+
     const { data } = await axios.get(`${server}/user/me/posts`, {
       withCredentials: true,
     });
+
+    sessionStorage.setItem("MyPosts", JSON.stringify(data.posts))
 
     dispatch({
       type: "MyPostSuccess",
@@ -95,9 +136,20 @@ export const getMyBookmark = () => async (dispatch) => {
       type: "MyPostRequest",
     });
 
+    let cachedPosts = sessionStorage.getItem("MyBookmarks")
+    if(cachedPosts) {
+      let posts = await JSON.parse(cachedPosts)
+      dispatch({
+        type: "MyPostSuccess",
+        payload: posts,
+      });
+    }
+
     const { data } = await axios.get(`${server}/user/me/bookmarks`, {
       withCredentials: true,
     });
+
+    sessionStorage.setItem("MyBookmarks", JSON.stringify(data.posts))
 
     dispatch({
       type: "MyPostSuccess",
@@ -161,6 +213,11 @@ export const likePost = (postId) => async (dispatch) => {
       type: "GeneralRequest",
     });
 
+    sessionStorage.removeItem("FollowingPosts");
+    sessionStorage.removeItem("MyPosts");
+    sessionStorage.removeItem("MyBookmarks");
+    sessionStorage.removeItem("post")
+
     const { data } = await axios.get(`${server}/post/likes/${postId}`, {
       withCredentials: true,
     });
@@ -185,6 +242,11 @@ export const commentPost =
         type: "GeneralRequest",
       });
 
+      sessionStorage.removeItem("FollowingPosts");
+      sessionStorage.removeItem("MyPosts");
+      sessionStorage.removeItem("MyBookmarks");
+      sessionStorage.removeItem("post")
+
       const { data } = await axios.post(
         `${server}/post/comments/${postId}`,
         {
@@ -197,6 +259,7 @@ export const commentPost =
           withCredentials: true,
         },
       );
+ 
 
       dispatch({
         type: "GeneralSuccess",
@@ -217,9 +280,15 @@ export const bookmarkPost = (postId) => async (dispatch) => {
       type: "GeneralRequest",
     });
 
+    sessionStorage.removeItem("FollowingPosts");
+    sessionStorage.removeItem("MyPosts");
+    sessionStorage.removeItem("MyBookmarks");
+    sessionStorage.removeItem("post")
+
     const { data } = await axios.get(`${server}/post/bookmark/${postId}`, {
       withCredentials: true,
     });
+
 
     dispatch({
       type: "GeneralSuccess",
