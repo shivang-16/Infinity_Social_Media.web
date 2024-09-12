@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Login/login.scss";
-import photo from "../../assets/photo.png";
+import photo from "../../assets/signup.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sinupUser } from "../../redux/actions/User";

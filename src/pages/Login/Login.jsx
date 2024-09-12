@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./login.scss";
-import photo from "../../assets/photo.png";
+import photo from "../../assets/signin.png";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../redux/actions/User";
 import { loadUser } from "../../redux/actions/User";
@@ -71,7 +71,7 @@ const Login = () => {
             </div>
 
             <div className="signup_link login_form">
-              <span>Don't have an account?</span>
+              <span>Does not have an account?</span>
               <Link to="/signup">
                 <span>SignUp</span>
               </Link>
