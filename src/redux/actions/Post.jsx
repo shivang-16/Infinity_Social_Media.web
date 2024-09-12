@@ -324,6 +324,11 @@ export const editPost =
         },
       );
 
+      sessionStorage.removeItem("FollowingPosts");
+      sessionStorage.removeItem("MyPosts");
+      sessionStorage.removeItem("MyBookmarks");
+      sessionStorage.removeItem("post")
+
       dispatch({
         type: "GeneralSuccess",
         payload: data.message,
@@ -346,6 +351,11 @@ export const deletePost = (postId) => async (dispatch) => {
     const { data } = await axios.delete(`${server}/post/${postId}`, {
       withCredentials: true,
     });
+
+    sessionStorage.removeItem("FollowingPosts");
+    sessionStorage.removeItem("MyPosts");
+    sessionStorage.removeItem("MyBookmarks");
+    sessionStorage.removeItem("post")
 
     dispatch({
       type: "GeneralSuccess",
