@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./login.scss";
-import photo from "../../assets/signin.png";
+import photo from "../../assets/photo.png";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../redux/actions/User";
 import { loadUser } from "../../redux/actions/User";
