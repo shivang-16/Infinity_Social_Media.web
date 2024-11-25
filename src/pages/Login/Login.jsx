@@ -71,8 +71,8 @@ const Login = () => {
                 type="button"
                 className="form-btn gray-btn"
                 onClick={fillGuestCredentials}
-                >
-                Get Credentials
+              >
+                Get Guest Credentials
               </button>
               </form>
            
