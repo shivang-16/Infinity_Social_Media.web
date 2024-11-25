@@ -7,10 +7,9 @@ import { loadUser } from "../../redux/actions/User";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../components/Spinner/Spinner";
 import Loader from "../../components/Spinner/Loader";
+
 const Login = () => {
-  const { loading: userLoading } = useSelector(
-    (state) => state.user,
-  );
+  const { loading: userLoading } = useSelector((state) => state.user);
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +19,11 @@ const Login = () => {
     e.preventDefault();
     await dispatch(loginUser(loginIdentifier, password));
     dispatch(loadUser());
+  };
+
+  const fillGuestCredentials = () => {
+    setLoginIdentifier("guest121");
+    setPassword("#Guest121");
   };
 
   return (
@@ -64,6 +68,13 @@ const Login = () => {
                   {userLoading ? <Loader /> : "Login"}
                 </button>
               </form>
+              <button
+                type="button"
+                className="form-btn gray-btn"
+                onClick={fillGuestCredentials}
+              >
+                Get Credentials
+              </button>
               <span>or</span>
               <Link to="/forgotPassword">
                 <p>Forgotten Your Password?</p>
