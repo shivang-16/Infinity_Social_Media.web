@@ -67,14 +67,15 @@ const Login = () => {
                 <button type="submit" className="form-btn">
                   {userLoading ? <Loader /> : "Login"}
                 </button>
-              </form>
-              <button
+               <button
                 type="button"
                 className="form-btn gray-btn"
                 onClick={fillGuestCredentials}
               >
                 Get Guest Credentials
               </button>
+              </form>
+           
               <span>or</span>
               <Link to="/forgotPassword">
                 <p>Forgotten Your Password?</p>
